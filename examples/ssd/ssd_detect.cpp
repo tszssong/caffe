@@ -17,7 +17,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-#endif  // USE_OPENCV
+#endif  // USE_OPENCV 
 #include <algorithm>
 #include <iomanip>
 #include <iosfwd>
