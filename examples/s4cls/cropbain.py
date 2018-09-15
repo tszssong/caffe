@@ -12,17 +12,17 @@ ScaleS = 1.0
 ScaleB = 1.5
 Ratio = 'R'  # crop recording the width&height ratio
 Shift = 0.3
-RotD = 110
-from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/gesture/Tight_ali2five_grab_train-img/"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/5-ali2grab-five-train.txt"
-clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
+RotD = 20
+from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/gesture/bainian-img/"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData2/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/6-bainian-train.txt"
+clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 4
+N_RESIZE = 6
 N_ROT = 6
 date = "_0915"
 
@@ -142,7 +142,7 @@ for annotation in annotations:
 
                 if nx2 > width or ny2 > height or nx1 < 0 or ny1 < 0:
                     continue
-                if nx2 < rx2 - 5 or nx1 > rx1 + 5 or ny2 < ry2 - 5 or ny1 > ry1 + 5:
+                if nx2 < rx2 - 1 or nx1 > rx1 + 1 or ny2 < ry2 - 1 or ny1 > ry1 + 1:
                     continue
 
 

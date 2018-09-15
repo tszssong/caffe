@@ -13,16 +13,16 @@ ScaleB = 1.5
 Ratio = 'R'  # crop recording the width&height ratio
 Shift = 0.3
 RotD = 110
-from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/gesture/Tight_ali2five_grab_train-img/"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/5-ali2grab-five-train.txt"
-clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
+from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/gesture/fist-img/"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData2/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/13-fist-train.txt"
+clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 4
+N_RESIZE = 6
 N_ROT = 6
 date = "_0915"
 
