@@ -12,9 +12,9 @@ ScaleS = 1.0
 ScaleB = 1.5
 Ratio = 'R'  # crop recording the width&height ratio
 Shift = 0.3
-RotD = 15
-from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/gesture/yeah-img/"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData2/"
+RotD = 25
+from_dir = "/Volumes/song/gestureDatabyName/yeah-img/"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/2-yearh-train.txt"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
@@ -22,7 +22,7 @@ print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 6
+N_RESIZE = 2
 N_ROT = 4
 date = "_0915"
 

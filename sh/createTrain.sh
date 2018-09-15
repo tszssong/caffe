@@ -31,7 +31,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $TRAIN_DATA_ROOT \
-    $DATA/train.txt\
-    $DATA/train_lmdb
+    $DATA/up_trainTxts.txt\
+    $DATA/up_lmdb
 
 echo "Done."
