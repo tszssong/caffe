@@ -12,29 +12,27 @@ ScaleS = 1.0
 ScaleB = 1.4
 Ratio = 'R'  # crop recording the width&height ratio
 Shift = 0.3
-RotD = 110
-from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/VOCdevkit/VOC2007/JPEGImages/"
+RotD = 15
+from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/ok-img/"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/data/VOCdevkit/VOC2007/5-five-train.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/9-ok-add.txt"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 4
-N_ROT = 4
+N_RESIZE = 6
+N_ROT = 6
 date = "_0915"
-txt_name = annofileName + '_' + str(cropSize)+ 'R'+str(RotD) + 'S'+str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
-save_dir = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
+txt_name = annofileName + '_' + str(cropSize)+ 'R'+str(RotD) + 'S'+str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date+'_1'
+save_dir = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date+'_1'
 print clsname, cls_idx
 print txt_name, save_dir
 
 if not os.path.exists(to_dir+save_dir):
     os.mkdir(to_dir+save_dir)
-
-fw = open(to_dir + txt_name + '.txt', 'w')
-#fw = open(os.path.join(save_dir, save_name + '.txt'), 'w')
+fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
 with open(anno_file, 'r') as f:
     annotations = f.readlines()
 
@@ -53,7 +51,6 @@ for annotation in annotations:
         continue
     objname = annotation[2]
 
-
     if not objname == clsname:
         # print im_path ," with class :", objname
         continue
@@ -65,6 +62,15 @@ for annotation in annotations:
     idx += 1
     if idx % 100 == 0:
         print "%s images done, pos: %s" % (idx, p_idx)
+    if p_idx > 20000:
+        p_idx = 0
+        txt_name += '_2'
+        save_dir += '_2'
+        if not os.path.exists(to_dir + save_dir):
+            os.mkdir(to_dir + save_dir)
+        fw.close()
+        fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
+
     height, width, channel = image.shape
 
     for pic_idx in range(N_ROT):
