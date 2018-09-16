@@ -152,23 +152,7 @@ def rotAug(image, boxes, rot_d):
         x, y, w, h = cv2.boundingRect(rect_pts)
         if x<0 or y<0 or x+w>im_width or y+h >im_height:
             continue
-        # offset_x = 0
-        # offset_y = 0
-        # if x < 0:
-        #     offset_x = -x
-        #     x = 0
-        # if y < 0:
-        #     offset_y = -y
-        #     y = 0
-        # if x + w - offset_x < 0 or y + h - offset_y < 0:
-        #     rotate_boxes = []
-        #     im = image
-        #     break
-        # if x + w - offset_x > im_width:
-        #     w = im_width - 1 - x - offset_x
-        # if y + h - offset_y > im_height:
-        #     h = im_height - 1 - y - offset_y
-        # rotate_boxes = np.vstack((rotate_boxes, np.array([x, y, x + w, y + h])))
+        # box go outside, delete
         rotate_boxes = np.append( rotate_boxes, np.array([x, y, x + w, y + h]) )
     return im, rotate_boxes
 

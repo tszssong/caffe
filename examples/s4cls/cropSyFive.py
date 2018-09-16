@@ -9,22 +9,22 @@ from image_argument import flipAug, rotAug
 cropSize = 48
 THpos = 0.3
 ScaleS = 1.0
-ScaleB = 1.4
+ScaleB = 1.2
 Ratio = 'R'  # crop recording the width&height ratio
 Shift = 0.3
-RotD = 110
-from_dir = "/Users/momo/wkspace/caffe_space/caffe/data/gesture/Tight_ali2five_grab_train-img/"
+RotD = 30
+from_dir = "/Volumes/song/5/ali1five_sy-img/"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/5-ali2grab-five-train.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/5-five-syali1.txt"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 4
-N_ROT = 6
-date = "_0915"
+N_RESIZE = 8
+N_ROT = 12
+date = "_0916"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name + '_1'
@@ -51,7 +51,7 @@ for annotation in annotations:
     annotation = annotation.strip().split(' ')
     im_path = annotation[0]
     nbox = int(annotation[1])
-    if nbox>2:
+    if not nbox==2:
         continue
     objname = annotation[2]
 
@@ -66,7 +66,7 @@ for annotation in annotations:
     idx += 1
     if idx % 100 == 0:
         print "%s images done, pos: %s" % (idx, p_idx)
-    if p_idx > 20000:
+    if p_idx > 100000:
         p_idx = 0
         d_idx += 1
         txt_name = save_name + '_' + str(d_idx)

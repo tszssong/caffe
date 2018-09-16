@@ -1,43 +1,9 @@
-name: "hand_gesture_cls_v3.2"
+name: "hand_gesture_cls_v3.2_14"
 layer {
   name: "data"
-  type: "ImageData"
+  type: "Input"
   top: "data"
-  top: "label"
-  image_data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/clsData/upAdd5_13cls.txt"
-    batch_size: 128
-    shuffle: true
-    new_height: 48
-    new_width: 48
-  }
-  transform_param {
-    mean_value: 104.008
-    mean_value: 116.669
-    mean_value: 122.675
-    crop_size: 48
-    mirror: false
-  }
-  include: { phase: TRAIN}
-}
-layer {
-  name: "data"
-  type: "Data"
-  top: "data"
-  top: "label"
-  data_param {
-    source: "//Users/momo/wkspace/caffe_space/caffe/data/clsData/test13cls_lmdb"
-    batch_size: 128
-    backend: LMDB
-  }
-  transform_param {
-    mean_value: 104.008
-    mean_value: 116.669
-    mean_value: 122.675
-    crop_size: 48
-    mirror: false
-  }
-  include: { phase: TEST}
+  input_param { shape: { dim: 1 dim: 3 dim: 48 dim: 48 } }
 }
 layer {
   name: "conv1"
@@ -234,7 +200,7 @@ layer {
   }
 }
 layer {
-  name: "fc-hand"
+  name: "fc-hand14"
   type: "InnerProduct"
   bottom: "pool-emotion"
   top: "fc-hand"
@@ -247,7 +213,7 @@ layer {
     decay_mult: 1
   }
   inner_product_param {
-    num_output: 13
+    num_output: 14
     weight_filler {
       type: "xavier"
     }

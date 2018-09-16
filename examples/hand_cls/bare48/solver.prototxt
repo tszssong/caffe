@@ -1,10 +1,10 @@
-net: "examples/hand_cls/mouth48/trainSATxt.prototxt"
+net: "examples/hand_cls/bare48/train13cls.prototxt"
 base_lr: 0.0001
 momentum: 0.9
 momentum2: 0.999
 
-type: "SGD"
-#type: "Adam"
+#type: "SGD"
+type: "Adam"
 #lr_policy: "fixed"
 test_iter: 1
 test_interval: 100
@@ -15,5 +15,5 @@ gamma: 0.8
 display: 50
 max_iter: 6000000
 snapshot: 5000
-snapshot_prefix: "models/mouth48_0916/new5addgrabbg_13cls"
+snapshot_prefix: "models/bare48_0916/fist13cls"
 solver_mode: CPU
