@@ -7,13 +7,13 @@ type: "SGD"
 #type: "Adam"
 #lr_policy: "fixed"
 test_iter: 1
-test_interval: 100
+test_interval: 1000
 weight_decay: 0.004
 lr_policy: "step"
 stepsize: 1000000
 gamma: 0.8
 display: 50
-max_iter: 6000000
+max_iter: 100000
 snapshot: 5000
-snapshot_prefix: "models/mouth48_0916/new5addgrabbg_13cls"
+snapshot_prefix: "models/mouth48_0917/rm5fist"
 solver_mode: CPU

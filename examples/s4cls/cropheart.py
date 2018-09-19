@@ -9,14 +9,14 @@ from image_argument import flipAug, rotAug
 cropSize = 48
 THpos = 0.3
 ScaleS = 1.0
-ScaleB = 1.5
+ScaleB = 1.2
 Ratio = 'R'  # crop recording the width&height ratio
 Shift = 0.3
 RotD = 30
-from_dir = "/Volumes/song/gestureDatabyName/13-fist-img/"
+from_dir = "/Volumes/song/gesture-ori-data138849/JPEGImages/"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/13-fist-train.txt"
-clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','fist','ILU']
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/1-heart-ori.txt"
+clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
@@ -24,7 +24,7 @@ cls_idx = clslists.index(clsname)
 
 N_RESIZE = 6
 N_ROT = 6
-date = "_0917"
+date = "_0915"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name + '_1'
@@ -62,7 +62,11 @@ for annotation in annotations:
     boxes = np.array(bbox, dtype=np.float32).reshape(-1, 4)
 
     image = cv2.imread(os.path.join(from_dir, im_path))
-
+    try:
+        image.shape
+    except:
+        print im_path, "not exist!"
+        continue
     idx += 1
     if idx % 100 == 0:
         print "%s images done, pos: %s" % (idx, p_idx)
@@ -142,7 +146,7 @@ for annotation in annotations:
 
                 if nx2 > width or ny2 > height or nx1 < 0 or ny1 < 0:
                     continue
-                if nx2 < rx2 - 5 or nx1 > rx1 + 5 or ny2 < ry2 - 5 or ny1 > ry1 + 5:
+                if nx2 < rx2 - 1 or nx1 > rx1 + 1 or ny2 < ry2 - 1 or ny1 > ry1 + 1:
                     continue
 
 

@@ -5,7 +5,7 @@ layer {
   top: "data"
   top: "label"
   image_data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/clsData/upAdd5_13cls.txt"
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/clsData/rm5fist.txt"
     batch_size: 128
     shuffle: true
     new_height: 48
