@@ -2,9 +2,10 @@
 """
 Draw a graph of the net architecture.
 """
+import sys
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 from google.protobuf import text_format
-
+sys.path.append("/Users/momo/wkspace/caffe_space/detection/caffe/build/python")
 import caffe
 import caffe.draw
 from caffe.proto import caffe_pb2
