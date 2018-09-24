@@ -12,8 +12,8 @@ class Data_Layer_test(caffe.Layer):
         self.batch_size = 128
         net_side = 128
         roi_list = []
-        roi_root = '/Users/momo/wkspace/caffe_space/caffe/data/regData/'
-        roi_txt='/Users/momo/wkspace/caffe_space/caffe/data/regData/test.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/regData1/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/regData1/test.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)

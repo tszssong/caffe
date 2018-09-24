@@ -1,5 +1,6 @@
 import sys
 sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
+sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
 import cv2
 import caffe
 import numpy as np
@@ -10,10 +11,10 @@ imdb_exit = False
 class Data_Layer_test(caffe.Layer):
     def setup(self, bottom, top):
         self.batch_size = 128
-        net_side = 128
+        net_side = 64
         roi_list = []
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/reg0921/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/reg0921/tests.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/tests.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
@@ -35,10 +36,10 @@ class Data_Layer_test(caffe.Layer):
 class Data_Layer_train(caffe.Layer):
     def setup(self, bottom, top):
         self.batch_size = 128
-        net_side = 128
+        net_side = 64
         roi_list = ''
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/reg0921/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/reg0921/train.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/train1030s.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)

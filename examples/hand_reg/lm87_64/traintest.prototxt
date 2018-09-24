@@ -757,7 +757,7 @@ layer {
 }
 
 layer {
-  name: "small64fc0"
+  name: "smallfc0"
   type: "InnerProduct"
   bottom: "_plus2"
   top: "fullyconnected0"
