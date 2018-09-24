@@ -7,5 +7,5 @@ export PYTHONPATH=/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_
 TOOLS=./build/tools
 $TOOLS/caffe train \
   --solver=examples/hand_reg/${EXEC_DIR}/solver.prototxt \
-  --weights=models/box87lm/0920_iter_35000.caffemodel \
+  --weights=models/box87lm/0920flip_iter_30000.caffemodel \
   2>&1 | tee examples/hand_reg/${EXEC_DIR}/log/`date +'%Y-%m-%d_%H-%M-%S'`.log
