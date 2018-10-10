@@ -9,27 +9,18 @@ from image_argument import  flipAug
 cropSize = 64
 N_FLIP = 5
 N_RESIZE = 20
-THneg = 0.001
-THpos = 0.3
 ScaleFacetors = np.array([10,10,5,5])
-ScaleS = 1.6
-ScaleB = 2.8
+ScaleS = 1.3
+ScaleB = 2.4
 Ratio = 'R'      #crop recording the width&height ratio
-Shift = 1.8
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
-# im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
-# anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2.txt"
-# im_dir = "/Volumes/song/handgesture5/Tight5-notali2-img/"
-anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
-im_dir = "/Volumes/song/handgesture5/Tight/Tight_20180724_five_hebing-img/"
-#anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
-#im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_onezanbigv.txt"
-# im_dir = "/Volumes/song/data4Train/Tight-onezanbigv-img/"
+Shift = 1.6
 
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/test/"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_ali1one.txt"
+im_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/regH/"
+
 annofileName = anno_file.split('.')[0].split('/')[-1]
-suffix = '_'
+suffix = '_repli'
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) + suffix
 save_dir = save_name + '_1'
 
@@ -49,12 +40,9 @@ for annotation in annotations:
     im_path = annotation[0]
     #print im_path
     nbox = int(annotation[1])
-
     bbox = map(float, annotation[3:])
     boxes = np.array(bbox, dtype=np.float32).reshape(-1, 4)
-
     image = cv2.imread(os.path.join(im_dir, im_path))
-
     idx += 1
     if idx % 100 == 0:
         print "%s images done, pos: %s"%(idx, p_idx)
@@ -69,7 +57,6 @@ for annotation in annotations:
         fw.close()
         fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
 
-
     height, width, channel = image.shape
 
     neg_num = 0
@@ -82,9 +69,9 @@ for annotation in annotations:
         #     flip_arg = 5
         flip_arg = pic_idx%5
         if flip_arg == 1 or flip_arg ==2:
-            flip_arg = 0
+            flip_arg = 3
 
-        img, f_bbox = flipAug(image, boxes, flip_arg)                 #take attention! need to deep copy new img
+        img, f_bbox = flipAug(image, boxes, flip_arg)                 #take attention! need to deep copy new img)
         f_boxes = np.array(f_bbox, dtype=np.float32).reshape(-1, 4)
 
         oriH, oriW, oriC = img.shape
@@ -126,12 +113,11 @@ for annotation in annotations:
 
                 ncx = rcx + delta_x
                 ncy = rcy + delta_y
-
+                
                 nx1 = ncx - enlargeS/2
                 ny1 = ncy - enlargeS/2
                 nx2 = ncx + enlargeS/2
                 ny2 = ncy + enlargeS/2
-
                 if nx2 < rx2 - rw / 10 or nx1 > rx1 + rw / 10 or ny2 < ry2 - rh / 10 or ny1 > ry1 + rh / 10:
                     continue
 
@@ -140,65 +126,56 @@ for annotation in annotations:
                 dw = np.log(float(rw)/float(enlargeS)) * ScaleFacetors[2]
                 dh = np.log(float(rh)/float(enlargeS)) * ScaleFacetors[3]
 
+                crop_box = np.array([nx1, ny1, nx2, ny2])
+
                 overlap_flag = 0
                 if nbox > 1:
                     otherboxes = np.array([])
                     for otherbox_idx in xrange(f_boxes.shape[0]):
                         if not box_idx == otherbox_idx:
                             iou = IOU(crop_box, f_boxes[otherbox_idx])
-                            #otherboxes = np.append(otherboxes, f_boxes[otherbox_idx])
-                            if iou > 0.01:
+                            if iou > 0.01:            #!!!need to smaller than 0.01
                                 overlap_flag = 1
                 if overlap_flag == 1:
                     continue
 
-                crop_box = np.array([nx1, ny1, nx2, ny2])
                 # Iou = overlapSelf(crop_box, box)
                 # if np.max(Iou) < THpos:
                 #     continue
 
-                # print enlargeS, ScaleS, ScaleB, maxWH
-                # print "r:", rx1, ry1, rx2, ry2
-                # print "n:", nx1, ny1, nx2, ny2
-                nx1 = int(nx1)
-                nx2 = int(nx2)
-                ny1 = int(ny1)
-                ny2 = int(ny2)
                 right_x = 0
                 left_x  = 0
                 top_y   = 0
                 down_y  = 0
-                constant = copy.deepcopy(img)  #necessary here!!! --- or set else: constant = copy.deepcopy(img) after if ---
+
+                constant = copy.deepcopy(img)
                 if nx2 > width or ny2 > height or nx1 < 0 or ny1 < 0 :
                     if nx2 > width:
-                        right_x = nx2 - width
+                        right_x = nx2-width
                     if ny2> height:
                         down_y = ny2 - height
                     if nx1 < 0:
-                        left_x = 0-nx1
-                    if ny1 < 0:
-                        top_y = 0- ny1
+                        left_x = 0 - nx1
+                    if ny1 <0:
+                        top_y = 0 - ny1
                     black = [0,0,0]
-                    # print "edge:", top_y, down_y, left_x, right_x
-                    # constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_CONSTANT, value = black );
-                    constant = cv2.copyMakeBorder(img, top_y, down_y, left_x, right_x, cv2.BORDER_REPLICATE);
-                    # do not us BORDER_REFLECT_101, may introduce copy of the hand
+                    #constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_CONSTANT, value = black );
+                    constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_REPLICATE);
 
                 # ncropped_im = img[int(ny1):int(ny2), int(nx1):int(nx2), :]
                 ncropped_im = constant[int(ny1+top_y):int(ny2+top_y), int(nx1+left_x):int(nx2+left_x), :]
-
+                # cv2.imshow("croped", ncropped_im)
+                # cv2.waitKey()
                 nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_LINEAR)
                 box_ = box.reshape(1, -1)
-
                 filename = "/" + str(p_idx) + '_' +  im_path.split('.')[0] + '.jpg'
-
                 save_file = os.path.join(save_dir + filename)
                 fw.write(save_dir + filename + ' 1 %.5f %.5f %.5f %.5f\n' % (dx, dy, dw, dh))
-                # fw.write(save_dir + filename + ' %d, %d, r: %.2f %.2f %.2f %.2f -n: %.2f %.2f %.2f %.2f\n' % (rw, rh, rx1, ry1, rx2, ry2, nx1, ny1, nx2, ny2))
                 cv2.imwrite(to_dir + save_file, nresized_im)
 
                 p_idx += 1
             box_idx += 1
 
 fw.close()
+
 

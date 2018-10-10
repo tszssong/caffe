@@ -8,28 +8,28 @@ from utils import IOU, overlapSelf
 from image_argument import  flipAug
 cropSize = 64
 N_FLIP = 5
-N_RESIZE = 10
-THneg = 0.001
-THpos = 0.3
+N_RESIZE = 20
 ScaleFacetors = np.array([10,10,5,5])
-ScaleS = 1.2
+ScaleS = 1.6
 ScaleB = 2.0
 Ratio = 'R'      #crop recording the width&height ratio
-Shift = 1.8
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
-im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2.txt"
-# im_dir = "/Volumes/song/handgesture5/Tight5-notali2-img/"
+Shift = 1.6
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
+# im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2.txt"
+im_dir = "/Volumes/song/data4Train/Tight5-notali2-img/"
 # anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
-# im_dir = "/Volumes/song/handgesture5/Tight/Tight_20180724_five_hebing-img/"
+# im_dir = "/Volumes/song/handgesture5/Tight_20180724_five_hebing-img/"
 #anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
 #im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_onezanbigv.txt"
 # im_dir = "/Volumes/song/data4Train/Tight-onezanbigv-img/"
 
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/0927edge/"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
+# im_dir = "/Volumes/song/data4Train/Tight-palm-img/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/1008reg64/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
-suffix = '_0927'
+suffix = '_repli'
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) + suffix
 save_dir = save_name + '_1'
 
@@ -78,7 +78,7 @@ for annotation in annotations:
         #     flip_arg = 5
         flip_arg = pic_idx%5
         if flip_arg == 1 or flip_arg ==2:
-            flip_arg = 0
+            flip_arg = 3
 
         img, f_bbox = flipAug(image, boxes, flip_arg)                 #take attention! need to deep copy new img)
         f_boxes = np.array(f_bbox, dtype=np.float32).reshape(-1, 4)
@@ -144,7 +144,7 @@ for annotation in annotations:
                         if not box_idx == otherbox_idx:
                             iou = IOU(crop_box, f_boxes[otherbox_idx])
                             #otherboxes = np.append(otherboxes, f_boxes[otherbox_idx])
-                            if iou > 0.1:
+                            if iou > 0.01:
                                 overlap_flag = 1
                 if overlap_flag == 1:
                     continue
@@ -153,9 +153,6 @@ for annotation in annotations:
                 # if np.max(Iou) < THpos:
                 #     continue
 
-                # print enlargeS, ScaleS, ScaleB, maxWH
-                # print "r:", rx1, ry1, rx2, ry2
-                # print "n:", nx1, ny1, nx2, ny2
                 right_x = 0
                 left_x  = 0
                 top_y   = 0
@@ -175,12 +172,13 @@ for annotation in annotations:
                     # print "edge:", top_y, down_y, left_x, right_x
                     # constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_CONSTANT, value = black );
                     constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_REPLICATE);
-                # cv2.imshow("enlarge", constant)
+
                 # ncropped_im = img[int(ny1):int(ny2), int(nx1):int(nx2), :]
                 ncropped_im = constant[int(ny1+top_y):int(ny2+top_y), int(nx1+left_x):int(nx2+left_x), :]
                 # cv2.imshow("croped", ncropped_im)
                 # cv2.waitKey()
-                nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_LINEAR)
+                nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)
+                # nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_LINEAR)
                 box_ = box.reshape(1, -1)
                 filename = "/" + str(p_idx) + '_' +  im_path.split('.')[0] + '.jpg'
                 save_file = os.path.join(save_dir + filename)

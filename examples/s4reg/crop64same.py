@@ -7,30 +7,30 @@ import numpy.random as npr
 from utils import IOU, overlapSelf
 from image_argument import  flipAug
 cropSize = 64
-N_FLIP = 10
-N_RESIZE = 80
+N_FLIP = 5
+N_RESIZE = 200
 THneg = 0.001
 THpos = 0.3
 ScaleFacetors = np.array([10,10,5,5])
-ScaleS = 1.0
-ScaleB = 3.0
+ScaleS = 1.8
+ScaleB = 3.6
 Ratio = 'R'      #crop recording the width&height ratio
-Shift = 2.5
-# anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
-# im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
+Shift = 2.0
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
+im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
 # anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2.txt"
 # im_dir = "/Volumes/song/handgesture5/Tight5-notali2-img/"
-anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
-im_dir = "/Volumes/song/handgesture5/Tight/Tight_20180724_five_hebing-img/"
+# anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
+# im_dir = "/Volumes/song/handgesture5/Tight/Tight_20180724_five_hebing-img/"
 #anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
 #im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_onezanbigv.txt"
 # im_dir = "/Volumes/song/data4Train/Tight-onezanbigv-img/"
 
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/0926reg64/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
-suffix = '_hflip'
-save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + suffix
+suffix = '_'
+save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) + suffix
 save_dir = save_name + '_1'
 
 if not os.path.exists(to_dir+save_dir):
@@ -119,9 +119,9 @@ for annotation in annotations:
             if (grey < 80):
                 continue
             for i in range(N_RESIZE):
-                maxWH = np.max(rw, rh)
+                maxWH = np.max((rw, rh))
                 enlargeS = npr.randint(np.ceil(maxWH*ScaleS), np.ceil(ScaleB * maxWH))
-                
+
                 delta_x = npr.randint(-float(rw)*Shift, float(rw)*Shift)
                 delta_y = npr.randint(-float(rh)*Shift, float(rh)*Shift)
 
@@ -153,7 +153,7 @@ for annotation in annotations:
                         if not box_idx == otherbox_idx:
                             iou = IOU(crop_box, f_boxes[otherbox_idx])
                             #otherboxes = np.append(otherboxes, f_boxes[otherbox_idx])
-                            if iou > 0.1:
+                            if iou > 0.01:
                                 overlap_flag = 1
 
 

@@ -10,11 +10,11 @@ imdb_exit = False
 ###############################################################################
 class Data_Layer_test(caffe.Layer):
     def setup(self, bottom, top):
-        self.batch_size = 512
+        self.batch_size = 256
         net_side = 64
         roi_list = []
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/tests.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/tests.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
@@ -35,13 +35,13 @@ class Data_Layer_test(caffe.Layer):
 ################################################################################
 class Data_Layer_train(caffe.Layer):
     def setup(self, bottom, top):
-        self.batch_size = 512
+        self.batch_size = 256
         net_side = 64
         roi_list = ''
 #        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/0926reg64/'
 #        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/0926reg64/trains.txt'
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/0927edge/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/0927edge/trains.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/train_addonepalm.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)

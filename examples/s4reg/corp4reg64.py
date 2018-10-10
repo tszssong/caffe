@@ -7,20 +7,20 @@ import numpy.random as npr
 from utils import IOU, overlapSelf
 from image_argument import  flipAug
 cropSize = 64
-N_FLIP = 20
-N_RESIZE = 60
+N_FLIP = 10
+N_RESIZE = 80
 THneg = 0.001
 THpos = 0.3
 ScaleFacetors = np.array([10,10,5,5])
-ScaleS = 1.0
+ScaleS = 1.1
 ScaleB = 3.0
 Ratio = 'R'      #crop recording the width&height ratio
 Shift = 2.5
 
-# anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
-# im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
-anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2.txt"
-im_dir = "/Volumes/song/handgesture5/Tight5-notali2-img/"
+anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
+im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
+# anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2.txt"
+# im_dir = "/Volumes/song/handgesture5/Tight5-notali2-img/"
 # anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
 # im_dir = "/Volumes/song/handgesture5/Tight/Tight_20180724_five_hebing-img/"
 to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/"
@@ -156,7 +156,7 @@ for annotation in annotations:
                         if not box_idx == otherbox_idx:
                             iou = IOU(crop_box, f_boxes[otherbox_idx])
                             #otherboxes = np.append(otherboxes, f_boxes[otherbox_idx])
-                            if iou > 0.1:
+                            if iou > 0.01:
                                 overlap_flag = 1
 
 
