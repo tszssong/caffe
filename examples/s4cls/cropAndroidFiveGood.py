@@ -12,19 +12,19 @@ ScaleS = 1.0
 ScaleB = 1.2
 Ratio = 'R'  # crop recording the width&height ratio
 Shift = 0.3
-RotD = 30
-from_dir = "/Volumes/song/5/Tight_ali2five_grab_train-img/"
+RotD = 110
+from_dir = "/Volumes/song/handgesture5/Tight_20180716_five_nogood-img/"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsData/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/5-ali2grab-five-train.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/5-five-NoGood.txt"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 6
+N_RESIZE = 12
 N_ROT = 18
-date = "_0916"
+date = "_0919"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name + '_1'
