@@ -14,8 +14,8 @@ RotD = 5
 
 # from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
-from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/7-zan-train.txt"
+# from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/7-zan-train.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/8-fingerheart-xml.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/cls64/"
