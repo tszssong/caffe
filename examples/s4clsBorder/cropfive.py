@@ -7,23 +7,21 @@ import numpy.random as npr
 from utils import IOU, overlapSelf
 from image_argument import flipAug, rotAug
 cropSize = 64
-THpos = 0.3
 ScaleS = 1.0
 ScaleB = 2.5
-Ratio = 'R'  # crop recording the width&height ratio
 Shift = 1.5
-RotD = 5
-from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
+RotD = 110
+from_dir = "/Volumes/song/data4Train/Tight5-notali2-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/5-five-Tightnoali2.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/cls64/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 4
-N_ROT = 3
+N_RESIZE = 20
+N_ROT = 5
 date = "_1010"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
@@ -66,7 +64,7 @@ for annotation in annotations:
     idx += 1
     if idx % 100 == 0:
         print "%s images done, pos: %s" % (idx, p_idx)
-    if p_idx > 20000:
+    if p_idx > 100000:
         p_idx = 0
         d_idx += 1
         txt_name = save_name + '_' + str(d_idx)
@@ -77,6 +75,8 @@ for annotation in annotations:
         fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
 
     height, width, channel = image.shape
+
+
 
     for pic_idx in range(N_ROT):
         rot_d = np.random.randint(-RotD, RotD)
@@ -115,16 +115,20 @@ for annotation in annotations:
             b = np.mean(cropped_im[:, :, 0])
             g = np.mean(cropped_im[:, :, 1])
             r = np.mean(cropped_im[:, :, 2])
-            if( (b - g) < 10 and abs( b - r) < 10):
+            if ((b - g) < 10 and abs(b - r) < 10):  # blur img
+                continue
+            grey = 0.11 * b + 0.59 * r + 0.3 * g
+            if (grey < 70):  # dark img
                 continue
 
             for i in range(N_RESIZE):
+                # maxWH = np.max((rw, rh))
+                # enlargeS = npr.randint(np.ceil(maxWH * ScaleS), np.ceil(ScaleB * maxWH))
+                # delta_x = npr.randint(-float(rw) * Shift, float(rw) * Shift)
+                # delta_y = npr.randint(-float(rh) * Shift, float(rh) * Shift)
+
                 nw = npr.randint(np.ceil(rw * ScaleS), np.ceil(ScaleB * rw))
-                if Ratio == 'R':
-                    ratio = float(rh) / float(rw)
-                    nh = int(ratio * nw)
-                else:
-                    nh = nw
+                nh = nw
                 if i == 0 and nw < w * 1.5:
                     delta_x = npr.randint(-int(float(rw) * 0.2), int( float(rw) * 0.2 ) + 1)
                     delta_y = npr.randint(-int(float(rh) * 0.2), int( float(rh) * 0.2 ) + 1)
@@ -140,15 +144,9 @@ for annotation in annotations:
                 nx2 = ncx + nw / 2
                 ny2 = ncy + nh / 2
 
-                if nx2 > width or ny2 > height or nx1 < 0 or ny1 < 0:
+                if nx2 < rx2 - 10 or nx1 > rx1 + 10 or ny2 < ry2 - 10 or ny1 > ry1 + 10:
                     continue
-                if nx2 < rx2 - 1 or nx1 > rx1 + 1 or ny2 < ry2 - 1 or ny1 > ry1 + 1:
-                    continue
-
-
-                ncropped_im = img[int(ny1): int(ny2), int(nx1): int(nx2), :]
                 crop_box = np.array([nx1, ny1, nx2, ny2])
-
                 overlap_flag = 0
                 if nbox > 1:
                     otherboxes = np.array([])
@@ -156,26 +154,37 @@ for annotation in annotations:
                         if not box_idx == otherbox_idx:
                             iou = IOU(crop_box, f_boxes[otherbox_idx])
                             # otherboxes = np.append(otherboxes, f_boxes[otherbox_idx])
-                            if iou > 0.1:
+                            if iou > 0.01:
                                 overlap_flag = 1
-
 
                 if overlap_flag == 1:
                     continue
 
-                Iou = overlapSelf(crop_box, box)
-                if np.max(Iou) < THpos:
-                    continue
+                right_x = 0
+                left_x = 0
+                top_y = 0
+                down_y = 0
+                constant = copy.deepcopy(img)
+                if nx2 > width or ny2 > height or nx1 < 0 or ny1 < 0:
+                    if nx2 > width:
+                        right_x = nx2 - width
+                    if ny2 > height:
+                        down_y = ny2 - height
+                    if nx1 < 0:
+                        left_x = 0 - nx1
+                    if ny1 < 0:
+                        top_y = 0 - ny1
+                    black = [0, 0, 0]
+                    # print "edge:", top_y, down_y, left_x, right_x
+                    constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_CONSTANT, value = black );
+                    # constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_REPLICATE);
 
+                ncropped_im = constant[int(ny1 + top_y):int(ny2 + top_y), int(nx1 + left_x):int(nx2 + left_x), :]
                 nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)
-                grey = 0.11 * b + 0.59 * r + 0.3 * g
-                if (grey < 70):
-                    # print im_path,"brightness not good!"
-                    continue
 
                 box_ = box.reshape(1, -1)
 
-                filename = '/'+im_path.split('.')[0]+'_'+str(p_idx)+'.jpg'
+                filename = '/'+str(p_idx)+'_'+im_path.split('.')[0]+'.jpg'
 
                 save_file = os.path.join(save_dir + filename)
                 fw.write(save_dir + filename + ' ' + str(cls_idx) + '\n')
