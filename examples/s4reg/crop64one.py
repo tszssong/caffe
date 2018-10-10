@@ -155,7 +155,7 @@ for annotation in annotations:
                         if not box_idx == otherbox_idx:
                             iou = IOU(crop_box, f_boxes[otherbox_idx])
                             #otherboxes = np.append(otherboxes, f_boxes[otherbox_idx])
-                            if iou > 0.1:
+                            if iou > 0.01:
                                 overlap_flag = 1
 
 
