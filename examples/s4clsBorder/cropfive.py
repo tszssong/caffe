@@ -11,13 +11,17 @@ ScaleS = 1.0
 ScaleB = 2.0
 Shift = 1.5
 RotD = 110
-# from_dir = "/Volumes/song/data4Train/Tight5-notali2-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-Tightnoali2.txt"
+from_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-Tightnoali2.txt"
+
+# from_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-TPickedali2.txt"
+
 # from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
 
-from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
+# from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','fist','otherhand']
 annofileName = anno_file.split('.')[0].split('/')[-1]

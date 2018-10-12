@@ -1,9 +1,9 @@
 import numpy as np
-from utils import IOU, overlapSelf, IOU_multi
+from utils import IOU, overlapSelf, IOU_multi, containBox
 import copy
 import numpy.random as npr
 import cv2
-#iouTH太小会导致切不到胳膊
+# iouH should biger than 0.1 , or arms can not be cropped
 def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
     oriH, oriW, oriC = image.shape
     height, width, channel = image.shape
@@ -22,6 +22,10 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
             return None,0
         crop_box = np.array([nx, ny, nx + size, ny + size])
 
+        contain_flag = containBox(crop_box, boxes)
+        if contain_flag == True:
+            return None,0
+
         iou = IOU_multi(crop_box, boxes)
         if iou < iouTH:
             cropped_im = img[ny : ny + size, nx : nx + size, :]
@@ -38,6 +42,8 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
         if nx+size>width:
             return None, 0
         crop_box = np.array([nx, ny, nx + size, ny + size])
+        if containBox(crop_box, boxes) == True:
+            return None,0
 
         iou = IOU_multi(crop_box, boxes)
         if iou < iouTH:
@@ -56,6 +62,8 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
         if nx+size>width:
             return None, 0
         crop_box = np.array([nx, ny, nx + size, ny + size])
+        if containBox(crop_box, boxes) == True:
+            return None,0
 
         iou = IOU_multi(crop_box, boxes)
         if iou < iouTH:
@@ -71,6 +79,9 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
         ny = npr.randint(0, height - size)
         crop_box = np.array([nx, ny, nx + size, ny + size])
         iou = IOU_multi(crop_box, boxes)
+        if containBox(crop_box, boxes) == True:
+            return None,0
+
         if iou < iouTH:
             cropped_im = img[ny : ny + size, nx : nx + size, :]
             resized_im = cv2.resize(cropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)
