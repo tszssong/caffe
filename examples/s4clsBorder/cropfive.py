@@ -8,7 +8,7 @@ from utils import IOU, overlapSelf
 from image_argument import flipAug, rotAug
 cropSize = 64
 ScaleS = 1.0
-ScaleB = 2.5
+ScaleB = 2.0
 Shift = 1.5
 RotD = 110
 # from_dir = "/Volumes/song/data4Train/Tight5-notali2-img/"
@@ -18,16 +18,16 @@ RotD = 110
 
 from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/cls64/"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','fist','otherhand']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 20
-N_ROT = 5
-date = "_1010"
+N_RESIZE = 8
+N_ROT = 6
+date = "_1012"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name + '_1'
@@ -86,7 +86,7 @@ for annotation in annotations:
     for pic_idx in range(N_ROT):
         rot_d = np.random.randint(-RotD, RotD)
 
-        img, f_bbox = rotAug(image, boxes, rot_d)
+        img, f_bbox, f_flag = rotAug(image, boxes, rot_d)
 
         f_boxes = np.array(f_bbox, dtype=np.float32).reshape(-1, 4)
 
@@ -94,9 +94,9 @@ for annotation in annotations:
         height, width, channel = img.shape
 
         for box_idx in xrange(f_boxes.shape[0]):
-
+            if f_flag[box_idx] == False:      #skip boxes outside image aftre Rot
+                continue
             box = f_boxes[box_idx]
-
             x1, y1, x2, y2 = box
             rx1, ry1, rx2, ry2 = box
             if rx1>=rx2 or ry1>=ry2:

@@ -142,7 +142,9 @@ def rotAug(image, boxes, rot_d):
     M = cv2.getRotationMatrix2D((im_width / 2, im_height / 2), rot_d, 1)
     im = cv2.warpAffine(im, M, (im_width, im_height), None, cv2.INTER_LINEAR, cv2.BORDER_REPLICATE)
     rotate_boxes = np.empty((0, 4), dtype=np.float32)
+    rotate_boxes_flag = np.empty((0, 1), dtype=np.bool_)
     for j in xrange(len(boxes)):
+        flage = True
         [x1, y1, x2, y2] = [int(x) for x in boxes[j]]
         new_pt1 = np.dot(M, np.array([x1, y1, 1]).transpose()).astype(np.int32).transpose()
         new_pt2 = np.dot(M, np.array([x2, y2, 1]).transpose()).astype(np.int32).transpose()
@@ -150,13 +152,14 @@ def rotAug(image, boxes, rot_d):
         new_pt4 = np.dot(M, np.array([x2, y1, 1]).transpose()).astype(np.int32).transpose()
         rect_pts = np.array([[new_pt1, new_pt2, new_pt3, new_pt4]])
         x, y, w, h = cv2.boundingRect(rect_pts)
-        # if x<0 or y<0 or x+w>im_width or y+h >im_height:
-        #     continue
+        # box go outside of image biger than 1/4 of box, set a flag
         if x < -w/4 or y < -h/4 or x + w > im_width+w/4 or y + h > im_height+h/4:
-            continue
-        # box go outside, delete
+           flage = False
+
         rotate_boxes = np.append( rotate_boxes, np.array([x, y, x + w, y + h]) )
-    return im, rotate_boxes
+        rotate_boxes_flag = np.append(rotate_boxes_flag , flage)
+
+    return im, rotate_boxes, rotate_boxes_flag
 
 def ImageAug(image, brighteness=0, contrast=0, saturation=0, hue=0, togray=0):
     image = ColorJitterAug(image, brighteness, contrast, saturation)

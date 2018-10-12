@@ -9,12 +9,12 @@ from cropNegs import cropNeg
 from image_argument import flipAug, rotAug
 
 cropSize = 64
-N_CROP = 4
+N_CROP = 3
 
 # from_dir = "/Volumes/song/gestureDatabyName/1-heart-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/1-heart-xml.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/3-one-train.txt"
 # from_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
@@ -23,16 +23,16 @@ N_CROP = 4
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
-from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/7-zan-train.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/cls64/"
+# from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/7-zan-train.txt"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
 
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 gen_mode = annofileName.split('-')[-1] #train/test
 clsname = annofileName.split('-')[-2]
 cls_idx = 0
-date = "_1010"
+date = "_1012"
 txt_name = '0-' + annofileName + '_neg' + date
 save_dir = '0-' + annofileName + '_neg' + date
 print gen_mode, clsname, cls_idx

@@ -3,7 +3,7 @@ from utils import IOU, overlapSelf, IOU_multi
 import copy
 import numpy.random as npr
 import cv2
-
+#iouTH太小会导致切不到胳膊
 def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
     oriH, oriW, oriC = image.shape
     height, width, channel = image.shape
