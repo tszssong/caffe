@@ -1,16 +1,41 @@
 name: "hand_gesture_cls14_v3.2"
 layer {
   name: "data"
-  type: "Input"
+  type: "Data"
   top: "data"
-  input_param {
-    shape {
-      dim: 1
-      dim: 3
-      dim: 48
-      dim: 48
-    }
+  top: "label"
+  data_param {
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/cls64/dw1011_train64_48_lmdb"
+    batch_size: 64
+    backend: LMDB
   }
+  transform_param {
+    mean_value: 104.008
+    mean_value: 116.669
+    mean_value: 122.675
+    crop_size: 48
+    mirror: false
+  }
+  include: { phase: TRAIN}
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  data_param {
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/cls64/dw1011_test64_48_lmdb"
+    batch_size: 64
+    backend: LMDB
+  }
+  transform_param {
+    mean_value: 104.008
+    mean_value: 116.669
+    mean_value: 122.675
+    crop_size: 48
+    mirror: false
+  }
+  include: { phase: TEST}
 }
 layer {
   name: "conv1"
@@ -232,10 +257,20 @@ layer {
 }
 layer {
   name: "prob"
-  type: "Softmax"
+  type: "SoftmaxWithLoss"
   bottom: "fc-hand"
+  bottom: "label"
   top: "prob"
+  propagate_down: 1
+  propagate_down: 0
+  loss_weight: 1
 }
-
+layer {
+  name: "loss-acc"
+  type: "Accuracy"
+  bottom: "fc-hand"
+  bottom: "label"
+  top: "loss-acc"
+}
 
 

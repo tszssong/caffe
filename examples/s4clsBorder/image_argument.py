@@ -150,7 +150,9 @@ def rotAug(image, boxes, rot_d):
         new_pt4 = np.dot(M, np.array([x2, y1, 1]).transpose()).astype(np.int32).transpose()
         rect_pts = np.array([[new_pt1, new_pt2, new_pt3, new_pt4]])
         x, y, w, h = cv2.boundingRect(rect_pts)
-        if x<0 or y<0 or x+w>im_width or y+h >im_height:
+        # if x<0 or y<0 or x+w>im_width or y+h >im_height:
+        #     continue
+        if x < -w/4 or y < -h/4 or x + w > im_width+w/4 or y + h > im_height+h/4:
             continue
         # box go outside, delete
         rotate_boxes = np.append( rotate_boxes, np.array([x, y, x + w, y + h]) )

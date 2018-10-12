@@ -1,16 +1,45 @@
-name: "hand_gesture_cls14_v3.2"
+name: "hand_gesture_cls_v3.2"
 layer {
   name: "data"
-  type: "Input"
+  type: "ImageData"
   top: "data"
-  input_param {
-    shape {
-      dim: 1
-      dim: 3
-      dim: 48
-      dim: 48
-    }
+  top: "label"
+  image_data_param {
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/cls64/train.txt"
+    batch_size: 128
+    shuffle: true
+    new_height: 64
+    new_width: 64
   }
+  transform_param {
+    mean_value: 128
+    mean_value: 128
+    mean_value: 128
+    crop_size: 64
+    mirror: false
+  }
+  include: { phase: TRAIN}
+}
+layer {
+  name: "data"
+  type: "ImageData"
+  top: "data"
+  top: "label"
+  image_data_param {
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/cls64/test.txt"
+    batch_size: 128
+    shuffle: true
+    new_height: 64
+    new_width: 64
+  }
+  transform_param {
+    mean_value: 128
+    mean_value: 128
+    mean_value: 128
+    crop_size: 64
+    mirror: false
+  }
+  include: { phase: TEST}
 }
 layer {
   name: "conv1"
@@ -149,7 +178,7 @@ layer {
   top: "conv4"
 }
 layer {
-  name: "conv5"
+  name: "conv5/64"
   type: "Convolution"
   bottom: "conv4"
   top: "conv5"
@@ -162,7 +191,7 @@ layer {
     decay_mult: 0
   }
   convolution_param {
-    num_output: 80
+    num_output: 64
     pad: 1
     kernel_size: 3
     stride: 1
@@ -183,7 +212,7 @@ layer {
   top: "conv5"
 }
 layer {
-  name: "ip1-emotion"
+  name: "ip1"
   type: "InnerProduct"
   bottom: "conv5"
   top: "pool-emotion"
@@ -232,10 +261,20 @@ layer {
 }
 layer {
   name: "prob"
-  type: "Softmax"
+  type: "SoftmaxWithLoss"
   bottom: "fc-hand"
+  bottom: "label"
   top: "prob"
+  propagate_down: 1
+  propagate_down: 0
+  loss_weight: 1
 }
-
+layer {
+  name: "loss-acc"
+  type: "Accuracy"
+  bottom: "fc-hand"
+  bottom: "label"
+  top: "loss-acc"
+}
 
 

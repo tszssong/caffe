@@ -19,7 +19,7 @@ RotD = 5
 # from_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/8-fingerheart-xml.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/cls64/"
-clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
+clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','fist','other']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]

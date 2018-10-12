@@ -8,13 +8,13 @@ from utils import IOU, overlapSelf
 from image_argument import flipAug, rotAug
 cropSize = 64
 ScaleS = 1.0
-ScaleB = 2.5
+ScaleB = 2.6
 Shift = 1.5
 RotD = 25
-from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/9-ok-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-xml.txt"
+# from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/9-ok-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-find2.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/10-call-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/10-call-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/11-rock-img/"
@@ -23,16 +23,16 @@ anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yea
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/12-big_v-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/13-fist-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/13-fist-xml.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/cls64/"
-clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','other']
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsDebug/"
+clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v', 'fist', 'other']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 20
-N_ROT = 5
-date = "_1010"
+N_RESIZE = 200
+N_ROT = 50
+date = "_1011"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name + '_1'
@@ -157,6 +157,7 @@ for annotation in annotations:
                 if nx2 < rx2 - 10 or nx1 > rx1 + 10 or ny2 < ry2 - 10 or ny1 > ry1 + 10:
                     continue
                 crop_box = np.array([nx1, ny1, nx2, ny2])
+                #iou 2 include
                 overlap_flag = 0
                 if nbox > 1:
                     otherboxes = np.array([])
