@@ -1,41 +1,16 @@
 name: "hand_gesture_cls14_v3.2"
 layer {
   name: "data"
-  type: "Data"
+  type: "Input"
   top: "data"
-  top: "label"
-  data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/64data/up1012_addbg48_lmdb"
-    batch_size: 128
-    backend: LMDB
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 64
+      dim: 64
+    }
   }
-  transform_param {
-    mean_value: 104.008
-    mean_value: 116.669
-    mean_value: 122.675
-    crop_size: 48
-    mirror: false
-  }
-  include: { phase: TRAIN}
-}
-layer {
-  name: "data"
-  type: "Data"
-  top: "data"
-  top: "label"
-  data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/64data/up1012_test64_48_lmdb"
-    batch_size: 128
-    backend: LMDB
-  }
-  transform_param {
-    mean_value: 104.008
-    mean_value: 116.669
-    mean_value: 122.675
-    crop_size: 48
-    mirror: false
-  }
-  include: { phase: TEST}
 }
 layer {
   name: "conv1"
@@ -207,20 +182,10 @@ layer {
   bottom: "conv5"
   top: "conv5"
 }
-
-layer {
-  name: "drop5"
-  type: "Dropout"
-  bottom: "conv5"
-  top: "drop5"
-  dropout_param{
-    dropout_ratio: 0.5
-  }
-}
 layer {
   name: "ip1-emotion"
   type: "InnerProduct"
-  bottom: "drop5"
+  bottom: "conv5"
   top: "pool-emotion"
   param {
     lr_mult: 1
@@ -267,20 +232,10 @@ layer {
 }
 layer {
   name: "prob"
-  type: "SoftmaxWithLoss"
+  type: "Softmax"
   bottom: "fc-hand"
-  bottom: "label"
   top: "prob"
-  propagate_down: 1
-  propagate_down: 0
-  loss_weight: 1
 }
-layer {
-  name: "loss-acc"
-  type: "Accuracy"
-  bottom: "fc-hand"
-  bottom: "label"
-  top: "loss-acc"
-}
+
 
 

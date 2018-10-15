@@ -7,9 +7,8 @@ import numpy.random as npr
 from utils import IOU, overlapSelf
 from image_argument import flipAug, rotAug
 cropSize = 64
-ScaleS = 1.0
-ScaleB = 2.0
-Shift = 1.5
+Scale = 1.1
+Shift = 0.5
 RotD = 110
 # from_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-Tightnoali2.txt"
@@ -18,12 +17,11 @@ RotD = 110
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-TPickedali2.txt"
 
 from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-gzjp41.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
 
 # from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsDebug/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','otherhand']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
@@ -32,9 +30,9 @@ cls_idx = clslists.index(clsname)
 
 N_RESIZE = 8
 N_ROT = 6
-date = "_1013"
+date = "_1012"
 
-save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
+save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(Scale).split('.')[0] + str(Scale).split('.')[1]+ date
 save_dir = save_name + '_1'
 txt_name = save_name + '_1'
 
@@ -132,19 +130,12 @@ for annotation in annotations:
                 continue
 
             for i in range(N_RESIZE):
-                # maxWH = np.max((rw, rh))
-                # enlargeS = npr.randint(np.ceil(maxWH * ScaleS), np.ceil(ScaleB * maxWH))
-                # delta_x = npr.randint(-float(rw) * Shift, float(rw) * Shift)
-                # delta_y = npr.randint(-float(rh) * Shift, float(rh) * Shift)
-
-                nw = npr.randint(np.ceil(rw * ScaleS), np.ceil(ScaleB * rw))
+                
+                nw = rw * Scale
                 nh = nw
-                if i == 0 and nw < w * 1.5:
-                    delta_x = npr.randint(-int(float(rw) * 0.2), int( float(rw) * 0.2 ) + 1)
-                    delta_y = npr.randint(-int(float(rh) * 0.2), int( float(rh) * 0.2 ) + 1)
-                else:
-                    delta_x = npr.randint(-int(float(rw) * Shift), int(float(rw) * Shift+1))
-                    delta_y = npr.randint(-int(float(rh) * Shift), int(float(rh) * Shift+1))
+            
+                delta_x = npr.randint(-int(float(rw) * Shift), int(float(rw) * Shift+1))
+                delta_y = npr.randint(-int(float(rh) * Shift), int(float(rh) * Shift+1))
 
                 ncx = rcx + delta_x
                 ncy = rcy + delta_y

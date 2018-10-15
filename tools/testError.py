@@ -3,37 +3,30 @@ sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
 sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
 import numpy as np
 import numpy.random as npr
-#import scipy.io as sio
+import scipy.io as sio
 import caffe
 import cv2
 import time
 
-NumTest = 20000
+NumTest = 50000
 TH=0.7
 if __name__ == '__main__':
     
     caffe.set_mode_cpu()
     inputSize = 48
-#    inputSize = 64
     mean = np.array([104, 117, 123])
-
+    fromlist = sys.argv[1]   #"5-five-TPickedali2_64R110S1020_1012_1.txt"
+    errlist = "data/errlist/"+fromlist
 #    classify_net = caffe.Net("/Users/momo/Desktop/sdk/momocv2_model/converted_model/hand_gesture/hand_gesture_cls_v3.0.prototxt",
 #                            "models/mouth48_0917/0917addfist_iter_60000.caffemodel", caffe.TEST)
-#    classify_net = caffe.Net("models/fromAli/test.prototxt",
-#                             "models/fromAli/641012_100w.caffemodel", caffe.TEST)
-    classify_net = caffe.Net("no_bn.prototxt",
-                             "no_bn.caffemodel", caffe.TEST)
-#
-#    classify_net = caffe.Net("examples/hand_cls/lm87cls/test.prototxt",
-#                             "models/lm87cls/1012_iter_1000000.caffemodel", caffe.TEST)
-#    classify_net = caffe.Net("examples/hand_cls/mouth48/bnTest.prototxt",
-#                         "models/mouth48_1012/adbg_drop_iter_850000.caffemodel", caffe.TEST)
-#    classify_net = caffe.Net("examples/hand_cls/mouth48/test14cls.prototxt",
-#                             "models/fromAli/1012_iter_2480000.caffemodel", caffe.TEST)
-    fid = open("data/48Test/Txts/0627.txt","r")
-#    fid = open("/Users/momo/Downloads/test0627.txt","r")
-    subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
-#               ,'palm', 'namaste', 'two_together', 'thumb_down']
+
+    classify_net = caffe.Net("examples/hand_cls/mouth48/test14cls.prototxt",
+                             "models/mouth48_1012/up_s10b20_iter_285000.caffemodel", caffe.TEST)
+#    fid = open("/Users/momo/Desktop/sdk/ok.txt","r")
+    fw = open(errlist, 'w')
+    fid = open("data/64data/Txts/" + fromlist, 'r')
+#fid = open("data/clsData/Txts/5-ali2grab-five-train_48R110S1015_0915_1.txt","r")
+    subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v', 'fist']
     tp_dict = {}
     gt_dict = {}
     re_dict = {}
@@ -56,9 +49,8 @@ if __name__ == '__main__':
         if not line or cur_ == NumTest:
             break;
         words = line.split()
-#        image_file_name = "data/clsData/" + words[0]
-#        image_file_name = "/Users/momo/Downloads/" + words[0]
-        image_file_name = "data/48Test/" + words[0]
+        image_file_name = "data/64data/" + words[0]
+#        image_file_name = "/Users/momo/Desktop/sdk/ok/" + words[0] + '.jpg'
 
         if cur_%500 == 0:
             print cur_,
@@ -73,8 +65,6 @@ if __name__ == '__main__':
         im = np.swapaxes(im, 0, 2)
         im = np.swapaxes(im, 1, 2)
         label    = int(words[1])
-        if label > 13:
-            continue
         gt_dict[subdirlists[label]] += 1
 
         classify_net.blobs['data'].reshape(1,3,inputSize,inputSize)
@@ -91,9 +81,11 @@ if __name__ == '__main__':
         re_dict[subdirlists[cls]] += 1
         if not cls == label:
             err += 1
+            print image_file_name, cls
+            fw.write(image_file_name + ' '+ str(cls) + '\n')
         else:
             tp_dict[subdirlists[cls]]+=1
-    print "err, sum:",err, sum_
+    print err, sum_
     print 'tp:', tp_dict
     print 're', re_dict
     print 'gt', gt_dict
@@ -106,4 +98,5 @@ if __name__ == '__main__':
         gtTotal += gt_dict[gname]
         tpTotal += tp_dict[gname]
     print "total recall:%.2f"%(float(tpTotal)/float(gtTotal)), "total precision:%.2f"%(float(tpTotal)/float(reTotal))
-
+fw.close()
+fid.close()

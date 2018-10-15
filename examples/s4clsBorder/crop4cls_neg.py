@@ -13,16 +13,17 @@ N_CROP = 3
 
 # from_dir = "/Volumes/song/gestureDatabyName/1-heart-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/1-heart-xml.txt"
-from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
+# from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/3-one-train.txt"
 # from_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-Tightnoali2.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
+
+from_dir = "/Volumes/song/gestureDatabyName/11-rock-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/11-rock-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/7-zan-train.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
@@ -46,7 +47,7 @@ with open(anno_file, 'r') as f:
     annotations = f.readlines()
 
 num = len(annotations)
-
+print "%d pics in total" % num, "NCROP:", N_CROP
 p_idx = 0  # positive
 idx = 0
 box_idx = 0

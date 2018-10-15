@@ -3,8 +3,10 @@ from utils import IOU, overlapSelf, IOU_multi, containBox
 import copy
 import numpy.random as npr
 import cv2
+
+factor = 2
 # iouH should biger than 0.1 , or arms can not be cropped
-def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
+def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.3):
     oriH, oriW, oriC = image.shape
     height, width, channel = image.shape
     fboxes = np.array([])
@@ -13,7 +15,7 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
     # print box, boxes
 
     if arg == 0:                     #down
-        size = npr.randint(40, min(width, height) / 2)
+        size = npr.randint(40, min(width, height) / factor)
         gtx1, gty1, gtx2, gty2 = box
         gtheight = int(gty2)-int(gty1)
         nx = int(gtx1)
@@ -34,7 +36,7 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
         else:
             return None, 0
     elif arg == 1:                   #right
-        size = npr.randint(40, min(width, height) / 2)
+        size = npr.randint(40, min(width, height) / factor)
         gtx1, gty1, gtx2, gty2 = box
         gtwidth = int(gtx2)-int(gtx1)
         nx = int(gtx2)+ int(0.2*gtwidth)
@@ -54,7 +56,7 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
             return None, 0
 
     elif arg == 2:                   #left
-        size = npr.randint(40, min(width, height) / 2)
+        size = npr.randint(40, min(width, height) / factor)
         gtx1, gty1, gtx2, gty2 = box
         gtwidth = int(gtx2)-int(gtx1)
         nx = int(gtx2)+ int(0.2*gtwidth)
@@ -74,7 +76,7 @@ def cropNeg(image, boxes,cropSize=128, arg=0, iouTH = 0.1):
         else:
             return None, 0
     else:                   #normal
-        size = npr.randint(40, min(width, height) / 2)
+        size = npr.randint(40, min(width, height) / factor)
         nx = npr.randint(0, width - size)
         ny = npr.randint(0, height - size)
         crop_box = np.array([nx, ny, nx + size, ny + size])

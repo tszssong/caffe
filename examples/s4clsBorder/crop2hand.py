@@ -11,15 +11,15 @@ ScaleS = 1.0
 ScaleB = 2.0
 Shift = 1.5
 RotD = 5
-# from_dir = "/Volumes/song/gestureDatabyName/1-heart-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/1-heart-xml.txt"
-from_dir = "/Volumes/song/gestureDatabyName/4-baoquan-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/4-baoquan-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/1-heart-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/1-heart-xml.txt"
+# from_dir = "/Volumes/song/gestureDatabyName/4-baoquan-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/4-baoquan-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/6-bainian-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/6-bainian-xml.txt"
 
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
-clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
+clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','otherhand','fist','ILU']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]

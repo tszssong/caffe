@@ -6,39 +6,33 @@ import os
 import numpy.random as npr
 from utils import IOU, overlapSelf
 from image_argument import flipAug, rotAug
-cropSize = 64
+cropSize = 48
 ScaleS = 1.0
 ScaleB = 2.0
 Shift = 1.5
-RotD = 110
-# from_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-Tightnoali2.txt"
+RotD = 5
+from_dir = "/Volumes/song/handg_neg_test32G/momoDeepLab4Test/0627all-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0627-test-all.txt"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-wsTest.txt"
 
-# from_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-TPickedali2.txt"
-
-from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-gzjp41.txt"
-
-# from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
+# from_dir = "/Volumes/song/handg_neg_test32G/928-zilv-test-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
-clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','otherhand']
+
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/48Test/"
+clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', \
+            'call', 'rock', 'big_v','fist','palm', 'namaste', 'two_together', 'thumb_down']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
-clsname = annofileName.split('-')[-2]
-cls_idx = clslists.index(clsname)
 
-N_RESIZE = 8
-N_ROT = 6
-date = "_1013"
+N_RESIZE = 4
+N_ROT = 2
+date = "_1014"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name + '_1'
 txt_name = save_name + '_1'
 
-print clsname, cls_idx
+clsname = annofileName.split('-')[-2]
 print txt_name, save_dir
 
 if not os.path.exists(to_dir+save_dir):
@@ -59,13 +53,28 @@ for annotation in annotations:
     annotation = annotation.strip().split(' ')
     im_path = annotation[0]
     nbox = int(annotation[1])
-    if nbox>2:
-        continue
-    objname = annotation[2]
 
-    if not objname == clsname:
-        # print im_path ," with class :", objname
+    if len(annotation[3:]) > 4:
+        annotation.pop(7)
+
+    objname = annotation[2]
+    if objname == 'two_together' or clsname == 'thumb_down' or clsname == 'palm' or clsname == 'namaste':
         continue
+
+    cls_idx = clslists.index(objname)
+
+    if nbox>=2:
+        continue
+
+    if cls_idx<9:
+        RotD = 5
+    else:
+        RotD = 25
+    if cls_idx == 2:
+        RotD = 25
+    if cls_idx == 5:
+        RotD = 110
+
     bbox = map(float, annotation[3:])
     boxes = np.array(bbox, dtype=np.float32).reshape(-1, 4)
 
@@ -85,8 +94,6 @@ for annotation in annotations:
         fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
 
     height, width, channel = image.shape
-
-
 
     for pic_idx in range(N_ROT):
         rot_d = np.random.randint(-RotD, RotD)
