@@ -33,7 +33,7 @@ layer {
   }
 }
 layer {
-  name: "conv1/bn"
+  name: "conv1_bn"
   type: "BatchNorm"
   bottom: "conv1"
   top: "conv1"
@@ -56,7 +56,7 @@ layer {
   }
 }
 layer {
-  name: "conv1_bn_scale"
+  name: "conv1_scale"
   type: "Scale"
   bottom: "conv1"
   top: "conv1"
@@ -106,7 +106,7 @@ layer {
   }
 }
 layer {
-  name: "conv2/bn"
+  name: "conv2_bn"
   type: "BatchNorm"
   bottom: "conv2"
   top: "conv2"
@@ -179,7 +179,7 @@ layer {
   }
 }
 layer {
-  name: "conv3/bn"
+  name: "conv3_bn"
   type: "BatchNorm"
   bottom: "conv3"
   top: "conv3"
@@ -252,7 +252,7 @@ layer {
   }
 }
 layer {
-  name: "conv4/bn"
+  name: "conv4_bn"
   type: "BatchNorm"
   bottom: "conv4"
   top: "conv4"
@@ -399,7 +399,7 @@ layer {
   }
 }
 layer {
-  name: "ip1/bn"
+  name: "ip1_bn"
   type: "BatchNorm"
   bottom: "ip1"
   top: "ip1"

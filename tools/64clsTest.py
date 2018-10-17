@@ -8,24 +8,12 @@ import caffe
 import cv2
 import time
 
+prototxt   = "models/fromAli/test_mouth64.prototxt"
+caffemodel = "models/fromAli/mouth64nobn100w.caffemodel"
 NumTest = 200000
-#prototxt = "examples/hand_cls/mouth48/bnTestNew.prototxt"
-#caffemodel = "models/mouth48_1012/1016bg_bn_iter_815000.caffemodel"
-#prototxt   = "no_bn.prototxt"
-#caffemodel = "no_bn.caffemodel"
-#prototxt   = "examples/hand_cls/mouth48/bnTest.prototxt"
-#caffemodel = "models/mouth48_1012/1015bg_bn_iter_1200000.caffemodel"
-#prototxt   = "examples/hand_cls/mouth48/bnTest.prototxt"
-#caffemodel = "models/fromAli/1015bg_bn_iter_1765000.caffemodel"
-prototxt   = "examples/hand_cls/mouth48/bnTestOld.prototxt"
-caffemodel = "examples/hand_cls/mouth48/adbg_drop_iter_1180000.caffemodel"
-#prototxt   = "examples/hand_cls/mouth48/test14cls.prototxt",
-#caffemodel = "models/fromAli/1012_iter_2480000.caffemodel"
-
 if __name__ == '__main__':
-    
     caffe.set_mode_cpu()
-    inputSize = 48
+    inputSize = 64
     mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
 #    fid = open("data/48Test/Txts/5-five-wsTest_48R110S1020_1013_1.txt","r")
@@ -56,7 +44,6 @@ if __name__ == '__main__':
             break;
         words = line.split()
 #        image_file_name = "data/clsData/" + words[0]
-#        image_file_name = "/Users/momo/Downloads/" + words[0]
         image_file_name = "data/48Test/" + words[0]
 
         if cur_%500 == 0:
@@ -101,5 +88,4 @@ if __name__ == '__main__':
         gtTotal += gt_dict[gname]
         tpTotal += tp_dict[gname]
     print "total recall:%.2f"%(float(tpTotal)/float(gtTotal)), "total precision:%.2f"%(float(tpTotal)/float(reTotal))
-    print prototxt
-    print caffemodel
+

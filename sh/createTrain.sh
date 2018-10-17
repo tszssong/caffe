@@ -1,21 +1,14 @@
 #!/usr/bin/env sh
 set -e
 EXAMPLE=sh
-DATA=data/clsData/
+DATA=data/64data/
 TOOLS=build/tools
 
-TRAIN_DATA_ROOT=/Users/momo/wkspace/caffe_space/caffe/data/clsData/
+TRAIN_DATA_ROOT=/Users/momo/wkspace/caffe_space/caffe/data/64data/
 
-# Set RESIZE=true to resize the images to 256x256. Leave as false if images have
-# already been resized using another tool.
-RESIZE=false
-if $RESIZE; then
-  RESIZE_HEIGHT=48
-  RESIZE_WIDTH=48
-else
-  RESIZE_HEIGHT=48
-  RESIZE_WIDTH=48
-fi
+RESIZE_HEIGHT=48
+RESIZE_WIDTH=48
+
 
 if [ ! -d "$TRAIN_DATA_ROOT" ]; then
   echo "Error: TRAIN_DATA_ROOT is not a path to a directory: $TRAIN_DATA_ROOT"
@@ -31,7 +24,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $TRAIN_DATA_ROOT \
-    $DATA/up_trainTxts.txt\
-    $DATA/up_lmdb
+    $DATA/up_1015addbgTrain.txt\
+    $DATA/up_1015addbgTrain48_lmdb
 
 echo "Done."
