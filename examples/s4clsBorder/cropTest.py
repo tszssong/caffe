@@ -16,7 +16,7 @@ Shift = 1.5
 paddingMode = 'black'
 N_RESIZE = 1
 N_ROT = 1
-date = "_1017"
+date = "_1017_1"
 
 from_dir = "/Volumes/song/handg_neg_test32G/momoDeepLab4Test/0627all-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0627-test-all.txt"
@@ -47,7 +47,6 @@ num = len(annotations)
 
 print "%d pics in total" % num, "NROT:", N_ROT,"N_RESIZE:", N_RESIZE
 p_idx = 0  # positive
-d_idx = 1  # dict idx
 idx = 0
 box_idx = 0
 
@@ -74,15 +73,6 @@ for annotation in annotations:
     idx += 1
     if idx % 100 == 0:
         print "%s images done, pos: %s" % (idx, p_idx)
-    if p_idx > 100000:
-        p_idx = 0
-        d_idx += 1
-        txt_name = save_name + '_' + str(d_idx)
-        save_dir = save_name + '_' + str(d_idx)
-        if not os.path.exists(to_dir + save_dir):
-            os.mkdir(to_dir + save_dir)
-        fw.close()
-        fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
 
     height, width, channel = image.shape
 
