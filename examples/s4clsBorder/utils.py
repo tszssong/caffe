@@ -77,7 +77,6 @@ def containBox(box, boxes):
         compH = compBox[3] - compBox[1]
         if( box[0]<compBox[0]-compW/10 and box[1]<compBox[1]-compH/10 and box[2]>compBox[2]+compW/10 and box[3]< compBox[3]+compH/10):
             contain = True
-
     return contain
 
 def overlapSelf(Reframe,GTframe):

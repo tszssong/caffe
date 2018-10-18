@@ -90,4 +90,6 @@ if __name__ == '__main__':
         gtTotal += gt_dict[gname]
         tpTotal += tp_dict[gname]
     print "total recall:%.2f"%(float(tpTotal)/float(gtTotal)), "total precision:%.2f"%(float(tpTotal)/float(reTotal))
+    print prototxt
+    print caffemodel
 

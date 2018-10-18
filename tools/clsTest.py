@@ -10,7 +10,7 @@ import time
 
 NumTest = 200000
 #prototxt = "examples/hand_cls/mouth48/bnTestNew.prototxt"
-#caffemodel = "models/mouth48_1012/1016bg_bn_iter_815000.caffemodel"
+#caffemodel = "models/mouth48_1012/1017f118w_iter_450000.caffemodel"
 #prototxt   = "no_bn.prototxt"
 #caffemodel = "no_bn.caffemodel"
 #prototxt   = "examples/hand_cls/mouth48/bnTest.prototxt"

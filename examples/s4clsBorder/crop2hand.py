@@ -54,7 +54,7 @@ for annotation in annotations:
     annotation = annotation.strip().split(' ')
     im_path = annotation[0]
     nbox = int(annotation[1])
-    if nbox>2:
+    if nbox>=2:
         continue
     objname = annotation[2]
 
