@@ -8,8 +8,10 @@ import caffe
 import cv2
 import time
 
-prototxt   = "models/fromAli/test_mouth64.prototxt"
-caffemodel = "models/fromAli/mouth64nobn100w.caffemodel"
+#prototxt   = "models/fromAli/test_mouth64.prototxt"
+#caffemodel = "models/fromAli/mouth64nobn100w.caffemodel"
+prototxt   = "models/fromAli/mouth64bn/test.prototxt"
+caffemodel = "models/fromAli/mouth64bn/bn1012_iter_1000000.caffemodel"
 NumTest = 200000
 if __name__ == '__main__':
     caffe.set_mode_cpu()

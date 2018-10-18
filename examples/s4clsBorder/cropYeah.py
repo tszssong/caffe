@@ -4,12 +4,12 @@ import cv2
 import copy
 import os
 import numpy.random as npr
-from utils import IOU, overlapSelf
+from utils import IOU, overlapSelf, overlapingOtherBox
 from bbox_transform import crop4cls, validBox
 from image_process import  crop_image, fliterDim
 from image_argument import flipAug, rotAug
 OutAllowed = 10
-cropSize = 48
+cropSize = 64
 ScaleS = 1.0
 ScaleB = 2.0
 Shift = 1.5
@@ -18,12 +18,8 @@ N_RESIZE = 1
 N_ROT = 1
 date = "_1017_1"
 
-from_dir = "/Volumes/song/handg_neg_test32G/momoDeepLab4Test/0627all-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0627-test-all.txt"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-wsTest.txt"
-
-# from_dir = "/Volumes/song/handg_neg_test32G/928-zilv-test-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0928-zilv-test.txt"
+from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
 
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/48Test/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','palm', 'namaste', 'two_together', 'thumb_down']
@@ -55,10 +51,10 @@ for annotation in annotations:
     im_path = annotation[0]
     nbox = int(annotation[1])
 
-    if nbox>=2:
+    if nbox>2:
         continue
-    if len(annotation[3:]) > 4:
-        annotation.pop(7)
+    # if len(annotation[3:]) > 4:
+    #     annotation.pop(7)
 
     objname = annotation[2]
     if (objname == 'two_together' or objname == 'thumb_down' or objname == 'palm' or objname == 'namaste'):
@@ -100,16 +96,10 @@ for annotation in annotations:
                 if not crop_box.size == 4:
                     continue
 
-                overlap_flag = 0
-                if nbox > 1:
-                    otherboxes = np.array([])
-                    for otherbox_idx in xrange(f_boxes.shape[0]):
-                        if not box_idx == otherbox_idx:
-                            iou = IOU(crop_box, f_boxes[otherbox_idx])
-                            if iou > 0.01:
-                                overlap_flag = 1
-                if overlap_flag == 1:
-                    continue
+                if nbox>1:
+                    if overlapingOtherBox(crop_box, box_idx, f_boxes):
+                        continue
+
                 ncropped_im = crop_image(img, crop_box, paddingMode)
                 nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)
                 filename = '/'+str(cls_idx)+'_'+str(p_idx)+'_'+im_path.split('.')[0]+'.jpg'

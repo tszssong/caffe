@@ -9,10 +9,10 @@ test_iter: 1
 test_interval: 1000
 weight_decay: 0.004
 lr_policy: "step"
-stepsize: 20000
+stepsize: 50000
 gamma: 0.8
 display: 50
 max_iter: 10000000
-snapshot: 5000
-snapshot_prefix: "models/mouth48_1012/1016bg_bn"
+snapshot: 50000
+snapshot_prefix: "models/mouth48_1012/1017f118w"
 solver_mode: CPU

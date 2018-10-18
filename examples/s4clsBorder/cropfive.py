@@ -18,21 +18,21 @@ RotD = 110
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-TPickedali2.txt"
 
 from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-gzjp41.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-gzjp41.txt"
 
 # from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/64data/"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsDebug/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','otherhand']
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 clsname = annofileName.split('-')[-2]
 cls_idx = clslists.index(clsname)
 
-N_RESIZE = 8
-N_ROT = 6
-date = "_1013"
+N_RESIZE = 1
+N_ROT = 1
+date = "_1017"
 
 save_name = annofileName +'_' + str(cropSize)+ 'R'+str(RotD) +'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name + '_1'
@@ -43,6 +43,8 @@ print txt_name, save_dir
 
 if not os.path.exists(to_dir+save_dir):
     os.mkdir(to_dir+save_dir)
+if not os.path.exists(to_dir+ '/Txts/'):
+    os.mkdir(to_dir+ '/Txts/')
 fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
 with open(anno_file, 'r') as f:
     annotations = f.readlines()

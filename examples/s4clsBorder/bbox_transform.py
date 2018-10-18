@@ -1,6 +1,7 @@
 import numpy as np
 import numpy.random as npr
 
+
 def validBox(box, width, height):
     rx1, ry1, rx2, ry2 = box
     if rx1 >= rx2 or ry1 >= ry2:
