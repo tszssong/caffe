@@ -14,7 +14,7 @@ ScaleS = 1.0
 ScaleB = 2.0
 Shift = 1.5
 paddingMode = 'black'
-N_RESIZE = 4
+N_RESIZE = 2
 N_ROT = 1
 date = "_1017_1"
 maxNum = 20000
@@ -30,6 +30,7 @@ maxNum = 20000
 
 from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-s.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/48Test/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','palm', 'namaste', 'two_together', 'thumb_down']
 RotDlists = [ 0,       5,       30,    10,         5,    110,         5,    10,            10,   30,     30,     30,      30,    30,     5,         5,              5,     5]
@@ -65,7 +66,7 @@ while(p_idx<maxNum):
 
         if nbox>2:
             continue
-        if p_idx == maxNum:
+        if p_idx >= maxNum:
             break
         # if len(annotation[3:]) > 4:
         #     annotation.pop(7)
@@ -122,5 +123,6 @@ while(p_idx<maxNum):
                     cv2.imwrite(to_dir + save_file, nresized_im)
                     p_idx += 1
                 box_idx += 1
+print p_idx , "images croped"
 fw.close()
 

@@ -76,7 +76,7 @@ while(p_idx<maxNum):
 
         if nbox>2:
             continue
-        if p_idx == maxNum:
+        if p_idx >= maxNum:
             break
         # if len(annotation[3:]) > 4:
         #     annotation.pop(7)
