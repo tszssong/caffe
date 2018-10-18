@@ -16,13 +16,13 @@ Shift = 1.5
 paddingMode = 'black'
 N_RESIZE = 1
 N_ROT = 1
-date = "_1017_1"
+date = "_1017"
 
 # from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
 
-# from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
+from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
 
 # from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/7-zan-train.txt"

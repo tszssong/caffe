@@ -14,13 +14,21 @@ ScaleS = 1.0
 ScaleB = 2.0
 Shift = 1.5
 paddingMode = 'black'
-N_RESIZE = 1
+N_RESIZE = 4
 N_ROT = 1
-date = "_1017_1"
+date = "_1017"
+# from_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-Tightnoali2.txt"
+
+# from_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-TPickedali2.txt"
 
 from_dir = "/Volumes/song/gestureDatabyName/5-five-VggMomo-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-VggMomo.txt"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-gzjp41.txt"
 
+# from_dir = "/Volumes/song/handgesture5_48G/ali1five_sy-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-syali1.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/48Test/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','palm', 'namaste', 'two_together', 'thumb_down']
 RotDlists = [ 0,       5,       30,    10,         5,    110,         5,    10,            10,   30,     30,     30,      30,    30,     5,         5,              5,     5]

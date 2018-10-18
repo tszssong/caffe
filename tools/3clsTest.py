@@ -9,18 +9,8 @@ import cv2
 import time
 
 NumTest = 200000
-prototxt = "examples/hand_cls/mouth48/bnTestNew.prototxt"
-caffemodel = "models/mouth48_1012/1017f118w_iter_600000.caffemodel"
-#prototxt   = "no_bn.prototxt"
-#caffemodel = "no_bn.caffemodel"
-#prototxt   = "examples/hand_cls/mouth48/bnTest.prototxt"
-#caffemodel = "models/mouth48_1012/1015bg_bn_iter_1200000.caffemodel"
-#prototxt   = "examples/hand_cls/mouth48/bnTest.prototxt"
-#caffemodel = "models/fromAli/1015bg_bn_iter_1765000.caffemodel"
-#prototxt   = "examples/hand_cls/mouth48/bnTestOld.prototxt"
-#caffemodel = "examples/hand_cls/mouth48/adbg_drop_iter_1180000.caffemodel"
-#prototxt   = "examples/hand_cls/mouth48/test14cls.prototxt",
-#caffemodel = "models/fromAli/1012_iter_2480000.caffemodel"
+prototxt = "models/fromAli/3cls/test3cls.prototxt"
+caffemodel = "models/fromAli/3cls/1018_iter_100000.caffemodel"
 
 if __name__ == '__main__':
     
@@ -29,8 +19,8 @@ if __name__ == '__main__':
     mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
 #    fid = open("data/48Test/Txts/5-five-wsTest_48R110S1020_1013_1.txt","r")
+#    fid = open("/Users/momo/Desktop/faceNeg/total_1017f118w_iter_45w_out_rand.txt","r")
     fid = open("data/48Test/Txts/testshuffle.txt","r")
-#    fid = open("data/48Test/Txts/zilvmomodl.txt","r")
 #    fid = open("/Users/momo/Downloads/test0627.txt","r")
     subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
     tp_dict = {}
@@ -57,12 +47,15 @@ if __name__ == '__main__':
         words = line.split()
 #        image_file_name = "data/clsData/" + words[0]
 #        image_file_name = "/Users/momo/Downloads/" + words[0]
+
+#        image_file_name = "/Users/momo/Desktop/faceNeg/" + words[0]
         image_file_name = "data/48Test/" + words[0]
 
         if cur_%500 == 0:
             print cur_,
             sys.stdout.flush()
         im = cv2.imread(image_file_name)
+        copy = im
         h,w,ch = im.shape
         if h!=inputSize or w!=inputSize:
             im = cv2.resize(im,(int(inputSize),int(inputSize)))
@@ -88,6 +81,11 @@ if __name__ == '__main__':
             err += 1
         else:
             tp_dict[subdirlists[cls]]+=1
+
+        print "label:", label, "cls:", cls
+#        cv2.imshow("pic", copy)
+#        cv2.waitKey()
+
     print "\nerr, sum:",err, sum_
     reTotal = 0
     gtTotal = 0

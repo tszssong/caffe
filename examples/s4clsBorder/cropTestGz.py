@@ -17,26 +17,23 @@ Shift = 1.5
 paddingMode = 'black'
 N_RESIZE = 1
 N_ROT = 1
-date = "_1017_2"
+date = "_1018"
 
 from_dir = "/Volumes/song/handg_neg_test32G/momoDeepLab4Test/0627all-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0627-test-all.txt"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-wsTest.txt"
 
-# from_dir = "/Volumes/song/handg_neg_test32G/928-zilv-test-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0928-zilv-test.txt"
 
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/48Test/"
+to_dir = "/Users/momo/caffe/data/48Test/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','palm', 'namaste', 'two_together', 'thumb_down']
 RotDlists = [ 0,       5,       30,    10,         5,    110,         5,    10,            10,   30,     30,     30,      30,    30,     5,         5,              5,           5]
-annofileName = anno_file.split('.')[0].split('/')[-1]
+annofileName = anno_file.split('/')[-1].split('.')[0]
 print annofileName
 
 save_name = annofileName + '_' + str(cropSize)+ 'S' + str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
 save_dir = save_name
 txt_name = save_name
 
-clsname = annofileName.split('-')[-2]
+# clsname = annofileName.split('-')[-2]
 print txt_name, save_dir
 
 if not os.path.exists(to_dir + save_dir):
@@ -47,13 +44,14 @@ with open(anno_file, 'r') as f:
 num = len(annotations)
 
 print "%d pics in total" % num, "NROT:", N_ROT,"N_RESIZE:", N_RESIZE
-p_idx = 0  # positive
-idx = 0
-box_idx = 0
 handnum = np.zeros((14,), dtype=int)
 
-while min(handnum) < maxnum :
-    
+while min(handnum[1: ]) < maxnum :
+    print('****************************************************')
+    p_idx = 0  # positive
+    idx = 0
+    box_idx = 0
+    loop = 1
     for annotation in annotations:
         annotation = annotation.strip().split(' ')
         im_path = annotation[0]
@@ -107,24 +105,22 @@ while min(handnum) < maxnum :
                     if not crop_box.size == 4:
                         continue
 
-                    overlap_flag = 0
                     if nbox > 1:
-                        otherboxes = np.array([])
-                        for otherbox_idx in xrange(f_boxes.shape[0]):
-                            if not box_idx == otherbox_idx:
-                                iou = IOU(crop_box, f_boxes[otherbox_idx])
-                                if iou > 0.01:
-                                    overlap_flag = 1
-                    if overlap_flag == 1:
-                        continue
+                        if overlapingOtherBox(crop_box, box_idx, f_boxes):
+                            continue
+
                     ncropped_im = crop_image(img, crop_box, paddingMode)
                     nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)
-                    filename = '/'+str(cls_idx)+'_'+str(p_idx)+'_'+im_path.split('.')[0]+'.jpg'
+                    filename = '/'+str(cls_idx)+'_'+str(p_idx)+'_'+im_path.split('.')[0]+'_'+str(loop)+'.jpg'
                     save_file = os.path.join(save_dir + filename)
                     fw.write(save_dir + filename + ' ' + str(cls_idx) + '\n')
                     cv2.imwrite(to_dir + save_file, nresized_im)
                     p_idx += 1
+                    handnum[cls_idx] += 1
                 box_idx += 1
-    handnum[cls_idx] += 1
+        print handnum
+        if min(handnum[1: ]) == maxnum:
+            continue
+    loop += 1
 fw.close()
 
