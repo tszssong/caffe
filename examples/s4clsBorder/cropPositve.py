@@ -16,20 +16,24 @@ Shift = 1.5
 paddingMode = 'black'
 N_RESIZE = 1
 N_ROT = 1
-date = "_1017"
+date = "_1017_2"
+maxNum = 20000
 
+# from_dir = "/Volumes/song/gestureDatabyName/1-heart-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/1-heart-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
 
-from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
+# from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
 
 # from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/7-zan-train.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/8-fingerheart-xml.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/9-ok-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/9-ok-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-xml.txt"
+# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-find2.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/10-call-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/10-call-xml.txt"
 # from_dir = "/Volumes/song/gestureDatabyName/11-rock-img/"
@@ -64,67 +68,70 @@ p_idx = 0  # positive
 idx = 0
 box_idx = 0
 
-for annotation in annotations:
-    annotation = annotation.strip().split(' ')
-    im_path = annotation[0]
-    nbox = int(annotation[1])
+while(p_idx<maxNum):
+    for annotation in annotations:
+        annotation = annotation.strip().split(' ')
+        im_path = annotation[0]
+        nbox = int(annotation[1])
 
-    if nbox>2:
-        continue
-    # if len(annotation[3:]) > 4:
-    #     annotation.pop(7)
+        if nbox>2:
+            continue
+        if p_idx == maxNum:
+            break
+        # if len(annotation[3:]) > 4:
+        #     annotation.pop(7)
 
-    objname = annotation[2]
-    if (objname == 'two_together' or objname == 'thumb_down' or objname == 'palm' or objname == 'namaste'):
-        continue
-    cls_idx = clslists.index(objname)
+        objname = annotation[2]
+        if (objname == 'two_together' or objname == 'thumb_down' or objname == 'palm' or objname == 'namaste'):
+            continue
+        cls_idx = clslists.index(objname)
 
-    RotD = RotDlists[cls_idx]
-    bbox = map(float, annotation[3:])
-    boxes = np.array(bbox, dtype=np.float32).reshape(-1, 4)
-    image = cv2.imread(os.path.join(from_dir, im_path))
+        RotD = RotDlists[cls_idx]
+        bbox = map(float, annotation[3:])
+        boxes = np.array(bbox, dtype=np.float32).reshape(-1, 4)
+        image = cv2.imread(os.path.join(from_dir, im_path))
 
-    idx += 1
-    if idx % 100 == 0:
-        print "%s images done, pos: %s" % (idx, p_idx)
+        idx += 1
+        if idx % 100 == 0:
+            print "%s images done, pos: %s" % (idx, p_idx)
 
-    height, width, channel = image.shape
+        height, width, channel = image.shape
 
-    for pic_idx in range(N_ROT):
+        for pic_idx in range(N_ROT):
 
-        rot_d = np.random.randint(-RotD, RotD)
-        img, f_bbox, f_flag = rotAug(image, boxes, rot_d)
-        f_boxes = np.array(f_bbox, dtype=np.float32).reshape(-1, 4)
-        height, width, channel = img.shape
+            rot_d = np.random.randint(-RotD, RotD)
+            img, f_bbox, f_flag = rotAug(image, boxes, rot_d)
+            f_boxes = np.array(f_bbox, dtype=np.float32).reshape(-1, 4)
+            height, width, channel = img.shape
 
-        for box_idx in xrange(f_boxes.shape[0]):
+            for box_idx in xrange(f_boxes.shape[0]):
 
-            if f_flag[box_idx] == False:      #skip boxes outside image after Rot
-                continue
-            box = f_boxes[box_idx]
-            if validBox(box, width, height) == False:
-                continue
-            # cropped_im = img[int(ry1): int(ry2), int(rx1): int(rx2), :]
-            cropped_im = img[int(box[1]): int(box[3]), int(box[0]): int(box[2]), :]
-            if fliterDim(cropped_im) == False:
-                continue
-
-            for i in range(N_RESIZE):
-                crop_box = crop4cls(box, ScaleS, ScaleB, Shift,OutAllowed)
-                if not crop_box.size == 4:
+                if f_flag[box_idx] == False:      #skip boxes outside image after Rot
+                    continue
+                box = f_boxes[box_idx]
+                if validBox(box, width, height) == False:
+                    continue
+                # cropped_im = img[int(ry1): int(ry2), int(rx1): int(rx2), :]
+                cropped_im = img[int(box[1]): int(box[3]), int(box[0]): int(box[2]), :]
+                if fliterDim(cropped_im) == False:
                     continue
 
-                if nbox>1:
-                    if overlapingOtherBox(crop_box, box_idx, f_boxes):
+                for i in range(N_RESIZE):
+                    crop_box = crop4cls(box, ScaleS, ScaleB, Shift,OutAllowed)
+                    if not crop_box.size == 4:
                         continue
 
-                ncropped_im = crop_image(img, crop_box, paddingMode)
-                nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)
-                filename = '/'+str(cls_idx)+'_'+str(p_idx)+'_'+im_path.split('.')[0]+'.jpg'
-                save_file = os.path.join(save_dir + filename)
-                fw.write(save_dir + filename + ' ' + str(cls_idx) + '\n')
-                cv2.imwrite(to_dir + save_file, nresized_im)
-                p_idx += 1
-            box_idx += 1
-fw.close()
+                    if nbox>1:
+                        if overlapingOtherBox(crop_box, box_idx, f_boxes):
+                            continue
 
+                    ncropped_im = crop_image(img, crop_box, paddingMode)
+                    nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)
+                    filename = '/'+str(cls_idx)+'_'+str(p_idx)+'_'+im_path.split('.')[0]+'.jpg'
+                    save_file = os.path.join(save_dir + filename)
+                    fw.write(save_dir + filename + ' ' + str(cls_idx) + '\n')
+                    cv2.imwrite(to_dir + save_file, nresized_im)
+                    p_idx += 1
+                box_idx += 1
+print p_idx , "images croped"
+fw.close()

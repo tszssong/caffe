@@ -21,7 +21,6 @@ date = "_1017_1"
 from_dir = "/Volumes/song/handg_neg_test32G/momoDeepLab4Test/0627all-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0627-test-all.txt"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/5-five-wsTest.txt"
-
 # from_dir = "/Volumes/song/handg_neg_test32G/928-zilv-test-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0928-zilv-test.txt"
 
@@ -99,17 +98,6 @@ for annotation in annotations:
                 crop_box = crop4cls(box, ScaleS, ScaleB, Shift,OutAllowed)
                 if not crop_box.size == 4:
                     continue
-
-                # overlap_flag = 0
-                # if nbox > 1:
-                #     otherboxes = np.array([])
-                #     for otherbox_idx in xrange(f_boxes.shape[0]):
-                #         if not box_idx == otherbox_idx:
-                #             iou = IOU(crop_box, f_boxes[otherbox_idx])
-                #             if iou > 0.01:
-                #                 overlap_flag = 1
-                # if overlap_flag == 1:
-                #     continue
                 if nbox>1:
                     if overlapingOtherBox(crop_box, box_idx, f_boxes):
                         continue

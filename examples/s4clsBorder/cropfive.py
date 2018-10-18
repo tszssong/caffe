@@ -85,10 +85,7 @@ for annotation in annotations:
             os.mkdir(to_dir + save_dir)
         fw.close()
         fw = open(to_dir + '/Txts/' + txt_name + '.txt', 'w')
-
     height, width, channel = image.shape
-
-
 
     for pic_idx in range(N_ROT):
         rot_d = np.random.randint(-RotD, RotD)
@@ -134,10 +131,6 @@ for annotation in annotations:
                 continue
 
             for i in range(N_RESIZE):
-                # maxWH = np.max((rw, rh))
-                # enlargeS = npr.randint(np.ceil(maxWH * ScaleS), np.ceil(ScaleB * maxWH))
-                # delta_x = npr.randint(-float(rw) * Shift, float(rw) * Shift)
-                # delta_y = npr.randint(-float(rh) * Shift, float(rh) * Shift)
 
                 nw = npr.randint(np.ceil(rw * ScaleS), np.ceil(ScaleB * rw))
                 nh = nw
