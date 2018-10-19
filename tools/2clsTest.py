@@ -8,23 +8,24 @@ import caffe
 import cv2
 import time
 
-NumTest = 200000
+NumTest = 20000
 
 prototxt = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_reg/lm87b/test_with2cls.prototxt";
 caffemodel = "/Users/momo/wkspace/caffe_space/caffe/models/lm87bcls/2cls_plus0_iter_280000.caffemodel";
-
+n_nohand = 0
+n_hand = 0
 if __name__ == '__main__':
     
     caffe.set_mode_cpu()
     inputSize = 64
     mean = np.array([128, 128, 128])
+#    mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
 #    fid = open("data/48Test/Txts/5-five-wsTest_48R110S1020_1013_1.txt","r")
 #    fid = open("data/48Test/Txts/testshuffle.txt","r")
-#    fid = open("data/48Test/Txts/zilvmomodl.txt","r")
 #    fid = open("/Users/momo/Downloads/test0627.txt","r")
     fid = open("/Users/momo/Desktop/faceNeg/total_1017f118w_iter_45w_out.txt","r")
-    subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
+    subdirlists = ['nohand', 'hand']
     tp_dict = {}
     gt_dict = {}
     re_dict = {}
@@ -64,19 +65,21 @@ if __name__ == '__main__':
         im = np.swapaxes(im, 0, 2)
         im = np.swapaxes(im, 1, 2)
         label    = int(words[1])
-        if label > 13:
-            continue
+        if label == 0:
+            n_nohand+=1
+        else:
+            label = 1
+            n_hand += 1
         gt_dict[subdirlists[label]] += 1
 
         classify_net.blobs['data'].reshape(1,3,inputSize,inputSize)
         classify_net.blobs['data'].data[...]=im
         out_ = classify_net.forward()
         prob = out_['2clsprob'][0]
-
         cls_prob = np.max(prob)
         cls = np.where(prob==np.max(prob))[0][0]
         re_dict[subdirlists[cls]] += 1
-        print label, cls
+#        print label, cls
         if not cls == label:
             err += 1
         else:
