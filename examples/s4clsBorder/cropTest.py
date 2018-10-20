@@ -11,7 +11,7 @@ from image_argument import flipAug, rotAug
 OutAllowed = 10
 cropSize = 64
 ScaleS = 1.0
-ScaleB = 3.0
+ScaleB = 2.0
 Shift = 1.5
 paddingMode = 'black'
 N_RESIZE = 1

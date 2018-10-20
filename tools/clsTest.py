@@ -11,7 +11,7 @@ import time
 NumTest = 200000
 prototxt = "examples/hand_cls/mouth48/bnTestNew.prototxt"
 #caffemodel = "models/mouth48_1012/1017f118w_iter_1100000.caffemodel"
-caffemodel = "models/fromAli/mouth48bn/1018bg_iter_595000.caffemodel"
+caffemodel = "models/fromAli/mouth48bn/1018bg_iter_2570000.caffemodel"
 #prototxt   = "no_bn.prototxt"
 #caffemodel = "no_bn.caffemodel"
 #prototxt   = "examples/hand_cls/mouth48/bnTest.prototxt"
@@ -33,8 +33,8 @@ if __name__ == '__main__':
     mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
 #    fid = open("data/48Test/Txts/5-five-wsTest_48R110S1020_1013_1.txt","r")
-#    fid = open("data/48Test/Txts/test.txt","r")
-    fid = open("data/48Test/Txts/2cls_shuffle.txt","r")
+    fid = open("data/48Test/Txts/48test1020totalshuffle.txt","r")
+#    fid = open("data/48Test/Txts/2cls_shuffle.txt","r")
 #    fid = open("/Users/momo/Downloads/test0627.txt","r")
     subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
     tp_dict = {}

@@ -14,7 +14,7 @@ NumTest = 200000
 #caffemodel = "models/lm87bcls/2cls_plus0_iter_280000.caffemodel";
 prototxt = "examples/hand_cls/lm87_64_2cls/test2cls.prototxt"
 #caffemodel = "models/lm87bcls/lm87_64_2cls_iter_260000.caffemodel"
-caffemodel = "models/lm87_64_2cls/lm87_64_2cls_iter_535000.caffemodel"
+caffemodel = "models/lm87_64_2cls/lm87_64_2cls_iter_650000.caffemodel"
 
 n_nohand = 0
 n_hand = 0
