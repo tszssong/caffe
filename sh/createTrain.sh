@@ -6,8 +6,8 @@ TOOLS=build/tools
 
 TRAIN_DATA_ROOT=/Users/momo/wkspace/caffe_space/caffe/data/64data/
 
-RESIZE_HEIGHT=64
-RESIZE_WIDTH=64
+RESIZE_HEIGHT=48
+RESIZE_WIDTH=48
 
 if [ ! -d "$TRAIN_DATA_ROOT" ]; then
   echo "Error: TRAIN_DATA_ROOT is not a path to a directory: $TRAIN_DATA_ROOT"
@@ -23,5 +23,5 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --shuffle \
     $TRAIN_DATA_ROOT \
     $DATA/1018bg64/up_1018bg64.txt\
-    $DATA/1018bg64_lmdb
+    $DATA/1018bg64_48_lmdb
 echo "Done."

@@ -8,10 +8,14 @@ import caffe
 import cv2
 import time
 
-NumTest = 20000
+NumTest = 200000
 
-prototxt = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_reg/lm87b/test_with2cls.prototxt";
-caffemodel = "/Users/momo/wkspace/caffe_space/caffe/models/lm87bcls/2cls_plus0_iter_280000.caffemodel";
+#prototxt = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_reg/lm87b/test_with2cls.prototxt"
+#caffemodel = "models/lm87bcls/2cls_plus0_iter_280000.caffemodel";
+prototxt = "examples/hand_cls/lm87_64_2cls/test2cls.prototxt"
+#caffemodel = "models/lm87bcls/lm87_64_2cls_iter_260000.caffemodel"
+caffemodel = "models/lm87_64_2cls/lm87_64_2cls_iter_535000.caffemodel"
+
 n_nohand = 0
 n_hand = 0
 if __name__ == '__main__':
@@ -22,9 +26,10 @@ if __name__ == '__main__':
 #    mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
 #    fid = open("data/48Test/Txts/5-five-wsTest_48R110S1020_1013_1.txt","r")
+    fid = open("data/48Test/Txts/2cls_shuffle.txt","r")
 #    fid = open("data/48Test/Txts/testshuffle.txt","r")
-#    fid = open("/Users/momo/Downloads/test0627.txt","r")
-    fid = open("/Users/momo/Desktop/faceNeg/total_1017f118w_iter_45w_out.txt","r")
+#    fid = open("data/48Test/Txts/2clsonly5bgs.txt","r")
+#    fid = open("/Users/momo/Desktop/faceNeg/total_1017f118w_iter_45w_out.txt","r")
     subdirlists = ['nohand', 'hand']
     tp_dict = {}
     gt_dict = {}
@@ -38,20 +43,22 @@ if __name__ == '__main__':
     lines = fid.readlines()
     fid.close()
     cur_=0
-    sum_=len(lines)
+    
+    sum_=0
     regloss = np.array([])
     probs = np.array([])
     cls = 0
     totalTime = 0
     for line in lines:
         cur_+=1
+        sum_+=1
         if not line or cur_ == NumTest:
             break;
         words = line.split()
 #        image_file_name = "data/clsData/" + words[0]
 #        image_file_name = "/Users/momo/Downloads/" + words[0]
-#        image_file_name = "data/48Test/" + words[0]
-        image_file_name = "/Users/momo/Desktop/faceNeg/" + words[0]
+        image_file_name = "data/48Test/" + words[0]
+#        image_file_name = "/Users/momo/Desktop/faceNeg/" + words[0]
         if cur_%500 == 0:
             print cur_,
             sys.stdout.flush()

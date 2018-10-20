@@ -387,6 +387,14 @@ layer {
   type: "Scale"
   bottom: "stage2_unit1_conv1"
   top: "stage2_unit1_conv1"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   scale_param {
     bias_term: true
     filler {
@@ -451,6 +459,14 @@ layer {
   type: "Scale"
   bottom: "stage2_unit1_conv2"
   top: "stage2_unit1_conv2"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
   scale_param {
     bias_term: true
     filler {

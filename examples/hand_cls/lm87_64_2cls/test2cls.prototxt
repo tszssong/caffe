@@ -1,45 +1,16 @@
-name: "hand_cls"
+name: "hand_reg"
 layer {
   name: "data"
-  type: "ImageData"
+  type: "Input"
   top: "data"
-  top: "label"
-  image_data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/64data/1018_3cls/train2cls.txt"
-    batch_size: 128
-    shuffle: true
-    new_height: 64
-    new_width: 64
+  input_param {
+    shape {
+      dim: 1
+      dim: 3
+      dim: 64
+      dim: 64
+    }
   }
-  transform_param {
-    mean_value: 128
-    mean_value: 128
-    mean_value: 128
-    crop_size: 64
-    mirror: false
-  }
-  include: { phase: TRAIN}
-}
-layer {
-  name: "data"
-  type: "ImageData"
-  top: "data"
-  top: "label"
-  image_data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/64data/1018_3cls/test2cls.txt"
-    batch_size: 128
-    shuffle: true
-    new_height: 64
-    new_width: 64
-  }
-  transform_param {
-    mean_value: 128
-    mean_value: 128
-    mean_value: 128
-    crop_size: 64
-    mirror: false
-  }
-  include: { phase: TEST}
 }
 
 layer {
@@ -80,7 +51,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -152,7 +123,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -224,7 +195,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -295,7 +266,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -377,7 +348,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -387,14 +358,6 @@ layer {
   type: "Scale"
   bottom: "stage2_unit1_conv1"
   top: "stage2_unit1_conv1"
-  param {
-    lr_mult: 0
-    decay_mult: 0
-  }
-  param {
-    lr_mult: 0
-    decay_mult: 0
-  }
   scale_param {
     bias_term: true
     filler {
@@ -449,7 +412,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -459,14 +422,6 @@ layer {
   type: "Scale"
   bottom: "stage2_unit1_conv2"
   top: "stage2_unit1_conv2"
-  param {
-    lr_mult: 0
-    decay_mult: 0
-  }
-  param {
-    lr_mult: 0
-    decay_mult: 0
-  }
   scale_param {
     bias_term: true
     filler {
@@ -520,7 +475,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -602,7 +557,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -674,7 +629,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -745,7 +700,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -832,7 +787,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -891,20 +846,9 @@ layer {
   }
 }
 layer {
-  name: "pesudoprob"
-  type: "SoftmaxWithLoss"
-  bottom: "fullyconnected1"
-  bottom: "label"
-  top: "pesudoprob"
-  propagate_down: 0
-  propagate_down: 0
-  loss_weight: 0
-}
-
-layer {
   name: "ip2cls"
   type: "InnerProduct"
-  bottom: "_plus0"
+  bottom: "_plus1"
   top: "ip1"
   param {
     lr_mult: 1.0
@@ -940,7 +884,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: false
+    use_global_stats: true
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -1001,19 +945,7 @@ layer {
 }
 layer {
   name: "2clsprob"
-  type: "SoftmaxWithLoss"
+  type: "Softmax"
   bottom: "fc-hand"
-  bottom: "label"
   top: "2clsprob"
-  propagate_down: 1
-  propagate_down: 0
-  loss_weight: 1
 }
-layer {
-  name: "loss-acc"
-  type: "Accuracy"
-  bottom: "fc-hand"
-  bottom: "label"
-  top: "loss-acc"
-}
-

@@ -10,7 +10,7 @@ import time
 
 NumTest = 200000
 prototxt = "models/fromAli/3cls/test3cls.prototxt"
-caffemodel = "models/fromAli/3cls/1018_iter_100000.caffemodel"
+caffemodel = "models/fromAli/3cls/1018_iter_1000000.caffemodel"
 
 if __name__ == '__main__':
     
@@ -18,11 +18,8 @@ if __name__ == '__main__':
     inputSize = 48
     mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
-#    fid = open("data/48Test/Txts/5-five-wsTest_48R110S1020_1013_1.txt","r")
-#    fid = open("/Users/momo/Desktop/faceNeg/total_1017f118w_iter_45w_out_rand.txt","r")
-    fid = open("data/48Test/Txts/testshuffle.txt","r")
-#    fid = open("/Users/momo/Downloads/test0627.txt","r")
-    subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
+    fid = open("data/48Test/Txts/2cls_shuffle.txt","r")
+    subdirlists = ['bg', 'five', 'other']
     tp_dict = {}
     gt_dict = {}
     re_dict = {}
@@ -45,10 +42,6 @@ if __name__ == '__main__':
         if not line or cur_ == NumTest:
             break;
         words = line.split()
-#        image_file_name = "data/clsData/" + words[0]
-#        image_file_name = "/Users/momo/Downloads/" + words[0]
-
-#        image_file_name = "/Users/momo/Desktop/faceNeg/" + words[0]
         image_file_name = "data/48Test/" + words[0]
 
         if cur_%500 == 0:
@@ -67,6 +60,10 @@ if __name__ == '__main__':
         label    = int(words[1])
         if label > 13:
             continue
+        if label == 5:
+            label = 1
+        elif label != 0:
+            label = 2
         gt_dict[subdirlists[label]] += 1
 
         classify_net.blobs['data'].reshape(1,3,inputSize,inputSize)
@@ -82,7 +79,7 @@ if __name__ == '__main__':
         else:
             tp_dict[subdirlists[cls]]+=1
 
-        print "label:", label, "cls:", cls
+#        print "label:", label, "cls:", cls
 #        cv2.imshow("pic", copy)
 #        cv2.waitKey()
 
