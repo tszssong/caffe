@@ -5,9 +5,9 @@ import copy
 import os
 import numpy.random as npr
 from utils import IOU, overlapSelf, overlapingOtherBox
-from bbox_transform import  validBox, crop4reg
-from image_process import  fliterDim, crop_image
-from image_argument import  flipAug
+from bbox_transform import validBox, crop4reg
+from image_process import fliterDim, crop_image
+from image_argument import flipAug
 paddingMode = 'black'
 OutAllowed = 10   # 10 pixels allowed to go out of gt
 cropSize = 64
@@ -26,11 +26,11 @@ maxNum = 20000
 # im_dir = "/Volumes/song/handgesture5/Tight_20180724_five_hebing-img/"
 #anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
 #im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
-im_dir = "/Volumes/song/gestureTight4Reg/Tight-onezanbigv-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_onezanbigv.txt"
+# im_dir = "/Volumes/song/gestureTight4Reg/Tight-onezanbigv-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_onezanbigv.txt"
 
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
-# im_dir = "/Volumes/song/data4Train/Tight-palm-img/"
+im_dir = "/Volumes/song/gestureTight4Reg/Tight-palm-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
 to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/1021data/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) + paddingMode
