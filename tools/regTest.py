@@ -11,46 +11,14 @@ import caffe
 import cv2
 import argparse
 import time
-def clip_boxes(boxes, im_shape):
-    boxes[0] = max(boxes[0], 0)
-    boxes[1] = min(boxes[1], im_shape[0])
-    boxes[2] = max(boxes[2], 0)
-    boxes[3] = min(boxes[3], im_shape[1])
-    return boxes
-ScaleFacetors = np.array([1,1,1,1])
-#ScaleFacetors = np.array([10,10,5,5])
-def bbox_reg(boxes, deltas, nw, nh):
-    deltas[:]/=ScaleFacetors[:]
-    if boxes.shape[0] == 0:
-        return np.zeros((0, deltas.shape[1]), dtype=deltas.dtype)
-    boxes = boxes.astype(deltas.dtype, copy=False)
-    pred_boxes = np.zeros(deltas.shape, dtype=deltas.dtype)
-    w = boxes[2]-boxes[0]
-    h = boxes[3]-boxes[1]
-    ctrx = boxes[0] + 0.5*w
-    ctry = boxes[1] + 0.5*h
-    
-    dw = deltas[2]
-    dh = deltas[3]
-    nw = np.exp(dw) * w
-    nh = np.exp(dh) * h
-
-    nctrx = ctrx + deltas[0]*float(nw)
-    nctry = ctry + deltas[1]*float(nh)
-
-    pred_boxes[0] = nctrx - 0.5*nw # x1
-    pred_boxes[1] = nctry - 0.5*nh # y1
-    pred_boxes[2] = nctrx + 0.5*nw # x2
-    pred_boxes[3] = nctry + 0.5*nh # y2
-    return pred_boxes
 
 if __name__ == '__main__':
-    bbox_reg_net = caffe.Net("examples/hand_reg/lm87_64/test.prototxt", "models/lm87_64/0922all_iter_390000.caffemodel", caffe.TEST)
+    bbox_reg_net = caffe.Net("examples/hand_reg/lm87_64/test.prototxt", "models/fromAli/0927data_b512_iter_1000000.caffemodel", caffe.TEST)
 #    bbox_reg_net = caffe.Net("/Users/momo/Desktop/sdk/momocv2_model/converted_model/hand_gesture/hand_gesture_reg_v3.0.prototxt", \
 #                             "/Users/momo/Desktop/sdk/momocv2_model/converted_model/hand_gesture/hand_gesture_reg_v3.0.caffemodel", caffe.TEST)
-    fid = open("data/reg0921/tests.txt","r")
+    fid = open("data/1021data/Txts/T_onezanbigv_64S2030_16black.txt","r")
     TP=0
-    inputSize = 128
+    inputSize = 64
 
     mean = 128
     lines = fid.readlines()
@@ -67,13 +35,13 @@ if __name__ == '__main__':
         if not line:
             break;
         words = line.split()
-        image_file_name = "/Users/momo/wkspace/caffe_space/detection/caffe/data/reg0921/" + words[0]
+        image_file_name = "/Users/momo/wkspace/caffe_space/detection/caffe/data/1021data/" + words[0]
         print cur_, image_file_name
 
         im = cv2.imread(image_file_name)
         h,w,ch = im.shape
-        cv2.imshow("input",im)
-        cv2.waitKey()
+#        cv2.imshow("input",im)
+#        cv2.waitKey()
         if h!=inputSize or w!=inputSize:
             im = cv2.resize(im,(int(inputSize),int(inputSize)))
         
@@ -102,5 +70,4 @@ if __name__ == '__main__':
         print box_deltas
         regloss = np.append(regloss,np.sum((box_deltas-roi)**2)/2)
         
-#    print "reg loss mean=", np.mean(regloss),"reg loss std=", np.std(regloss),"time:", totalTime*1000/cur_, "ms"
-#    print "porb mean=", np.mean(probs),"prob std=", np.std(probs)
+    print "reg loss mean=", np.mean(regloss),"reg loss std=", np.std(regloss),"time:", totalTime*1000/cur_, "ms"
