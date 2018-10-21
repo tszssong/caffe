@@ -6,18 +6,18 @@ import os
 import numpy.random as npr
 from utils import IOU, overlapSelf
 from image_argument import  flipAug
-cropSize = 64
+cropSize = 48
 N_FLIP = 5
 N_RESIZE = 20
 ScaleFacetors = np.array([10,10,5,5])
-ScaleS = 1.6
-ScaleB = 2.0
+ScaleS = 2.0
+ScaleB = 3.0
 Ratio = 'R'      #crop recording the width&height ratio
 Shift = 1.6
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/5-ali2five.txt"
 # im_dir = "/Volumes/song/handgesture5/Tight_ali2_five_train-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2.txt"
-im_dir = "/Volumes/song/data4Train/Tight5-notali2-img/"
+im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
 # anno_file = "//Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
 # im_dir = "/Volumes/song/handgesture5/Tight_20180724_five_hebing-img/"
 #anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
@@ -27,9 +27,9 @@ im_dir = "/Volumes/song/data4Train/Tight5-notali2-img/"
 
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
 # im_dir = "/Volumes/song/data4Train/Tight-palm-img/"
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/1008reg64/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/1015reg48/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
-suffix = '_repli'
+suffix = '_black'
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) + suffix
 save_dir = save_name + '_1'
 
@@ -170,8 +170,8 @@ for annotation in annotations:
                         top_y = 0 - ny1
                     black = [0,0,0]
                     # print "edge:", top_y, down_y, left_x, right_x
-                    # constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_CONSTANT, value = black );
-                    constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_REPLICATE);
+                    constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_CONSTANT, value = black );
+                    # constant = cv2.copyMakeBorder(img, int(top_y), int(down_y), int(left_x), int(right_x), cv2.BORDER_REPLICATE);
 
                 # ncropped_im = img[int(ny1):int(ny2), int(nx1):int(nx2), :]
                 ncropped_im = constant[int(ny1+top_y):int(ny2+top_y), int(nx1+left_x):int(nx2+left_x), :]
