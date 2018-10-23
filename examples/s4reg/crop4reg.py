@@ -20,9 +20,9 @@ maxNum = 200000
 # im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
 
 im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2_ali2grabgz.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2_ali2grabgz.txt"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180716_fiveGood.txt"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180716_fiveGood.txt"
 #anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
 #im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
 # im_dir = "/Volumes/song/gestureTight4Reg/Tight-onezanbigv-img/"
