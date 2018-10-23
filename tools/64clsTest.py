@@ -12,14 +12,14 @@ import time
 #caffemodel = "models/fromAli/mouth64nobn100w.caffemodel"
 prototxt   = "models/fromAli/mouth64bn/test.prototxt"
 #caffemodel = "models/fromAli/mouth64bn/bn1012_iter_1000000.caffemodel"
-caffemodel = "models/fromAli/mouth64bn/1018addbg_1012f0001_iter_1000000.caffemodel"
+caffemodel = "models/fromAli/mouth64bn/1020_iter_1000000.caffemodel"
 NumTest = 200000
 if __name__ == '__main__':
     caffe.set_mode_cpu()
     inputSize = 64
     mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
-    fid = open("data/48Test/Txts/2cls_shuffle.txt","r")
+    fid = open("data/48Test/Txts/64test1020.txt","r")
 #    fid = open("/Users/momo/Downloads/test0627.txt","r")
     subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
     tp_dict = {}

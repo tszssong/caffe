@@ -22,7 +22,7 @@ def validBox(box, width, height):
     return True
 # gt_outside: pix allowed to go outside ground truth box
 # p_ratio: False - crop a square ; True - crop a reactage
-def crop4cls(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=False):
+def crop4cls(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=False, loop = 100):
     # TODO: validBox and enlarge params
     # newBox = np.array([])
 
@@ -31,25 +31,31 @@ def crop4cls(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=Fals
     h = y2 - y1
     cx = x1 + w/2
     cy = y1 + h/2
-    nw = npr.randint(np.ceil(w * enlarge_bottom), np.ceil(w * enlargeTop))
+    i = 0
+    while i< loop:
 
-    if p_ratio == False:
-        nh = nw
-    else:
-        nh = int(h*nw/w)
+        nw = npr.randint(np.ceil(w * enlarge_bottom), np.ceil(w * enlargeTop))
 
-    delta_x = npr.randint(-int(float(w) * shift), int(float(w) * shift + 1))
-    delta_y = npr.randint(-int(float(h) * shift), int(float(h) * shift + 1))
+        if p_ratio == False:
+            nh = nw
+        else:
+            nh = int(h*nw/w)
 
-    ncx = cx + delta_x
-    ncy = cy + delta_y
+        # delta_x = npr.randint(-int(float(w) * shift), int(float(w) * shift + 1))
+        # delta_y = npr.randint(-int(float(h) * shift), int(float(h) * shift + 1))
+        delta_x = npr.randint(-int(nw*shift), int(nw*shift))
+        delta_y = npr.randint(-int(nh*shift), int(nh*shift))
 
-    nx1 = cx - nw / 2
-    ny1 = cy - nh / 2
-    nx2 = cx + nw / 2
-    ny2 = cy + nh / 2
+        ncx = cx + delta_x
+        ncy = cy + delta_y
 
-    if nx2 < x2 + gt_outside or nx1 > x1 - gt_outside or ny2 < y2 + gt_outside or ny1 > y1 - gt_outside:
-        return np.array([])
-    else:
-        return np.array([nx1, ny1, nx2, ny2])
+        nx1 = ncx - nw / 2
+        ny1 = ncy - nh / 2
+        nx2 = ncx + nw / 2
+        ny2 = ncy + nh / 2
+
+        if nx2 < x2 + gt_outside or nx1 > x1 - gt_outside or ny2 < y2 + gt_outside or ny1 > y1 - gt_outside:
+            continue
+        else:
+            return np.array([nx1, ny1, nx2, ny2])
+    return np.array([])

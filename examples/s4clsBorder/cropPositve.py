@@ -12,7 +12,7 @@ OutAllowed = 10
 cropSize = 64
 ScaleS = 1.0
 ScaleB = 2.0
-Shift = 1.5
+Shift = 0.5
 paddingMode = 'black'
 N_RESIZE = 1
 N_ROT = 1
@@ -113,9 +113,12 @@ while(p_idx<maxNum):
                     continue
                 # cropped_im = img[int(ry1): int(ry2), int(rx1): int(rx2), :]
                 cropped_im = img[int(box[1]): int(box[3]), int(box[0]): int(box[2]), :]
-                if fliterDim(cropped_im) == False:
-                    continue
 
+                if fliterDim(cropped_im) == False:
+                    break
+                #
+                # if crop4cls(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=False, loop = 100)
+                #     continue
                 for i in range(N_RESIZE):
                     crop_box = crop4cls(box, ScaleS, ScaleB, Shift,OutAllowed)
                     if not crop_box.size == 4:

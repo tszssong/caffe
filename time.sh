@@ -1,5 +1,7 @@
 ./build/tools/caffe time \
---model=no_bn.prototxt -iterations 3000
+--model=models/fromAli/mouth64bn/test.prototxt -iterations 3000
+#--model=res/res3d/test64.prototxt -iterations 3000
+#--model=no_bn.prototxt -iterations 3000
 #--model=examples/hand_cls/mouth48/mergebn14cls.prototxt -iterations 3000
 #--model=examples/hand_cls/mouth48/test14cls.prototxt -iterations 3000
 #--model=examples/hand_cls/mouth48/bnTest.prototxt -iterations 3000
