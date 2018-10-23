@@ -44,17 +44,17 @@ def crop4cls(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=Fals
     ncx = cx + delta_x
     ncy = cy + delta_y
 
-    nx1 = cx - nw / 2
-    ny1 = cy - nh / 2
-    nx2 = cx + nw / 2
-    ny2 = cy + nh / 2
+    nx1 = ncx - nw / 2
+    ny1 = ncy - nh / 2
+    nx2 = ncx + nw / 2
+    ny2 = ncy + nh / 2
 
     if nx2 < x2 + gt_outside or nx1 > x1 - gt_outside or ny2 < y2 + gt_outside or ny1 > y1 - gt_outside:
         return np.array([])
     else:
         return np.array([nx1, ny1, nx2, ny2])
 
-def crop4reg(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=False):
+def crop4reg(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=100):
     # TODO: validBox and enlarge params
     # do not support crop by h/w
     x1, y1, x2, y2 = box
@@ -63,26 +63,32 @@ def crop4reg(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=Fals
     cx = x1 + w/2
     cy = y1 + h/2
 
-    maxWH = np.max((w, h))
-    enlargeS = npr.randint(np.ceil(maxWH * enlarge_bottom), np.ceil(maxWH * enlargeTop))
+    # maxWH = np.max((w, h))
+    minWH = np.min((w, h))
+    i = 0
+    while i< loop:
+        i++1
+        # enlargeS = npr.randint(np.ceil(maxWH * enlarge_bottom), np.ceil(maxWH * enlargeTop))
+        enlargeS = npr.randint(np.ceil(minWH * enlarge_bottom), np.ceil(minWH * enlargeTop))
 
-    delta_x = npr.randint(-int(float(w) * shift), int(float(w) * shift + 1))
-    delta_y = npr.randint(-int(float(h) * shift), int(float(h) * shift + 1))
+        delta_x = npr.randint(-int( enlargeS * shift), int( enlargeS * shift + 1))
+        delta_y = npr.randint(-int( enlargeS * shift), int( enlargeS * shift + 1))
 
-    ncx = cx + delta_x
-    ncy = cy + delta_y
+        ncx = cx + delta_x
+        ncy = cy + delta_y
 
-    nx1 = cx - enlargeS / 2
-    ny1 = cy - enlargeS / 2
-    nx2 = cx + enlargeS / 2
-    ny2 = cy + enlargeS / 2
+        nx1 = ncx - enlargeS / 2
+        ny1 = ncy - enlargeS / 2
+        nx2 = ncx + enlargeS / 2
+        ny2 = ncy + enlargeS / 2
 
-    dx = float(cx - ncx)/float(enlargeS) * ScaleFacetors[0]
-    dy = float(cy - ncy)/float(enlargeS) * ScaleFacetors[1]
-    dw = np.log(float(w)/float(enlargeS)) * ScaleFacetors[2]
-    dh = np.log(float(h)/float(enlargeS)) * ScaleFacetors[3]
+        dx = float(cx - ncx)/float(enlargeS) * ScaleFacetors[0]
+        dy = float(cy - ncy)/float(enlargeS) * ScaleFacetors[1]
+        dw = np.log(float(w)/float(enlargeS)) * ScaleFacetors[2]
+        dh = np.log(float(h)/float(enlargeS)) * ScaleFacetors[3]
 
-    if nx2 < x2 + gt_outside or nx1 > x1 - gt_outside or ny2 < y2 + gt_outside or ny1 > y1 - gt_outside:
-        return np.array([]), np.array([])
-    else:
-        return np.array([nx1, ny1, nx2, ny2]), np.array([dx,dy,dw,dh])
+        if nx2 < x2 + gt_outside or nx1 > x1 - gt_outside or ny2 < y2 + gt_outside or ny1 > y1 - gt_outside:
+            continue
+        else:
+            return np.array([nx1, ny1, nx2, ny2]), np.array([dx,dy,dw,dh])
+    return np.array([]), np.array([])
