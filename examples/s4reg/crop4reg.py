@@ -16,11 +16,13 @@ ScaleS = 2.2
 ScaleB = 3.0
 Shift =  0.5
 maxNum = 200000
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5_ali2_4reg.txt"
-im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
-# im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5_ali2_4reg.txt"
+# im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
+
+im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2_ali2grabgz.txt"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180716_fiveGood.txt"
 #anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
 #im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
 # im_dir = "/Volumes/song/gestureTight4Reg/Tight-onezanbigv-img/"
@@ -28,7 +30,7 @@ im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
 
 # im_dir = "/Volumes/song/gestureTight4Reg/Tight-palm-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/regDebug/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) +'_' +str(flipRange)+ paddingMode
 save_dir = save_name
@@ -77,13 +79,14 @@ while(croped_pic_idx<maxNum):
             if fliterDim(cropped_im) == False:
                 continue
 
-            crop_box, reg_coord = crop4reg(box, ScaleS, ScaleB, Shift, OutAllowed)
+            # crop_box, reg_coord = crop4reg(box, ScaleS, ScaleB, Shift, OutAllowed)
+            crop_box, reg_coord = crop4reg(box_idx, f_boxes, ScaleS, ScaleB, Shift, OutAllowed)
             if not crop_box.size == 4:
                 continue
 
-            if nbox > 1:
-                if overlapingOtherBox(crop_box, box_idx, f_boxes):
-                    continue
+            # if nbox > 1:
+            #     if overlapingOtherBox(crop_box, box_idx, f_boxes):
+            #         continue
 
             ncropped_im = crop_image(img, crop_box, paddingMode)
             nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize), interpolation=cv2.INTER_NEAREST)

@@ -1,6 +1,6 @@
 import numpy as np
 import numpy.random as npr
-
+from utils import IOU, overlapSelf, overlapingOtherBox
 ScaleFacetors = np.array([10,10,5,5])
 
 def validBox(box, width, height):
@@ -54,9 +54,10 @@ def crop4cls(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=Fals
     else:
         return np.array([nx1, ny1, nx2, ny2])
 
-def crop4reg(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=100):
+def crop4reg(idx, boxes, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=100):
     # TODO: validBox and enlarge params
     # do not support crop by h/w
+    box = boxes[idx]
     x1, y1, x2, y2 = box
     w = x2 - x1
     h = y2 - y1
@@ -67,7 +68,7 @@ def crop4reg(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=100):
     minWH = np.min((w, h))
     i = 0
     while i< loop:
-        i++1
+        i+=1
         # enlargeS = npr.randint(np.ceil(maxWH * enlarge_bottom), np.ceil(maxWH * enlargeTop))
         enlargeS = npr.randint(np.ceil(minWH * enlarge_bottom), np.ceil(minWH * enlargeTop))
 
@@ -86,9 +87,13 @@ def crop4reg(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=100):
         dy = float(cy - ncy)/float(enlargeS) * ScaleFacetors[1]
         dw = np.log(float(w)/float(enlargeS)) * ScaleFacetors[2]
         dh = np.log(float(h)/float(enlargeS)) * ScaleFacetors[3]
+        crop_box = np.array([nx1, ny1, nx2, ny2])
 
         if nx2 < x2 + gt_outside or nx1 > x1 - gt_outside or ny2 < y2 + gt_outside or ny1 > y1 - gt_outside:
             continue
+        elif overlapingOtherBox(crop_box, idx, boxes):
+            continue
         else:
             return np.array([nx1, ny1, nx2, ny2]), np.array([dx,dy,dw,dh])
+
     return np.array([]), np.array([])
