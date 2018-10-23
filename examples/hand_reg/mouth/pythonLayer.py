@@ -1,6 +1,5 @@
 import sys
-sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
-sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
+sys.path.append('/nfs/zhengmeisong/wkspace/gesture/caffe/build/python')
 import cv2
 import caffe
 import numpy as np
