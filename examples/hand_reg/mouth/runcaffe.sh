@@ -2,8 +2,8 @@
 set -e
 set -x
 EXEC_DIR="mouth"
-export PYTHONPATH=/Users/momo/wkspace/caffe_space/detection/caffe/python:$PYTHONPATH
-export PYTHONPATH=/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_reg/${EXEC_DIR}:$PYTHONPATH
+export PYTHONPATH=/nfs/zhengmeisong/wkspace/gesture/caffe/python:$PYTHONPATH
+export PYTHONPATH=/nfs/zhengmeisong/wkspace/gesture/caffe/examples/hand_reg/${EXEC_DIR}:$PYTHONPATH
 TOOLS=./build/tools
 $TOOLS/caffe train \
   --solver=examples/hand_reg/${EXEC_DIR}/solver.prototxt \
