@@ -1,5 +1,6 @@
 import sys
-sys.path.append('/nfs/zhengmeisong/wkspace/gesture/caffe/build/python')
+sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
+sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
 import cv2
 import caffe
 import numpy as np
@@ -12,8 +13,8 @@ class Data_Layer_test(caffe.Layer):
         self.batch_size = 128
         net_side = 64
         roi_list = []
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/tests.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/test.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
@@ -37,8 +38,8 @@ class Data_Layer_train(caffe.Layer):
         self.batch_size = 128
         net_side = 64
         roi_list = ''
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1008reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1008reg64/trains.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/train.txt'
 #        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/'
 #        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/0927reg64/train_addonepalm.txt'
         print roi_txt

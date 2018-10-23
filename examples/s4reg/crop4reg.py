@@ -30,7 +30,7 @@ anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T
 
 # im_dir = "/Volumes/song/gestureTight4Reg/Tight-palm-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/regDebug/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) +'_' +str(flipRange)+ paddingMode
 save_dir = save_name
