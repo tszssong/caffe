@@ -16,8 +16,7 @@ model = "examples/hand_reg/mouthmac/test.prototxt"
 weights = "models/fromAli/mouth/1023f_addfisthebing_iter_1570000.caffemodel"
 if __name__ == '__main__':
     bbox_reg_net = caffe.Net( model, weights, caffe.TEST)
-    fid = open("data/regTest/Txts/3-distrub_64S2430_5_3black.txt","r")
-#    fid = open("data/regTest/test.txt","r")
+    fid = open("data/regTest/test.txt","r")
     TP=0
     inputSize = 64
 
