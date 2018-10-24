@@ -65,12 +65,17 @@ def crop4reg(idx, boxes, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=
     cy = y1 + h/2
 
     # maxWH = np.max((w, h))
-    minWH = np.min((w, h))
+    # minWH = np.min((w, h))
+    meanWH = w + float(h-w)/2.
     i = 0
     while i< loop:
         i+=1
         # enlargeS = npr.randint(np.ceil(maxWH * enlarge_bottom), np.ceil(maxWH * enlargeTop))
-        enlargeS = npr.randint(np.ceil(minWH * enlarge_bottom), np.ceil(minWH * enlargeTop))
+        # enlargeS = npr.randint(np.ceil(minWH * enlarge_bottom), np.ceil(minWH * enlargeTop))
+        if (enlarge_bottom == 0):
+            enlargeS = int(meanWH * enlargeTop)
+        else:
+            enlargeS = npr.randint(np.ceil(meanWH * enlarge_bottom), np.ceil(meanWH * enlargeTop))
 
         delta_x = npr.randint(-int( enlargeS * shift), int( enlargeS * shift + 1))
         delta_y = npr.randint(-int( enlargeS * shift), int( enlargeS * shift + 1))
