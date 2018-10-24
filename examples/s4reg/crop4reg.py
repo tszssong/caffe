@@ -11,32 +11,31 @@ from image_argument import flipAug
 paddingMode = 'black'
 OutAllowed = 10   # 10 pixels allowed to go out of gt
 cropSize = 64
-flipRange = 3  #flip params: 1-ori\horizontal
-ScaleS = 2.2
-ScaleB = 3.0
+flipRange = 1  #flip params: 1-ori\horizontal
+ScaleS = 2.8
+ScaleB = 3.5
 Shift =  0.5
-maxNum = 20000
+maxNum = 5000
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5_ali2_4reg.txt"
 # im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
 
-# im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
+im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight5-notali2_ali2grabgz.txt"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180724_five_hebing.txt"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_20180716_fiveGood.txt"
-#anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
-#im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
+# anno_file = "/Volumes/song/handgesture1/11-Tali1rock1.txt"
+# im_dir = "/Volumes/song/handgesture1/Tight_ali1rock1-img/"
 # im_dir = "/Volumes/song/gestureTight4Reg/Tight-onezanbigv-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_onezanbigv.txt"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight-one-total.txt"
 
-# im_dir = "/Volumes/song/gestureTight4Reg/Tight-palm-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
-im_dir = "/Volumes/song/handgTight_56G/T_13_alifist-fist-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_13_alifist-fist.txt"
-# im_dir = "/Volumes/song/handgTight_56G/T_13_greenfist-img "
+im_dir = "/Volumes/song/gestureTight4Reg/Tight-palm-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
+# im_dir = "/Volumes/song/handgTight_56G/T_13_alifist-fist-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_13_alifist-fist.txt"
+# im_dir = "/Volumes/song/handgTight_56G/T_13_greenfist-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_13_greenfist.txt"
 
-
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/1023data/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) +'_' +str(flipRange)+ paddingMode
 save_dir = save_name
