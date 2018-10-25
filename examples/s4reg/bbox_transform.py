@@ -76,7 +76,8 @@ def crop4reg(idx, boxes, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=
             enlargeS = int(meanWH * enlargeTop)
         else:
             enlargeS = npr.randint(np.ceil(meanWH * enlarge_bottom), np.ceil(meanWH * enlargeTop))
-
+        # print w, h, meanWH,  meanWH * enlarge_bottom, meanWH * enlargeTop, enlargeS
+        # print enlargeS/w, enlargeS/h
         delta_x = npr.randint(-int( enlargeS * shift), int( enlargeS * shift + 1))
         delta_y = npr.randint(-int( enlargeS * shift), int( enlargeS * shift + 1))
 
