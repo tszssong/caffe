@@ -1,0 +1,259 @@
+20180710___baidu___gold_0263.jpg 1 five 25 64 486 665 
+20180710___baidu___gold_0511.jpg 1 five 15 0 770 1048 
+20180710___baidu___gold_0713.jpg 1 five 33 5 468 639 
+20180710___baidu___gold_1425.jpg 1 five 30 38 568 766 
+20180710___baidu___gold_0049.jpg 1 five 4 28 366 546 
+20180710___baidu___gold_1431.jpg 1 five 61 6 601 874 
+20180710___baidu___gold_0854.jpg 1 five 39 11 623 638 
+20180710___baidu___gold_0698.jpg 1 five 58 153 765 972 
+20180710___baidu___gold_1948.jpg 1 five 1 18 324 517 
+20180710___baidu___gold_0317.jpg 1 five 264 355 630 875 
+20180710___baidu___gold_0471.jpg 1 five 9 7 417 355 
+20180710___baidu___gold_0459.jpg 1 five 8 49 378 263 
+20180710___baidu___gold_0458.jpg 1 five 29 21 414 350 
+20180710___baidu___gold_0302.jpg 1 five 84 95 311 489 
+20180710___baidu___gold_1785.jpg 1 five 13 3 374 476 
+20180710___baidu___gold_1949.jpg 1 five 0 12 335 582 
+20180710___baidu___gold_1791.jpg 1 five 15 14 208 230 
+20180710___baidu___gold_0855.jpg 1 five 131 16 606 477 
+20180710___baidu___gold_0262.jpg 1 five 238 19 778 571 
+20180710___baidu___gold_0274.jpg 1 five 123 62 694 798 
+20180710___baidu___gold_1142.jpg 1 five 43 7 463 348 
+20180710___baidu___gold_0704.jpg 1 five 32 239 729 1142 
+20180710___baidu___gold_1208.jpg 2 five 100 11 205 193 225 11 336 191 
+20180710___baidu___gold_0894.jpg 1 five 8 26 279 274 
+20180710___baidu___gold_1963.jpg 1 five 74 32 183 99 
+20180710___baidu___gold_0472.jpg 2 five 246 138 497 447 497 135 757 438 
+20180710___baidu___gold_0473.jpg 1 five 237 366 487 819 
+20180710___baidu___gold_0659.jpg 1 five 87 47 942 738 
+20180710___baidu___gold_0711.jpg 1 five 25 115 622 806 
+20180710___baidu___gold_0936.jpg 1 five 67 477 585 854 
+20180710___baidu___gold_0088.jpg 1 five 95 59 522 689 
+20180710___baidu___gold_1147.jpg 1 five 23 3 252 250 
+20180710___baidu___gold_1609.jpg 1 five 2 23 387 236 
+20180710___baidu___gold_0517.jpg 1 five 50 0 411 316 
+20180710___baidu___gold_0271.jpg 2 five 21 7 274 330 282 8 529 321 
+20180710___baidu___gold_1423.jpg 1 five 91 57 454 444 
+20180710___baidu___gold_0067.jpg 1 five 33 18 331 449 
+20180710___baidu___gold_1580.jpg 1 five 4 31 513 741 
+20180710___baidu___gold_1027.jpg 2 five 11 7 301 441 303 17 599 444 
+20180710___baidu___gold_0305.jpg 1 five 205 30 1141 799 
+20180710___baidu___gold_0310.jpg 2 five 119 138 454 555 585 141 933 575 
+20180710___baidu___gold_0462.jpg 1 five 104 4 635 991 
+20180710___baidu___gold_1218.jpg 1 five 9 1 545 432 
+20180710___baidu___gold_1542.jpg 1 five 26 23 364 283 
+20180710___baidu___gold_0847.jpg 1 five 32 0 317 256 
+20180710___baidu___gold_0516.jpg 1 five 108 11 362 257 
+20180710___baidu___gold_0528.jpg 1 five 18 220 575 909 
+20180710___baidu___gold_0064.jpg 1 five 75 43 961 920 
+20180710___baidu___gold_0702.jpg 1 five 62 35 439 464 
+20180710___baidu___gold_0070.jpg 1 five 53 4 279 260 
+20180710___baidu___gold_0110.jpg 1 five 27 2 252 299 
+20180710___baidu___gold_1965.jpg 1 five 7 86 610 736 
+20180710___baidu___gold_0306.jpg 2 five 88 89 485 509 526 105 905 531 
+20180710___baidu___gold_0460.jpg 1 five 1 12 189 294 
+20180710___baidu___gold_1569.jpg 1 five 1 64 542 746 
+20180710___baidu___gold_1233.jpg 1 five 2 40 442 587 
+20180710___baidu___gold_0717.jpg 1 five 22 4 355 387 
+20180710___baidu___gold_1390.jpg 1 five 13 14 564 334 
+20180710___baidu___gold_1186.jpg 1 five 0 49 563 379 
+20180710___baidu___gold_0599.jpg 1 five 73 50 362 268 
+20180710___baidu___gold_1687.jpg 1 five 0 4 382 499 
+20180710___baidu___gold_0002.jpg 1 five 0 16 247 232 
+20180710___baidu___gold_0770.jpg 1 five 34 78 286 417 
+20180710___baidu___gold_0016.jpg 1 five 64 35 633 991 
+20180710___baidu___gold_1446.jpg 1 five 34 201 470 834 
+20180710___baidu___gold_0604.jpg 1 five 16 115 411 630 
+20180710___baidu___gold_0162.jpg 1 five 3 60 504 563 
+20180710___baidu___gold_1903.jpg 1 five 74 211 578 766 
+20180710___baidu___gold_0360.jpg 1 five 114 6 354 242 
+20180710___baidu___gold_1718.jpg 1 five 57 36 162 157 
+20180710___baidu___gold_0375.jpg 1 five 184 100 771 761 
+20180710___baidu___gold_0163.jpg 1 five 127 88 630 463 
+20180710___baidu___gold_0995.jpg 1 five 261 92 1147 898 
+20180710___baidu___gold_0567.jpg 1 five 3 10 1004 717 
+20180710___baidu___gold_0201.jpg 1 five 284 127 754 712 
+20180710___baidu___gold_1874.jpg 1 five 113 74 3248 2378 
+20180710___baidu___gold_0571.jpg 1 five 55 80 303 333 
+20180710___baidu___gold_0217.jpg 4 five 30 310 183 513 164 191 379 426 416 280 562 497 569 249 777 485 
+20180710___baidu___gold_0565.jpg 1 five 111 98 743 1207 
+20180710___baidu___gold_1135.jpg 1 five 90 42 296 210 
+20180710___baidu___gold_1337.jpg 1 five 9 27 456 296 
+20180710___baidu___gold_0029.jpg 1 five 151 109 544 704 
+20180710___baidu___gold_1323.jpg 1 five 53 13 561 335 
+20180710___baidu___gold_1531.jpg 1 five 39 15 356 365 
+20180710___baidu___gold_0405.jpg 1 five 265 60 911 876 
+20180710___baidu___gold_1727.jpg 1 five 40 66 339 276 
+20180710___baidu___gold_0410.jpg 1 five 45 162 555 560 
+20180710___baidu___gold_1901.jpg 1 five 55 153 460 551 
+20180710___baidu___gold_0148.jpg 1 five 29 12 283 476 
+20180710___baidu___gold_0606.jpg 1 five 25 36 575 817 
+20180710___baidu___gold_1295.jpg 1 five 99 26 363 285 
+20180710___baidu___gold_0028.jpg 1 five 66 67 652 765 
+20180710___baidu___gold_1450.jpg 1 five 68 91 482 693 
+20180710___baidu___gold_1493.jpg 1 five 21 2 323 466 
+20180710___baidu___gold_0558.jpg 2 five 112 156 288 337 338 154 505 325 
+20180710___baidu___gold_1134.jpg 1 five 50 2 346 343 
+20180710___baidu___gold_1695.jpg 1 five 12 37 346 532 
+20180710___baidu___gold_0574.jpg 1 five 47 156 776 1008 
+20180710___baidu___gold_0206.jpg 1 five 0 19 578 680 
+20180710___baidu___gold_0776.jpg 1 five 107 174 320 310 
+20180710___baidu___gold_0010.jpg 1 five 52 86 564 646 
+20180710___baidu___gold_0158.jpg 1 five 18 36 327 499 
+20180710___baidu___gold_0170.jpg 2 five 119 110 337 465 369 109 589 461 
+20180710___baidu___gold_1722.jpg 1 five 338 526 577 844 
+20180710___baidu___gold_1050.jpg 1 five 26 86 308 454 
+20180710___baidu___gold_0400.jpg 1 five 130 47 432 313 
+20180710___baidu___gold_0401.jpg 1 five 109 47 559 584 
+20180710___baidu___gold_0429.jpg 2 five 161 133 417 446 613 226 927 494 
+20180710___baidu___gold_1723.jpg 2 five 131 620 532 1021 532 579 936 998 
+20180710___baidu___gold_0617.jpg 1 five 117 94 583 794 
+20180710___baidu___gold_0165.jpg 1 five 30 15 347 320 
+20180710___baidu___gold_1253.jpg 1 five 80 7 350 278 
+20180710___baidu___gold_0159.jpg 1 five 84 3 422 610 
+20180710___baidu___gold_0824.jpg 1 five 1 26 367 275 
+20180710___baidu___gold_0763.jpg 1 five 45 31 438 423 
+20180710___baidu___gold_0561.jpg 1 five 51 49 320 416 
+20180710___baidu___gold_0207.jpg 1 five 49 45 334 406 
+20180710___baidu___gold_0575.jpg 1 five 39 61 231 342 
+20180710___baidu___gold_0549.jpg 1 five 57 124 829 885 
+20180710___baidu___gold_1682.jpg 1 five 0 1 385 443 
+20180710___baidu___gold_1696.jpg 1 five 66 103 212 270 
+20180710___baidu___gold_0239.jpg 1 five 13 170 386 488 
+20180710___baidu___gold_1641.jpg 1 five 136 1 371 296 
+20180710___baidu___gold_0205.jpg 1 five 212 97 690 527 
+20180710___baidu___gold_0985.jpg 1 five 120 97 898 596 
+20180710___baidu___gold_0007.jpg 1 five 230 79 993 1040 
+20180710___baidu___gold_0013.jpg 1 five 67 25 424 448 
+20180710___baidu___gold_0173.jpg 1 five 152 116 678 468 
+20180710___baidu___gold_1906.jpg 1 five 3 31 518 892 
+20180710___baidu___gold_0371.jpg 1 five 95 146 657 918 
+20180710___baidu___gold_0403.jpg 1 five 292 352 3677 2246 
+20180710___baidu___gold_0614.jpg 1 five 55 146 558 677 
+20180710___baidu___gold_0012.jpg 1 five 122 1 396 464 
+20180710___baidu___gold_0774.jpg 1 five 149 17 396 300 
+20180710___baidu___gold_0006.jpg 1 five 96 53 623 696 
+20180710___baidu___gold_1324.jpg 1 five 63 206 448 764 
+20180710___baidu___gold_0953.jpg 1 five 32 9 314 334 
+20180710___baidu___gold_1898.jpg 1 five 63 101 469 638 
+20180710___baidu___gold_0553.jpg 1 five 128 82 611 597 
+20180710___baidu___gold_0209.jpg 1 five 24 55 527 897 
+20180710___baidu___gold_1671.jpg 1 five 4 1 470 354 
+20180710___baidu___gold_0382.jpg 1 five 13 64 548 337 
+20180710___baidu___gold_1704.jpg 1 five 9 82 598 529 
+20180710___baidu___gold_0432.jpg 1 five 53 2 408 376 
+20180710___baidu___gold_0383.jpg 1 five 283 118 825 703 
+20180710___baidu___gold_0195.jpg 1 five 280 121 469 298 
+20180710___baidu___gold_0022.jpg 1 five 55 2 438 259 
+20180710___baidu___gold_1880.jpg 1 five 478 0 2678 2370 
+20180710___baidu___gold_1128.jpg 1 five 21 22 394 346 
+20180710___baidu___gold_1666.jpg 1 five 141 45 850 587 
+20180710___baidu___gold_1470.jpg 1 five 16 23 322 475 
+20180710___baidu___gold_0183.jpg 1 five 34 8 448 242 
+20180710___baidu___gold_0140.jpg 1 five 24 1 301 498 
+20180710___baidu___gold_0395.jpg 1 five 100 96 646 826 
+20180710___baidu___gold_0424.jpg 2 five 5 38 118 139 134 32 245 140 
+20180710___baidu___gold_1048.jpg 1 five 59 103 3096 4123 
+20180710___baidu___gold_0356.jpg 2 five 14 48 149 262 346 56 464 262 
+20180710___baidu___gold_0418.jpg 1 five 6 78 366 370 
+20180710___baidu___gold_1075.jpg 3 five 63 50 226 258 292 74 435 278 450 63 639 281 
+20180710___baidu___gold_0155.jpg 1 five 69 191 533 662 
+20180710___baidu___gold_0009.jpg 1 five 30 34 696 877 
+20180710___baidu___gold_0551.jpg 1 five 226 135 874 793 
+20180710___baidu___gold_0592.jpg 1 five 15 127 477 592 
+20180710___baidu___gold_0569.jpg 2 five 206 110 389 308 545 108 727 317 
+20180710___baidu___gold_0233.jpg 1 five 0 90 323 392 
+20180710___baidu___gold_0780.jpg 1 five 152 0 716 943 
+20180710___baidu___gold_0019.jpg 1 five 158 62 708 820 
+20180710___baidu___gold_0179.jpg 1 five 52 43 645 577 
+20180710___baidu___gold_0151.jpg 1 five 52 36 306 474 
+20180710___baidu___gold_0390.jpg 1 five 3 26 382 318 
+20180710___baidu___gold_0409.jpg 1 five 148 112 494 377 
+20180710___baidu___gold_1071.jpg 1 five 138 10 306 268 
+20180710___baidu___gold_0352.jpg 1 five 147 52 376 395 
+20180710___baidu___gold_0420.jpg 2 five 68 108 456 490 530 114 917 492 
+20180710___baidu___gold_0636.jpg 2 five 82 26 490 468 512 51 945 520 
+20180710___baidu___gold_1528.jpg 1 five 53 301 534 738 
+20180710___baidu___gold_0193.jpg 1 five 470 533 2400 3171 
+20180710___baidu___gold_0839.jpg 1 five 67 65 393 377 
+20180710___baidu___gold_0811.jpg 1 five 38 67 423 355 
+20180710___baidu___gold_0024.jpg 1 five 17 0 328 279 
+20180710___baidu___gold_1886.jpg 1 five 39 51 368 402 
+20180710___baidu___gold_0597.jpg 1 five 417 153 882 546 
+20180710___baidu___gold_1847.jpg 1 five 173 37 310 242 
+20180710___baidu___gold_0542.jpg 1 five 109 224 599 966 
+20180710___baidu___gold_0556.jpg 1 five 66 236 444 597 
+20180710___baidu___gold_0807.jpg 2 five 645 1 958 498 260 150 653 505 
+20180710___baidu___gold_0378.jpg 1 five 64 41 648 625 
+20180710___baidu___gold_1067.jpg 1 five 103 7 541 391 
+20180710___baidu___gold_0386.jpg 1 five 197 139 558 545 
+20180710___baidu___gold_1259.jpg 1 five 159 20 291 209 
+20180710___baidu___gold_0153.jpg 1 five 282 115 650 707 
+20180710___baidu___gold_1265.jpg 1 five 74 29 426 508 
+20180710___baidu___gold_1503.jpg 1 five 210 249 520 630 
+20180710___baidu___gold_1517.jpg 1 five 76 32 563 825 
+20180710___baidu___gold_1311.jpg 1 five 100 4 483 381 
+20180710___baidu___gold_0972.jpg 1 five 212 82 861 626 
+20180710___baidu___gold_1661.jpg 1 five 101 26 364 282 
+20180710___baidu___gold_0594.jpg 1 five 187 100 723 692 
+20180710___baidu___gold_1846.jpg 2 five 60 44 198 159 219 63 357 194 
+20180710___baidu___gold_0281.jpg 1 five 316 106 801 538 
+20180710___baidu___gold_0295.jpg 1 five 80 38 700 713 
+20180710___baidu___gold_0083.jpg 1 five 45 17 426 261 
+20180710___baidu___gold_0097.jpg 1 five 18 0 578 674 
+20180710___baidu___gold_0040.jpg 1 five 1 1 143 161 
+20180710___baidu___gold_0732.jpg 1 five 77 4 695 837 
+20180710___baidu___gold_1410.jpg 1 five 67 12 742 452 
+20180710___baidu___gold_0691.jpg 1 five 31 19 1123 602 
+20180710___baidu___gold_0108.jpg 1 five 131 58 541 799 
+20180710___baidu___gold_0323.jpg 1 five 3 0 1253 888 
+20180710___baidu___gold_0337.jpg 2 five 662 155 898 423 404 365 614 620 
+20180710___baidu___gold_1940.jpg 1 five 41 85 422 650 
+20180710___baidu___gold_0492.jpg 1 five 53 99 451 522 
+20180710___baidu___gold_1571.jpg 1 five 69 4 512 541 
+20180710___baidu___gold_0848.jpg 1 five 84 74 390 565 
+20180710___baidu___gold_0914.jpg 1 five 186 23 842 1063 
+20180710___baidu___gold_1613.jpg 1 five 28 45 303 420 
+20180710___baidu___gold_0243.jpg 1 five 50 52 790 917 
+20180710___baidu___gold_0525.jpg 1 five 196 1 1019 746 
+20180710___baidu___gold_0280.jpg 1 five 458 271 962 767 
+20180710___baidu___gold_0080.jpg 2 five 119 173 446 551 665 165 996 536 
+20180710___baidu___gold_1361.jpg 1 five 5 35 490 315 
+20180710___baidu___gold_1407.jpg 1 five 24 41 461 790 
+20180710___baidu___gold_0862.jpg 1 five 49 26 304 312 
+20180710___baidu___gold_1573.jpg 1 five 3 77 518 749 
+20180710___baidu___gold_0320.jpg 1 five 132 258 558 904 
+20180710___baidu___gold_0446.jpg 1 five 111 7 883 1012 
+20180710___baidu___gold_0136.jpg 1 five 24 24 560 702 
+20180710___baidu___gold_0644.jpg 1 five 44 53 535 602 
+20180710___baidu___gold_0863.jpg 1 five 66 0 456 342 
+20180710___baidu___gold_0693.jpg 2 five 71 230 536 564 732 173 1125 472 
+20180710___baidu___gold_0718.jpg 1 five 68 39 313 255 
+20180710___baidu___gold_1348.jpg 2 five 32 18 206 231 228 18 411 232 
+20180710___baidu___gold_0095.jpg 1 five 148 159 527 529 
+20180710___baidu___gold_1610.jpg 1 five 104 17 301 299 
+20180710___baidu___gold_0526.jpg 1 five 271 30 555 524 
+20180710___baidu___gold_1833.jpg 1 five 160 45 665 719 
+20180710___baidu___gold_0293.jpg 1 five 4 250 558 805 
+20180710___baidu___gold_0278.jpg 1 five 60 160 759 1108 
+20180710___baidu___gold_0536.jpg 2 five 64 46 519 573 516 64 963 577 
+20180710___baidu___gold_0244.jpg 1 five 81 10 214 276 
+20180710___baidu___gold_1416.jpg 1 five 32 87 501 729 
+20180710___baidu___gold_0126.jpg 1 five 9 26 322 511 
+20180710___baidu___gold_0318.jpg 1 five 87 413 2922 2104 
+20180710___baidu___gold_0325.jpg 1 five 69 87 657 645 
+20180710___baidu___gold_1952.jpg 1 five 87 0 685 874 
+20180710___baidu___gold_0133.jpg 1 five 34 0 499 609 
+20180710___baidu___gold_0127.jpg 1 five 21 13 247 321 
+20180710___baidu___gold_1415.jpg 1 five 36 0 387 633 
+20180710___baidu___gold_0737.jpg 1 five 34 5 237 202 
+20180710___baidu___gold_0870.jpg 1 five 78 78 471 452 
+20180710___baidu___gold_0131.jpg 1 five 2 2 494 584 
+20180710___baidu___gold_0441.jpg 1 five 78 0 630 513 
+20180710___baidu___gold_0483.jpg 1 five 264 123 657 622 
+20180710___baidu___gold_0118.jpg 1 five 37 6 411 526 
+20180710___baidu___gold_0695.jpg 1 five 80 207 814 955 
+20180710___baidu___gold_1428.jpg 1 five 41 1 542 701 
+20180710___baidu___gold_1414.jpg 1 five 51 184 522 714 
+20180710___baidu___gold_0252.jpg 2 five 120 96 316 311 336 103 535 302 
+20180710___baidu___gold_0246.jpg 1 five 87 142 586 757 
