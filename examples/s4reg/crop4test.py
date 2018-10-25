@@ -26,7 +26,7 @@ anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/2
 im_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/3-distrub-img"
 anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/3-distrub.txt"
 
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/regTest/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/regDebug/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) +'_' +str(flipRange)+ paddingMode
 save_dir = save_name
