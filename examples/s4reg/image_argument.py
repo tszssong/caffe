@@ -94,31 +94,31 @@ def flipAug(image, boxes, arg):
     fboxes = np.array([])
     im = copy.deepcopy(image)
     
-    if arg == 0:                     #0-horizontal flip
+    if arg == 1:                     #0-horizontal flip
         im = cv2.flip(im,1)
-    elif arg == 1:                   #1-rot90
+    elif arg == 2:                   #1-rot90
         im = cv2.transpose(im)
-    elif arg == 2:                   #2-rot270
+    elif arg == 3:                   #2-rot270
         im = cv2.transpose(im)       #  rot90
         imnew = copy.deepcopy(im)
         im = cv2.flip(imnew,1)       #  horizontal flip
-    elif arg == 3:                   #3-vertical flip
+    elif arg == 4:                   #3-vertical flip
         im = cv2.flip(im, 0)
-    elif arg == 4:                   #4-horizontal and vertical flip
+    elif arg == 5:                   #4-horizontal and vertical flip
         im = cv2.flip(im, -1)
 
     for box in boxes:                # box (x_left, y_top, x_right, y_bottom)
         x1, y1, x2, y2 = box
         rx1, ry1, rx2, ry2 = box
-        if arg == 0:                 #horizontal flip
+        if arg == 1:                 #horizontal flip
             rx2 = width - x1 - 1
             rx1 = width - x2 - 1
-        elif arg == 1:               #rot90
+        elif arg == 2:               #rot90
             rx1 = y1
             ry1 = x1
             rx2 = y2
             ry2 = x2
-        elif arg == 2:               #rot270 - rot90 and transpose
+        elif arg == 3:               #rot270 - rot90 and transpose
             rx1 = y1
             ry1 = x1
             rx2 = y2
@@ -126,10 +126,10 @@ def flipAug(image, boxes, arg):
             temp = rx2               #take attention!
             rx2 = oriH - rx1 - 1
             rx1 = oriH - temp - 1
-        elif arg == 3:               #vertical flip
+        elif arg == 4:               #vertical flip
             ry2 = height - y1 - 1
             ry1 = height - y2 - 1
-        elif arg == 4:               #horizontal and vertical flip
+        elif arg == 5:               #horizontal and vertical flip
             rx2 = width - x1 - 1
             rx1 = width - x2 - 1
             ry2 = height - y1 - 1

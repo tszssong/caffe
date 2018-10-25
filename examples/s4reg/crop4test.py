@@ -11,46 +11,22 @@ from image_argument import flipAug
 paddingMode = 'black'
 OutAllowed = 10   # 10 pixels allowed to go out of gt
 cropSize = 64
-flipRange = 2  #flip params: 1-ori\horizontal
+flipRange = 3  #flip params: 1-ori\horizontal
 ScaleS = 2.4
-ScaleB = 2.8
+ScaleB = 3.0
 Shift =  0.5
-maxNum = 30000
-# im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_ali2.txt"
+maxNum = 5000
 
-# im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_hebing.txt"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_notali2_ali2grab.txt"
+# im_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/1-hengbing-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/1-hengbing.txt"
+#
+im_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/2-4_1-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/2-4_1.txt"
+#
+im_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/3-distrub-img"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018bzgs/3-distrub.txt"
 
-# im_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_2_yeah.txt"
-# im_dir = "/Volumes/song/gestureTight4Reg/Tight-onezanbigv-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_3_one.txt"
-
-# im_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_7_zan.txt"
-im_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_8_fheart.txt"
-# im_dir = "/Volumes/song/handgTight_56G/T_9_ok1ali2-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_9_ok1ali2-xml.txt"
-# im_dir = "/Volumes/song/handgTight_56G/T_10_ali1call-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_10_ali1call-xml.txt"
-# im_dir = "/Volumes/song/handgTight_56G/T_11_ali1rock1-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_11_ali1rock1-xml.txt"
-# im_dir = "/Volumes/song/handgTight_56G/T_12_ali2big_v1-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_12_ali2big_v1-xml.txt"
-
-# im_dir = "/Volumes/song/gestureDatabyName/13-fist-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_13_fist.txt"
-
-# im_dir = "/Volumes/song/gestureTight4Reg/Tight-palm-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_palm.txt"
-
-# im_dir = "/Volumes/song/gestureTight4Reg/Tight_green_nofist-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/Tight_green_nofist.txt"
-
-to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/1025data/"
+to_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/regDebug/"
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) +'_' +str(flipRange)+ paddingMode
 save_dir = save_name
@@ -87,7 +63,7 @@ while(croped_pic_idx<maxNum):
         height, width, channel = image.shape
 
         flip_arg = np.random.randint(0,flipRange)                             #randint(0,5) -- int of 0/1/2/3/4
-        img, f_bbox = flipAug(image, boxes, flip_arg)                         #take attention! need to deep copy new img)
+        img, f_bbox = flipAug(image, boxes, flip_arg)                 #take attention! need to deep copy new img)
         f_boxes = np.array(f_bbox, dtype=np.float32).reshape(-1, 4)
         height, width, channel = img.shape
 
