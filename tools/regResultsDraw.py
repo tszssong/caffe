@@ -47,14 +47,14 @@ def bbox_reg(boxes, deltas, nw, nh):
     return pred_boxes
 
 if __name__ == '__main__':
-    bbox_reg_net = caffe.Net("/Users/momo/wkspace/caffe_space/caffe/models/prototxt/64fromali/test.prototxt" ,\
-                             "/Users/momo/wkspace/caffe_space/caffe/models/prototxt/64fromali/0922allfb256_iter_510000.caffemodel", caffe.TEST)
+    bbox_reg_net = caffe.Net("/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_reg/mouthmac/test.prototxt" ,\
+                             "/Users/momo/wkspace/caffe_space/detection/caffe/models/fromAli/mouth/1023_iter_2000000.caffemodel", caffe.TEST)
     # bbox_reg_net = caffe.Net("/Users/momo/Desktop/sdk/momocv2_model/converted_model/hand_gesture/hand_gesture_reg_v3.0.prototxt", \
     #                         "/Users/momo/Desktop/sdk/momocv2_model/converted_model/hand_gesture/hand_gesture_reg_v3.0.caffemodel", caffe.TEST)
     # bbox_reg_net = caffe.Net("/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_reg/lm87_64/test.prototxt", \
     #                          "/Users/momo/wkspace/caffe_space/detection/caffe/models/lm87_64/0922allf_iter_200000.caffemodel", caffe.TEST)
 
-    fid = open("/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/tests.txt","r")
+    fid = open("/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/test.txt","r")
     TP=0
     inputSize = 64
 
@@ -73,7 +73,7 @@ if __name__ == '__main__':
         if not line:
             break;
         words = line.split()
-        image_file_name = "/Users/momo/wkspace/caffe_space/detection/caffe/data/reg64Data/" + words[0]
+        image_file_name = "/Users/momo/wkspace/caffe_space/detection/caffe/data/64data/" + words[0]
         print cur_, image_file_name
 
         im = cv2.imread(image_file_name)
@@ -130,21 +130,40 @@ if __name__ == '__main__':
         endT48 = time.clock()
         totalTime += (endT48-startT48)
 
-        fea_smallconv0 = bbox_reg_net.blobs["conv0"].data[0]
-        print "fea_smallconv0:\n", fea_smallconv0.shape, fea_smallconv0.dtype
-        cv2.imshow("fea0", fea_smallconv0[0, :, :] * 255)
+        fea_smallconv0 = bbox_reg_net.blobs["conv1"].data[0]
+        print "fea_conv1:\n", fea_smallconv0.shape, fea_smallconv0.dtype
+        cv2.imshow("fea_conv1", fea_smallconv0[0, :, :] * 255)
         fea0Total = fea_smallconv0[0, :, :] * 255
         for i in xrange(fea_smallconv0.shape[0] - 1):
             fea0Total = np.hstack((fea0Total, fea_smallconv0[i + 1, :, :] * 255))
-        cv2.imshow("fea0", fea0Total)
+        # cv2.imshow("fea0", fea0Total)
+        cv2.imwrite("./fea1.jpg", fea0Total)
 
-        fea_plus0 = bbox_reg_net.blobs["_plus0"].data[0]
-        print "fea_plus0:\n", fea_plus0.shape, fea_plus0.dtype
-        cv2.imshow("_plus0", fea_plus0[0, :, :] * 255)
-        fea_plus0Total = fea_plus0[0, :, :] * 255
-        for i in xrange(fea_plus0.shape[0] - 1):
-            fea_plus0Total = np.hstack((fea_plus0Total, fea_plus0[i + 1, :, :] * 255))
-        cv2.imshow("_plus0", fea_plus0Total)
+        fea_smallconv3 = bbox_reg_net.blobs["conv3"].data[0]
+        print "fea_conv3:\n", fea_smallconv3.shape, fea_smallconv3.dtype
+        cv2.imshow("fea_conv3", fea_smallconv3[0, :, :] * 255)
+        fea3Total = fea_smallconv3[0, :, :] * 255
+        for i in xrange(fea_smallconv3.shape[0] - 1):
+            fea3Total = np.hstack((fea3Total, fea_smallconv3[i + 1, :, :] * 255))
+        # cv2.imshow("fea0", fea0Total)
+        cv2.imwrite("./fea3.jpg", fea3Total)
+
+        fea_smallconv5 = bbox_reg_net.blobs["conv5"].data[0]
+        print "fea_conv1:\n", fea_smallconv5.shape, fea_smallconv5.dtype
+        cv2.imshow("fea_conv5", fea_smallconv5[0, :, :] * 255)
+        fea5Total = fea_smallconv5[0, :, :] * 255
+        for i in xrange(fea_smallconv5.shape[0] - 1):
+            fea5Total = np.hstack((fea5Total, fea_smallconv5[i + 1, :, :] * 255))
+        # cv2.imshow("fea0", fea0Total)
+        cv2.imwrite("./fea5.jpg", fea5Total)
+
+        # fea_plus0 = bbox_reg_net.blobs["_plus0"].data[0]
+        # print "fea_plus0:\n", fea_plus0.shape, fea_plus0.dtype
+        # cv2.imshow("_plus0", fea_plus0[0, :, :] * 255)
+        # fea_plus0Total = fea_plus0[0, :, :] * 255
+        # for i in xrange(fea_plus0.shape[0] - 1):
+        #     fea_plus0Total = np.hstack((fea_plus0Total, fea_plus0[i + 1, :, :] * 255))
+        # cv2.imshow("_plus0", fea_plus0Total)
 
         if label != 0:
             roi_n+=1

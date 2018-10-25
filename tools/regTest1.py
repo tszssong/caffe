@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 import sys
-caffe_root = '/nfs/zhengmeisong/wkspace/gesture/caffe/distribute/'
-sys.path.append(caffe_root + 'python')
-sys.path.append(caffe_root + 'lib')
-#sys.path.append('//nfs/zhengmeisong/wkspace/gesture/caffe/build/python')
-#sys.path.append('/nfs/zhengmeisong/wkspace/gesture/caffe/python')
-import caffe
+sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
+sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
 import numpy as np
 import numpy.random as npr
 import scipy.io as sio
 import os
+import caffe
 import cv2
 import argparse
 import time
@@ -19,8 +16,7 @@ model = "examples/hand_reg/mouthmac/test.prototxt"
 weights = "models/fromAli/mouth/1023f_addfisthebing_iter_1570000.caffemodel"
 if __name__ == '__main__':
     bbox_reg_net = caffe.Net( model, weights, caffe.TEST)
-    fid = open("data/regTest/Txts/3-distrub_64S2430_5_3black.txt","r")
-#    fid = open("data/regTest/test.txt","r")
+    fid = open("data/regTest/test.txt","r")
     TP=0
     inputSize = 64
 
