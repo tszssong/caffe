@@ -1,15 +1,15 @@
 net : "examples/hand_reg/mouthmac/traintest.prototxt"
 test_iter: 1
 test_interval: 100
-base_lr: 0.001
+base_lr: 0.0007
 momentum: 0.9
 weight_decay: 0.004
 lr_policy: "step"
-stepsize: 20000
+stepsize: 30000
 gamma: 0.8
 display: 10   #500
 max_iter: 1000000
 snapshot: 10000
-snapshot_prefix: "./models/mouth/1023"
+snapshot_prefix: "./models/mouth/1025ali1024f"
 type: "SGD"
 solver_mode: CPU
