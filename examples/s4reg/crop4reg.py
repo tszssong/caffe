@@ -11,13 +11,13 @@ from image_argument import flipAug
 paddingMode = 'black'
 OutAllowed = 10   # 10 pixels allowed to go out of gt
 cropSize = 64
-flipRange = 2  #flip params: 1-ori\horizontal
+flipRange = 4  #flip params: 1-ori\horizontal
 ScaleS = 2.4
 ScaleB = 2.8
 Shift =  0.5
-maxNum = 30000
-# im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_ali2.txt"
+maxNum = 50000
+im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_train-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_ali2.txt"
 
 # im_dir = "/Volumes/song/gestureTight4Reg/Tight5-notali2-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_hebing.txt"
@@ -30,8 +30,8 @@ maxNum = 30000
 
 # im_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_7_zan.txt"
-im_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_8_fheart.txt"
+# im_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
+# anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_8_fheart.txt"
 # im_dir = "/Volumes/song/handgTight_56G/T_9_ok1ali2-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_9_ok1ali2-xml.txt"
 # im_dir = "/Volumes/song/handgTight_56G/T_10_ali1call-img/"
