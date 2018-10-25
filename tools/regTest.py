@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 import sys
-caffe_root = '/nfs/zhengmeisong/wkspace/gesture/caffe/distribute/'
-sys.path.append(caffe_root + 'python')
-sys.path.append(caffe_root + 'lib')
-#sys.path.append('//nfs/zhengmeisong/wkspace/gesture/caffe/build/python')
-#sys.path.append('/nfs/zhengmeisong/wkspace/gesture/caffe/python')
+sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
+sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
 import caffe
 import numpy as np
 import numpy.random as npr
