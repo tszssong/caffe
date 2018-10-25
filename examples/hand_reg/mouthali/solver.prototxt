@@ -1,4 +1,4 @@
-net : "examples/hand_reg/mouth/traintest.prototxt"
+net : "examples/hand_reg/mouthali/traintest.prototxt"
 test_iter: 1
 test_interval: 100
 base_lr: 0.001

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 set -x
-EXEC_DIR="mouth"
+EXEC_DIR="mouthali"
 export PYTHONPATH=/nfs/zhengmeisong/wkspace/gesture/caffe/python:$PYTHONPATH
 export PYTHONPATH=/nfs/zhengmeisong/wkspace/gesture/caffe/examples/hand_reg/${EXEC_DIR}:$PYTHONPATH
 TOOLS=./build/tools
