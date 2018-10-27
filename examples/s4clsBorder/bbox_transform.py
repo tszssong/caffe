@@ -33,7 +33,7 @@ def crop4cls(box, enlarge_bottom, enlargeTop, shift, gt_outside=10, p_ratio=Fals
     cy = y1 + h/2
     i = 0
     while i< loop:
-
+        i+=1
         nw = npr.randint(np.ceil(w * enlarge_bottom), np.ceil(w * enlargeTop))
 
         if p_ratio == False:

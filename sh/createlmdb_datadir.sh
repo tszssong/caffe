@@ -34,7 +34,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $TRAIN_DATA_ROOT \
-    $DATA/totals.txt \
+    $DATA/1026cls64train.txt \
     $DATA/1026cls64_lmdb
 
 echo "Creating val lmdb..."

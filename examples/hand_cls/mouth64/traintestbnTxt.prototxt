@@ -1,13 +1,15 @@
 name: "hand_gesture_cls_mouth64bn"
 layer {
   name: "data"
-  type: "Data"
+  type: "ImageData"
   top: "data"
   top: "label"
-  data_param {
-    source: "data/clsData/64data/train10w_lmdb"
+  image_data_param {
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/1026cls64/train.txt"
     batch_size: 128
-    backend: LMDB
+    shuffle: true
+    new_height: 64
+    new_width: 64
   }
   transform_param {
     mean_value: 104.008
@@ -20,16 +22,18 @@ layer {
 }
 layer {
   name: "data"
-  type: "Data"
+  type: "ImageData"
   top: "data"
   top: "label"
-  data_param {
-    source: "data/clsData/64data/test_lmdb"
+  image_data_param {
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/1026cls64/test.txt"
     batch_size: 128
-    backend: LMDB
+    shuffle: true
+    new_height: 64
+    new_width: 64
   }
   transform_param {
-    mean_value: 104.08
+    mean_value: 104.008
     mean_value: 116.669
     mean_value: 122.675
     crop_size: 64

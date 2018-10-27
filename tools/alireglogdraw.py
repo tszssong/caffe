@@ -2,11 +2,11 @@
 import matplotlib.pyplot as plt
 import re
 
-logfile = "logsfromAli/mouthreglog/1022-1404.txt"
+logfile = "logsfromAli/mouthreglog/1025-2153.txt"
 with open(logfile) as f:
     data = f.read()
 
-pattern = re.compile('solver.cpp:112] Iteration (\d+)')
+pattern = re.compile('solver.cpp:243] Iteration (\d+)')
 results = re.findall(pattern, data)
 iter_num = []
 for result in results:
@@ -34,7 +34,7 @@ for result in results:
 short = min(len(iter_num), len(mbox_loss), len(learning_rate))
 print len(iter_num), len(mbox_loss), len(learning_rate), short
 
-pattern = re.compile('solver.cpp:347] Iteration (\d+)')
+pattern = re.compile('solver.cpp:358] Iteration (\d+)')
 results = re.findall(pattern, data)
 testiter_num = []
 for result in results:
@@ -49,7 +49,7 @@ for result in results:
 plt.subplot(211)
 plt.title(logfile)
 plt.plot(iter_num[:short], mbox_loss[:short],'.')
-plt.ylim(0.001,2.1)  #联合训练，训分类时回归loss会为0， 不画在图上
+plt.ylim(0.001,0.5)  #联合训练，训分类时回归loss会为0， 不画在图上
 plt.plot(testiter_num[:len(testreg_loss)], testreg_loss[:len(testreg_loss)],'r*')
 plt.subplot(212)
 plt.plot(iter_num[:short], learning_rate[:short])
