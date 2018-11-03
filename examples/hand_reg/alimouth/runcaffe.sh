@@ -7,5 +7,5 @@ export PYTHONPATH=/nfs/zhengmeisong/wkspace/gesture/caffe/examples/hand_reg/${EX
 TOOLS=./build/tools
 $TOOLS/caffe train \
   --solver=examples/hand_reg/${EXEC_DIR}/solver.prototxt \
-  --weights=models/mouth/1026f1025_iter_1500000.caffemodel \
-  --gpu 5 2>&1 | tee examples/hand_reg/${EXEC_DIR}/log/`date +'%Y-%m-%d_%H-%M-%S'`.log
+  --weights=models/mouth/1032_iter_6000000.caffemodel \
+  --gpu 6 2>&1 | tee examples/hand_reg/${EXEC_DIR}/log/`date +'%Y-%m-%d_%H-%M-%S'`.log

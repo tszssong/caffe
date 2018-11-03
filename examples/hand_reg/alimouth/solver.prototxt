@@ -1,15 +1,19 @@
 net : "examples/hand_reg/alimouth/traintest.prototxt"
 test_iter: 1
 test_interval: 2000
-base_lr: 0.0005
+base_lr: 0.001
 momentum: 0.9
 weight_decay: 0.004
-lr_policy: "step"
-stepsize: 50000
-gamma: 0.9
+lr_policy: "multistep"
+stepsize: 60000
+gamma: 0.5
 display: 50   #500
-max_iter: 6000000
+stepvalue: 50000
+stepvalue: 100000
+stepvalue: 400000
+stepvalue: 700000
+max_iter: 10000000
 snapshot: 10000
-snapshot_prefix: "./models/mouth/1026+1025f"
+snapshot_prefix: "./models/mouth/25262730f600w"
 type: "SGD"
 solver_mode: GPU
