@@ -9,9 +9,9 @@ import cv2
 import time
 
 NumTest = 100000
-prototxt = "examples/hand_cls/mouth48/bnTestNew.prototxt"
+#prototxt = "examples/hand_cls/mouth48/bnTestNew.prototxt"
 #caffemodel = "models/mouth48_1012/1017f118w_iter_1100000.caffemodel"
-caffemodel = "models/fromAli/mouth48bn/newdata_iter_350000.caffemodel"
+#caffemodel = "models/fromAli/mouth48bn/newdata_iter_350000.caffemodel"
 #prototxt   = "no_bn.prototxt"
 #caffemodel = "no_bn.caffemodel"
 #prototxt   = "examples/hand_cls/mouth48/bnTest.prototxt"
@@ -22,8 +22,8 @@ caffemodel = "models/fromAli/mouth48bn/newdata_iter_350000.caffemodel"
 #caffemodel = "examples/hand_cls/mouth48/adbg_drop_iter_1180000.caffemodel"
 #prototxt   = "examples/hand_cls/mouth48/test14cls.prototxt",
 #caffemodel = "models/fromAli/1012_iter_2480000.caffemodel"
-#prototxt   = "models/fromAli/mouth64bn/test.prototxt"
-#caffemodel = "models/fromAli/mouth64bn/1018addbg_1012f_iter_1000000.caffemodel"
+prototxt   = "models/fromAli/mouth64bn/test.prototxt"
+caffemodel = "models/fromAli/mouth64bn/1018addbg_1012f_iter_1000000.caffemodel"
 #caffemodel = "models/fromAli/mouth64bn/1018addbg_1012f0001_iter_1000000.caffemodel"
 
 if __name__ == '__main__':

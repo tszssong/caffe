@@ -5,7 +5,7 @@ layer {
   top: "data"
   top: "label"
   image_data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/1026cls64/train.txt"
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/1027cls64/totaltrain.txt"
     batch_size: 128
     shuffle: true
     new_height: 64
@@ -26,7 +26,7 @@ layer {
   top: "data"
   top: "label"
   image_data_param {
-    source: "/Users/momo/wkspace/caffe_space/caffe/data/1026cls64/test.txt"
+    source: "/Users/momo/wkspace/caffe_space/caffe/data/1027cls64/totaltest.txt"
     batch_size: 128
     shuffle: true
     new_height: 64

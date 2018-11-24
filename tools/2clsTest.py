@@ -1,6 +1,7 @@
 import os, sys
 sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
 sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
+os.environ['GLOG_minloglevel'] = '3'
 import numpy as np
 import numpy.random as npr
 #import scipy.io as sio
@@ -12,9 +13,9 @@ NumTest = 200000
 
 #prototxt = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/hand_reg/lm87b/test_with2cls.prototxt"
 #caffemodel = "models/lm87bcls/2cls_plus0_iter_280000.caffemodel";
-prototxt = "examples/hand_cls/lm87_64_2cls/test2cls.prototxt"
+prototxt = "examples/hand_cls/mouth2cls/test.prototxt"
 #caffemodel = "models/lm87bcls/lm87_64_2cls_iter_260000.caffemodel"
-caffemodel = "models/lm87_64_2cls/lm87_64_2cls_iter_650000.caffemodel"
+caffemodel = "models/mouth2cls/600w_iter_1000000.caffemodel"
 
 n_nohand = 0
 n_hand = 0
@@ -23,13 +24,8 @@ if __name__ == '__main__':
     caffe.set_mode_cpu()
     inputSize = 64
     mean = np.array([128, 128, 128])
-#    mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
-#    fid = open("data/48Test/Txts/5-five-wsTest_48R110S1020_1013_1.txt","r")
     fid = open("data/48Test/Txts/2cls_shuffle.txt","r")
-#    fid = open("data/48Test/Txts/testshuffle.txt","r")
-#    fid = open("data/48Test/Txts/2clsonly5bgs.txt","r")
-#    fid = open("/Users/momo/Desktop/faceNeg/total_1017f118w_iter_45w_out.txt","r")
     subdirlists = ['nohand', 'hand']
     tp_dict = {}
     gt_dict = {}
@@ -63,6 +59,7 @@ if __name__ == '__main__':
             print cur_,
             sys.stdout.flush()
         im = cv2.imread(image_file_name)
+        image = im
         h,w,ch = im.shape
         if h!=inputSize or w!=inputSize:
             im = cv2.resize(im,(int(inputSize),int(inputSize)))
@@ -77,6 +74,7 @@ if __name__ == '__main__':
         else:
             label = 1
             n_hand += 1
+        
         gt_dict[subdirlists[label]] += 1
 
         classify_net.blobs['data'].reshape(1,3,inputSize,inputSize)
@@ -89,6 +87,7 @@ if __name__ == '__main__':
 #        print label, cls
         if not cls == label:
             err += 1
+            cv2.imwrite("/Users/momo/Desktop/faceNeg/TestOut/" + words[0], image)
         else:
             tp_dict[subdirlists[cls]]+=1
     print "\nerr, sum:",err, sum_

@@ -2,7 +2,8 @@
 import matplotlib.pyplot as plt
 import re
 
-logfile = "logsfromAli/mouthreglog/1025-2153.txt"
+#logfile = "logsfromAli/mouthreglog/1104-1501.txt"
+logfile = "logsfromAli/1120-0822.txt"
 with open(logfile) as f:
     data = f.read()
 
@@ -48,9 +49,11 @@ for result in results:
 
 plt.subplot(211)
 plt.title(logfile)
+plt.grid()
 plt.plot(iter_num[:short], mbox_loss[:short],'.')
-plt.ylim(0.001,0.5)  #联合训练，训分类时回归loss会为0， 不画在图上
+plt.ylim(0.001,1.5)  #联合训练，训分类时回归loss会为0， 不画在图上
 plt.plot(testiter_num[:len(testreg_loss)], testreg_loss[:len(testreg_loss)],'r*')
 plt.subplot(212)
+plt.grid() 
 plt.plot(iter_num[:short], learning_rate[:short])
 plt.show()

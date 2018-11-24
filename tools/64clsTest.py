@@ -1,6 +1,7 @@
 import os, sys
 sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
 sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
+os.environ['GLOG_minloglevel'] = '3'
 import numpy as np
 import numpy.random as npr
 #import scipy.io as sio
@@ -10,9 +11,8 @@ import time
 
 #prototxt   = "models/fromAli/test_mouth64.prototxt"
 #caffemodel = "models/fromAli/mouth64nobn100w.caffemodel"
-prototxt   = "models/fromAli/mouth64bn/test.prototxt"
-#caffemodel = "models/fromAli/mouth64bn/bn1012_iter_1000000.caffemodel"
-caffemodel = "models/fromAli/mouth64bn/1020_iter_1000000.caffemodel"
+#prototxt   = "models/fromAli/mouth64bn/test.prototxt"
+#caffemodel = "models/fromAli/mouth64bn/1018addbg_1012f_iter_1000000.caffemodel"
 NumTest = 200000
 if __name__ == '__main__':
     caffe.set_mode_cpu()
@@ -54,6 +54,7 @@ if __name__ == '__main__':
         h,w,ch = im.shape
         if h!=inputSize or w!=inputSize:
             im = cv2.resize(im,(int(inputSize),int(inputSize)))
+        copy = im
 
         im = im.astype(np.int)
         im -= mean
@@ -74,6 +75,8 @@ if __name__ == '__main__':
         re_dict[subdirlists[cls]] += 1
         if not cls == label:
             err += 1
+            savename =  words[0].split('/')[-1].split('.')[0] + '_' + str(cls) + '.jpg'
+            cv2.imwrite("/Users/momo/wkspace/caffe_space/caffe/data/48Test/error/" + savename, copy)
         else:
             tp_dict[subdirlists[cls]]+=1
     print "\nerr, sum:",err, sum_

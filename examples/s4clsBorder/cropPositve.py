@@ -11,49 +11,47 @@ from image_argument import flipAug, rotAug
 OutAllowed = 10
 cropSize = 64
 ScaleS = 1.0
-ScaleB = 3.0
+ScaleB = 2.0
 Shift = 0.5
 paddingMode = 'black'
 
-date = "_1026"
 maxNum = 100000
 
-# from_dir = "/Volumes/song/gestureDatabyName/1-heart-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/1-heart-xml.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/1-heart-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/1-heart-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/2-yearh-xml.txt"
 #
-# from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
+from_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/3-one-train.txt"
 
 from_dir = "/Volumes/song/gestureDatabyName/4-baoquan-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/4-baoquan-xml.txt"
 from_dir = "/Volumes/song/gestureDatabyName/6-bainian-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/6-bainian-xml.txt"
-#
-# from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/7-zan-train.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/8-fingerheart-xml.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/9-ok-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-xml.txt"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-find2.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/10-call-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/10-call-xml.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/11-rock-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/11-rock-left.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/12-big_v-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/12-big_v-xml.txt"
-# from_dir = "/Volumes/song/gestureDatabyName/13-fist-img/"
-# anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/13-fist-xml.txt"
 
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/1026cls64/"
+from_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/7-zan-train.txt"
+from_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/8-fingerheart-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/9-ok-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/9-ok-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/10-call-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/10-call-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/11-rock-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/11-rock-left.txt"
+from_dir = "/Volumes/song/gestureDatabyName/12-big_v-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/12-big_v-xml.txt"
+from_dir = "/Volumes/song/gestureDatabyName/13-fist-img/"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/13-fist.txt"
+
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/1027cls64/"
 clslists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','palm', 'namaste', 'two_together', 'thumb_down']
 RotDlists = [ 0,       5,       30,    10,         5,    110,         5,    10,            10,   30,     30,     30,      30,    30,     5,         5,              5,     5]
 annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 
-save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + date
+save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10))
 save_dir = save_name
 txt_name = save_name
 

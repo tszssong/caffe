@@ -1,5 +1,5 @@
-net: "examples/hand_cls/mouth64/traintestbnTxt.prototxt"
-base_lr: 0.001
+net: "examples/hand_cls/mouth64/train8cls.prototxt"
+base_lr: 0.01
 momentum: 0.9
 momentum2: 0.999
 
@@ -10,10 +10,10 @@ test_iter: 1
 test_interval: 1000
 weight_decay: 0.004
 lr_policy: "step"
-stepsize: 100000
+stepsize: 5000
 gamma: 0.8
 display: 50
-max_iter: 200000
+max_iter: 1000000
 snapshot: 5000
-snapshot_prefix: "models/mouth64/1027face"
+snapshot_prefix: "models/8clsmouth64/8cls_1w+2w"
 solver_mode: CPU

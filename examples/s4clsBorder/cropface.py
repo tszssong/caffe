@@ -8,19 +8,18 @@ from utils import overlapingOtherBox
 from bbox_transform import crop4cls, validBox
 from image_process import  crop_image, fliterDim
 from image_argument import flipAug, rotAug
-OutAllowed = 10
+OutAllowed = 5
 cropSize = 64
 ScaleS = 1.0
 ScaleB = 3.0
-Shift = 0.5
+Shift = 1.5
 paddingMode = 'black'
 
-date = "_1026"
-maxNum = 10000
+maxNum = 100000
 from_dir = "/Volumes/song/face/0328/JPEGImages/"
-anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4cls/gt/0-face0328-rmhand.txt"
+anno_file = "/Users/momo/wkspace/caffe_space/caffe/examples/s4clsBorder/gt/0-face0328-rmhand.txt"
 
-to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/clsDebug/"
+to_dir = "/Users/momo/wkspace/caffe_space/caffe/data/1027cls64/"
 clslists = ['face', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist','other']
 
 RotDlists = [100, 5, 30, 10, 5, 110, 5, 10, 10, 30, 30, 30, 30, 30, 5, 5, 5, 5]
@@ -28,7 +27,7 @@ annofileName = anno_file.split('.')[0].split('/')[-1]
 print annofileName
 
 save_name = annofileName + '_' + str(cropSize) + 'S' + str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(
-    int(ScaleB * 10)) + date
+    int(ScaleB * 10))
 save_dir = save_name
 txt_name = save_name
 

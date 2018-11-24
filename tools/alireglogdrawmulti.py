@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 import re
-logfilelist = ["logsfromAli/2018-11-06_18-13-53.log", \
-               "logsfromAli/2018-11-06_18-20-25.log", \
-               "logsfromAli/2018-11-06_18-23-57.log", \
-               "logsfromAli/2018-11-06_18-26-05.log", \
-               "logsfromAli/2018-11-06_18-28-06.log"
+logfilelist = [
+               "logsfromAli/1120-0822.txt", \
+               "logsfromAli/2018-11-19_14-17-50.log"
                ]
 
 def get_lr_loss( logfile ):
@@ -63,6 +61,7 @@ def drawlogs(dict_train_num_, dict_train_loss_, dict_test_num_, dict_test_loss_,
     plt.legend(loc='upper left')
     plt.subplot(212)
     plt.grid()
+#    plt.ylim(0,0.0001)
     for i in xrange(len(dict_train_num_)):
         plt.plot(dict_train_num_[i][:len(dict_train_loss_[i])], \
                  dict_lr_[i][:len(dict_train_loss_[i])], \
