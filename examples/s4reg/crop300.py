@@ -9,8 +9,10 @@ from image_process import crop_image
 paddingMode = 'black'
 cropSize = 300
 ScaleB = 3.0
-im_dir = "/Users/momo/wkspace/gesture/data/ori/T-5-five_21081025pink-img/"
-anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_five-pink.txt"
+# im_dir = "/Users/momo/wkspace/gesture/data/ori/T-5-five_21081025pink-img/"
+im_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
+anno_file = "gt/total/"+sys.argv[1]
+#anno_file = "gt/T_5_five-pink.txt"
 # im_dir = "/Volumes/song/handg_pink/T-13-fist_20181026pink-img/"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_13_fist-pink.txt"
 to_dir = "../../data/trainData/"
