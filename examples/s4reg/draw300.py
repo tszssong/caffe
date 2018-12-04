@@ -5,7 +5,7 @@ import copy
 import os
 import re
 import numpy.random as npr
-wk_dir = "/Users/momo/wkspace/gesture/data/trainData/T_5_five-pink_300S30/"
+wk_dir = "../../data/trainData/T_5_five-pink_300S30/"
 
 if __name__=='__main__':
     pattern = re.compile(r'^[^\.].+\.jpg$')
