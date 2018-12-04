@@ -119,4 +119,3 @@ def overlapingOtherBox(crop_box, box_idx, f_boxes):
                 overlap_flag = 1
     if overlap_flag == 1:
         return True
-
