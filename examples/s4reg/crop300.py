@@ -72,6 +72,7 @@ for annotation in annotations:
             continue
 
         ncropped_im = crop_image(image, crop_box, paddingMode)
+
         if nbox > 1:
             overlapflag, overlaplists = overlapingOtherBox(crop_box, box_idx, f_boxes)
             if overlapflag:
@@ -80,7 +81,9 @@ for annotation in annotations:
                     bx1, by1, bx2, by2 = f_boxes[black_idx].astype(np.int32)
                     copyImg[by1:by2, bx1:bx2] = np.zeros([by2-by1, bx2-bx1, 3])
                 ncropped_im = crop_image(copyImg, crop_box, paddingMode)
-
+        if ncropped_im.shape[0] < cropSize / ScaleB or ncropped_im.shape[1] < cropSize / ScaleB:
+            print im_path, "cropped shape:", ncropped_im.shape
+            continue
         nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize))
         ratioW = float(cropSize)/(crop_box[2]-crop_box[0])
         ratioH = cropSize/float(crop_box[3]-crop_box[1])
