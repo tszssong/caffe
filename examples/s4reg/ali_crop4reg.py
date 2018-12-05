@@ -11,6 +11,7 @@ from image_argument import flipAug
 paddingMode = 'black'
 OutAllowed = 10   # 10 pixels allowed to go out of gt
 cropSize = 64
+<<<<<<< HEAD
 flipRange = 4  #flip params: 1-ori\horizontal
 ScaleS = 1.0
 ScaleB = 3.2
@@ -34,6 +35,29 @@ anno_file = "gt/T-5_five-pink1.txt"
 #anno_file = "gt/T-15-palm-total.txt"
 # anno_file = "gt/Tight_green_nofist.txt"
 to_dir = "/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1030data/"
+=======
+flipRange = 2  #flip params: 1-ori\horizontal
+ScaleS = 2.4
+ScaleB = 2.8
+Shift =  0.5
+maxNum = 30000
+im_dir = "/nfs/zhengmeisong/wkspace/gesture/VOCdevkit/VOC2007/JPEGImages/"
+# anno_file = "gt/T_5_ali2.txt"
+# anno_file = "gt/T_5_hebing.txt"
+# anno_file = "gt/T_5_notali2_ali2grab.txt"
+# anno_file = "gt/T_2_yeah.txt"
+# anno_file = "gt/T_3_one.txt"
+# anno_file = "gt/T_7_zan.txt"
+anno_file = "gt/T-8-fheart-total.txt"
+# anno_file = "gt/T_9_ok1ali2-xml.txt"
+# anno_file = "gt/T_10_ali1call-xml.txt"
+# anno_file = "gt/T_11_ali1rock1-xml.txt"
+# anno_file = "gt/T_12_ali2big_v1-xml.txt"
+# anno_file = "gt/T_13_fist.txt"
+# anno_file = "gt/T_palm.txt"
+# anno_file = "gt/Tight_green_nofist.txt"
+to_dir = "/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1025data/"
+>>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) +'_' +str(flipRange)+ paddingMode
 save_dir = save_name

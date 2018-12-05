@@ -1,7 +1,5 @@
 name: "hand_gesture_reg_mouth64"
 layer {
-<<<<<<< HEAD
-<<<<<<< HEAD
   name: "input-data"
   type: "Python"
   top: "data"
@@ -25,23 +23,6 @@ layer {
   python_param {
     module: "pythonLayer"
     layer:  "Data_Layer_test"
-=======
-=======
->>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
-  name: "data"
-  type: "Input"
-  top: "data"
-  input_param {
-    shape {
-      dim: 1
-      dim: 3
-      dim: 128
-      dim: 128
-    }
-<<<<<<< HEAD
->>>>>>> 1f9c019b4d8c70a11e7e9f9f0e03eed55d8ec800
-=======
->>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
   }
 }
 layer {
@@ -84,7 +65,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -158,7 +139,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -232,7 +213,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -305,7 +286,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -379,7 +360,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -414,10 +395,10 @@ layer {
   top: "conv5"
 }
 layer {
-  name: "det-ip1"
+  name: "ip1"
   type: "InnerProduct"
   bottom: "conv5"
-  top: "det-ip1"
+  top: "ip1"
   param {
     lr_mult: 1
     decay_mult: 1
@@ -433,10 +414,10 @@ layer {
 }
 
 layer {
-  name: "det-ip1_bn"
+  name: "ip1_bn"
   type: "BatchNorm"
-  bottom: "det-ip1"
-  top: "det-ip1"
+  bottom: "ip1"
+  top: "ip1"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -450,16 +431,16 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
 }
 layer {
-  name: "det-ip1_bn_scale"
+  name: "ip1_bn_scale"
   type: "Scale"
-  bottom: "det-ip1"
-  top: "det-ip1"
+  bottom: "ip1"
+  top: "ip1"
   param {
     lr_mult: 1
     decay_mult: 0
@@ -479,15 +460,15 @@ layer {
   }
 }
 layer {
-  name: "relu-det-ip1"
+  name: "relu-ip1"
   type: "ReLU"
-  bottom: "det-ip1"
-  top: "det-ip1"
+  bottom: "ip1"
+  top: "ip1"
 }
 layer {
   name: "fullyconnected1"
   type: "InnerProduct"
-  bottom: "det-ip1"
+  bottom: "ip1"
   top: "fullyconnected1"
   param {
       lr_mult: 1
@@ -507,4 +488,14 @@ layer {
         value: 0
     }
   }
+}
+layer {
+  name: "smallRegressionLoss"
+  type: "EuclideanLoss"
+  bottom: "fullyconnected1"
+  bottom: "roi"
+  top: "RegressionLoss"
+  propagate_down: 1
+  propagate_down: 0
+  loss_weight: 1
 }
