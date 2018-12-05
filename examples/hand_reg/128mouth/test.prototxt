@@ -2,6 +2,7 @@ name: "hand_gesture_reg_mouth64"
 layer {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   name: "input-data"
   type: "Python"
   top: "data"
@@ -28,6 +29,8 @@ layer {
 =======
 =======
 >>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
+=======
+>>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
   name: "data"
   type: "Input"
   top: "data"
@@ -39,7 +42,10 @@ layer {
       dim: 128
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1f9c019b4d8c70a11e7e9f9f0e03eed55d8ec800
+=======
+>>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
 =======
 >>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
   }

@@ -12,6 +12,7 @@ paddingMode = 'black'
 OutAllowed = 10   # 10 pixels allowed to go out of gt
 cropSize = 64
 <<<<<<< HEAD
+<<<<<<< HEAD
 flipRange = 4  #flip params: 1-ori\horizontal
 ScaleS = 1.0
 ScaleB = 3.2
@@ -36,6 +37,8 @@ anno_file = "gt/T-5_five-pink1.txt"
 # anno_file = "gt/Tight_green_nofist.txt"
 to_dir = "/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1030data/"
 =======
+=======
+>>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
 flipRange = 2  #flip params: 1-ori\horizontal
 ScaleS = 2.4
 ScaleB = 2.8
@@ -57,6 +60,9 @@ anno_file = "gt/T-8-fheart-total.txt"
 # anno_file = "gt/T_palm.txt"
 # anno_file = "gt/Tight_green_nofist.txt"
 to_dir = "/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1025data/"
+<<<<<<< HEAD
+>>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
+=======
 >>>>>>> 211d0c56b70351056824ad1dbd848e242a3245b0
 annofileName = anno_file.split('.')[0].split('/')[-1]
 save_name = annofileName +'_' + str(cropSize)+ 'S'+ str(ScaleS).split('.')[0] + str(ScaleS).split('.')[1] + str(int(ScaleB * 10)) + '_' + str(int(Shift * 10)) +'_' +str(flipRange)+ paddingMode
