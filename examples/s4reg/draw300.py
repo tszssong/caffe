@@ -6,16 +6,24 @@ import os
 import re
 import numpy.random as npr
 wk_dir = "../../data/trainData/T_5_five-pink_300S30/"
-
+wk_dir = "/Users/momo/wkspace/gesture/test_regGesture/data/"
+data_dir_path = wk_dir + "testData/"
+model_dir_path = wk_dir + "testData_model/"
+TestModelAnno = False
 if __name__=='__main__':
     pattern = re.compile(r'^[^\.].+\.jpg$')
     numPic = 0
-    for dirpath, dirnames, filenames in os.walk(wk_dir):
+    for dirpath, dirnames, filenames in os.walk(data_dir_path):
         for img_filename in filenames:
             match = pattern.match(img_filename)
             if not match: continue
             pt_filename = img_filename.replace('.jpg', '.txt')
-            ptfile_fullpath = os.path.join(dirpath, pt_filename)
+            if TestModelAnno:
+                ptfile_fullpath = os.path.join(model_dir_path, pt_filename)
+                showColor = (0, 255, 255)
+            else:
+                ptfile_fullpath = os.path.join(dirpath, pt_filename)
+                showColor = (0, 255, 0)
             label = np.loadtxt(ptfile_fullpath, dtype=float)
             numPic += 1
             print pt_filename, label
@@ -25,7 +33,7 @@ if __name__=='__main__':
             show_x2 = int(label[2])
             show_y2 = int(label[3])
             print show_x1, show_y1, show_x2, show_y2
-            cv2.rectangle(im_small,(show_x1, show_y1),(show_x2,show_y2), (255, 0, 0), 2 )
+            cv2.rectangle(im_small,(show_x1, show_y1),(show_x2,show_y2), showColor, 2 )
             cv2.imshow("img", im_small)
-            cv2.waitKey(1)
+            cv2.waitKey(3)
     print "the end! %d pic in dir"%numPic
