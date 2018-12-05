@@ -101,3 +101,11 @@ MANIFEST-*
 jobs
 temp
 examples/*/*lmdb
+
+#my configurations:
+examples/hand_reg/ali128box/log/
+examples/hand_reg/ali128lm87/log/
+examples/hand_reg/ali64box/log/
+examples/hand_reg/alimouth/log/
+examples/hand_reg/batchTest/log/
+examples/hand_reg/batchTest128mouth/log/
