@@ -103,3 +103,28 @@ def crop4reg(idx, boxes, enlarge_bottom, enlargeTop, shift, gt_outside=10, loop=
             return np.array([nx1, ny1, nx2, ny2]), np.array([dx,dy,dw,dh])
 
     return np.array([]), np.array([])
+
+def crop4reg_small(idx, boxes, enlarge):
+    # TODO: validBox and enlarge params
+    # do not support crop by h/w
+    box = boxes[idx]
+    x1, y1, x2, y2 = box
+    w = x2 - x1
+    h = y2 - y1
+    cx = x1 + w/2
+    cy = y1 + h/2
+
+    maxWH = np.max((w, h))
+    # minWH = np.min((w, h))
+    # meanWH = w + float(h-w)/2.
+    nx1 = cx - enlarge*maxWH * 0.5
+    ny1 = cy - enlarge*maxWH * 0.5
+    nx2 = cx + enlarge*maxWH * 0.5
+    ny2 = cy + enlarge*maxWH * 0.5
+
+    nnx1 = x1 - nx1
+    nnx2 = nnx1 + w
+    nny1 = y1 - ny1
+    nny2 = nny1 + h
+
+    return np.array([nx1, ny1, nx2, ny2]), np.array([nnx1, nny1, nnx2, nny2])

@@ -1,21 +1,19 @@
 import sys
-sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
-sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
+sys.path.append('/nfs/zhengmeisong/wkspace/gesture/caffe/build/python')
 import cv2
 import caffe
 import numpy as np
 import random
 import cPickle as pickle
-import time
 imdb_exit = False
 ###############################################################################
 class Data_Layer_test(caffe.Layer):
     def setup(self, bottom, top):
-        self.batch_size = 128
-        net_side = 64
+        self.batch_size = 64
+        net_side = 128
         roi_list = []
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/train.txt'
+        roi_root = '/nfs/zhengmeisong/wkspace/gesture/VOCdevkit/VOC2007/resizedPic/'
+        roi_txt='/nfs/zhengmeisong/wkspace/gesture/VOCdevkit/VOC2007/test.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
@@ -36,11 +34,11 @@ class Data_Layer_test(caffe.Layer):
 ################################################################################
 class Data_Layer_train(caffe.Layer):
     def setup(self, bottom, top):
-        self.batch_size = 128
-        net_side = 64
+        self.batch_size = 64
+        net_side = 128
         roi_list = ''
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/train.txt'
+        roi_root = '/nfs/zhengmeisong/wkspace/gesture/VOCdevkit/VOC2007/resizedPic/'
+        roi_txt='/nfs/zhengmeisong/wkspace/gesture/VOCdevkit/VOC2007/train.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
@@ -51,13 +49,10 @@ class Data_Layer_train(caffe.Layer):
 
     def forward(self, bottom, top):
         loss_task = 1
-#        start_time = time.time()
         for itt in range(self.batch_size):
             im, roi= self.batch_loader.load_next_image(loss_task)
             top[0].data[itt, ...] = im
             top[1].data[itt, ...] = roi
-#        print "read a batch use:",time.time() - start_time, " s\n"
-#        sys.stdout.flush()
     def backward(self, top, propagate_down, bottom):
         pass
 

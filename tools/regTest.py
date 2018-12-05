@@ -12,8 +12,10 @@ import cv2
 import argparse
 import time
 #model = "examples/hand_reg/lm87_64/test.prototxt"
-model = "examples/hand_reg/mouthmac/test.prototxt"
-weights = "models/fromAli/mouth/1023f_addfisthebing_iter_1570000.caffemodel"
+#model = "examples/hand_reg/mouthmac/test.prototxt"
+#weights = "models/fromAli/mouth/1023f_addfisthebing_iter_1570000.caffemodel"
+model = "/Users/momo/wkspace/caffe_space/detection/caffe/models/fromAli/mouth/test.prototxt";
+weights = "/Users/momo/wkspace/caffe_space/detection/caffe/models/fromAli/mouth/25262730f600w_iter_990000.caffemodel";
 if __name__ == '__main__':
     bbox_reg_net = caffe.Net( model, weights, caffe.TEST)
     fid = open("data/regTest/Txts/3-distrub_64S2430_5_3black.txt","r")

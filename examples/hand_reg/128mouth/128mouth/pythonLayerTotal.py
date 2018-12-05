@@ -1,22 +1,26 @@
 import sys
-sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/build/python')
-sys.path.append('/Users/momo/wkspace/caffe_space/detection/caffe/python')
+sys.path.append('/nfs/zhengmeisong/wkspace/caffe/build/python')
 import cv2
 import caffe
 import numpy as np
 import random
 import cPickle as pickle
-import time
 imdb_exit = False
+
+def view_bar(num, total):
+    rate = float(num) / total
+    rate_num = int(rate * 100)
+    r = '\r[%s%s]%d%%' % ("#"*rate_num, " "*(100-rate_num), rate_num, )
+    sys.stdout.write(r)
+    sys.stdout.flush()
 ###############################################################################
 class Data_Layer_test(caffe.Layer):
     def setup(self, bottom, top):
         self.batch_size = 128
         net_side = 64
         roi_list = []
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/train.txt'
-        print roi_txt
+        roi_root = '/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1025data/'
+        roi_txt='/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1025data/tests.txt'
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
         top[1].reshape(self.batch_size, 4)
@@ -37,69 +41,72 @@ class Data_Layer_test(caffe.Layer):
 class Data_Layer_train(caffe.Layer):
     def setup(self, bottom, top):
         self.batch_size = 128
-        net_side = 64
-        roi_list = ''
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/train.txt'
-        print roi_txt
+	net_side = 64
+	roi_list = ''
+	roi_root = '/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1025data/'
+        roi_txt='/nfs/zhengmeisong/wkspace/gesture/caffe/data/regData/1025data/trains.txt'
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
-        top[1].reshape(self.batch_size, 4)
-        
+	top[1].reshape(self.batch_size, 4)
     def reshape(self, bottom, top):
         pass
 
     def forward(self, bottom, top):
-        loss_task = 1
-#        start_time = time.time()
+	loss_task = 1
         for itt in range(self.batch_size):
             im, roi= self.batch_loader.load_next_image(loss_task)
             top[0].data[itt, ...] = im
-            top[1].data[itt, ...] = roi
-#        print "read a batch use:",time.time() - start_time, " s\n"
-#        sys.stdout.flush()
+	    top[1].data[itt, ...] = roi
     def backward(self, top, propagate_down, bottom):
         pass
 
 class BatchLoader(object):
     def __init__(self,roi_list,net_side,roi_root,roi_txt):
-        self.mean = 128
+	self.mean = 128
         self.im_shape = net_side
-        self.roi_root = roi_root
-        self.roi_list = []
+	self.roi_root = roi_root
+	self.roi_list = []
 
-        print "\nStart Reading:",roi_txt," into Memory...\n"
-        fid = open(roi_txt,'r')
-        lines = fid.readlines()
-        fid.close()
-        cur_=0
-        sum_=len(lines)
-        for line in lines:
-            cur_+=1
-            words = line.split()
-            image_file_name = self.roi_root + words[0]
-            roi= [float(words[2]),float(words[3]),float(words[4]),float(words[5])]
-            self.roi_list.append([image_file_name,roi])
-        random.shuffle(self.roi_list)
-        self.roi_cur = 0
-        print "\n",str(len(self.roi_list))," Regression Data have been read into Memory...\n"
+	print "\nStart Reading:",roi_txt," into Memory...\n"
+	if imdb_exit:
+	    fid = open('48/roi.imdb','r')
+	    self.roi_list = pickle.load(fid)
+	    fid.close()
+	else:
+	    fid = open(roi_txt,'r')
+            lines = fid.readlines()
+	    fid.close()
+	    cur_=0
+	    sum_=len(lines)
+	    for line in lines:
+	        view_bar(cur_, sum_)
+	        cur_+=1
+	        words = line.split()
+	        image_file_name = self.roi_root + words[0]
+	        im = cv2.imread(image_file_name)
+	        h,w,ch = im.shape
+	        if h!=self.im_shape or w!=self.im_shape:
+	            im = cv2.resize(im,(int(self.im_shape),int(self.im_shape)))
+	        im = np.swapaxes(im, 0, 2)
+                im = np.swapaxes(im, 1, 2)
+                im = im.astype(np.int)
+	        im -= self.mean
+                label    = int(words[1])
+                roi      = [float(words[2]),float(words[3]),float(words[4]),float(words[5])]
+		pts      = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1]
+	        self.roi_list.append([im,roi])
+	random.shuffle(self.roi_list)
+	self.roi_cur = 0 
+	print "\n",str(len(self.roi_list))," Regression Data have been read into Memory...\n"
 
-    def load_next_image(self,loss_task):
-        if loss_task == 1:
-            if self.roi_cur == len(self.roi_list):
+    def load_next_image(self,loss_task): 
+	if loss_task == 1:
+	    if self.roi_cur == len(self.roi_list):
                 self.roi_cur = 0
                 random.shuffle(self.roi_list)
-            cur_data = self.roi_list[self.roi_cur]  # Get the image index
-            image_file_name = cur_data[0]
-            im = cv2.imread(image_file_name)
-            h,w,ch = im.shape
-            if h!=self.im_shape or w!=self.im_shape:
-                im = cv2.resize(im,(int(self.im_shape),int(self.im_shape)))
-            im  = np.swapaxes(im, 0, 2)
-            im  = np.swapaxes(im, 1, 2)
-            im  = im.astype(np.int)
-            im -= self.mean
-            roi = cur_data[1]
+	    cur_data = self.roi_list[self.roi_cur]  # Get the image index
+	    im	     = cur_data[0]
+            roi      = cur_data[1]
             self.roi_cur += 1
             return im, roi
 ################################################################################

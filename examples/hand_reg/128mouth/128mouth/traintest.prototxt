@@ -1,6 +1,5 @@
 name: "hand_gesture_reg_mouth64"
 layer {
-<<<<<<< HEAD
   name: "input-data"
   type: "Python"
   top: "data"
@@ -24,18 +23,6 @@ layer {
   python_param {
     module: "pythonLayer"
     layer:  "Data_Layer_test"
-=======
-  name: "data"
-  type: "Input"
-  top: "data"
-  input_param {
-    shape {
-      dim: 1
-      dim: 3
-      dim: 128
-      dim: 128
-    }
->>>>>>> 1f9c019b4d8c70a11e7e9f9f0e03eed55d8ec800
   }
 }
 layer {
@@ -78,7 +65,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -152,7 +139,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -226,7 +213,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -299,7 +286,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -373,7 +360,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -444,7 +431,7 @@ layer {
     decay_mult: 0
   }
   batch_norm_param {
-    use_global_stats: true
+    use_global_stats: false
     moving_average_fraction: 0.899999976158
     eps: 1.99999994948e-05
   }
@@ -501,4 +488,14 @@ layer {
         value: 0
     }
   }
+}
+layer {
+  name: "smallRegressionLoss"
+  type: "EuclideanLoss"
+  bottom: "fullyconnected1"
+  bottom: "roi"
+  top: "RegressionLoss"
+  propagate_down: 1
+  propagate_down: 0
+  loss_weight: 1
 }

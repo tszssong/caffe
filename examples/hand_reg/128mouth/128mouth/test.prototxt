@@ -1,30 +1,5 @@
 name: "hand_gesture_reg_mouth64"
 layer {
-<<<<<<< HEAD
-  name: "input-data"
-  type: "Python"
-  top: "data"
-  top: "roi"
-  include {
-    phase: TRAIN
-  }
-  python_param {
-    module: "pythonLayer"
-    layer:  "Data_Layer_train"
-  }
-}
-layer {
-  name: "test-data"
-  type: "Python"
-  top: "data"
-  top: "roi"
-  include {
-    phase: TEST
-  }
-  python_param {
-    module: "pythonLayer"
-    layer:  "Data_Layer_test"
-=======
   name: "data"
   type: "Input"
   top: "data"
@@ -35,7 +10,6 @@ layer {
       dim: 128
       dim: 128
     }
->>>>>>> 1f9c019b4d8c70a11e7e9f9f0e03eed55d8ec800
   }
 }
 layer {
