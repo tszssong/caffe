@@ -1,0 +1,15 @@
+net : "examples/hand_reg/batchTest128mouth/train128mouth.prototxt"
+test_iter: 1
+test_interval: 2000
+base_lr: 0.01
+momentum: 0.9
+weight_decay: 0.004
+lr_policy: "step"
+stepsize: 5000
+gamma: 0.9
+display: 50   #500
+max_iter: 60000000
+snapshot: 100000
+snapshot_prefix: "./models/batch128Mouth/1030_1"
+type: "SGD"
+solver_mode: GPU

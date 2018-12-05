@@ -1,0 +1,21 @@
+net : "examples/hand_reg/batchTest/traintest.prototxt"
+test_iter: 1
+test_interval: 2000
+base_lr: 0.001
+momentum: 0.9
+weight_decay: 0.004
+lr_policy: "multistep"
+stepsize: 60000
+gamma: 0.5
+display: 50   #500
+stepvalue: 50000
+stepvalue: 100000
+stepvalue: 300000
+stepvalue: 720000
+stepvalue: 12000000
+stepvalue: 32000000
+max_iter: 60000000
+snapshot: 10000
+snapshot_prefix: "./models/batchMouth/addpink"
+type: "SGD"
+solver_mode: GPU
