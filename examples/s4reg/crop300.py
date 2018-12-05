@@ -16,14 +16,14 @@ ScaleB = 3.0
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_hebing.txt"
 # anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/examples/s4reg/gt/T_5_notali2_ali2grab.txt"
 # im_dir = "/Users/momo/wkspace/gesture/data/ori/T-5-five_21081025pink-img/"
-im_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
+# im_dir = "/Volumes/song/gestureDatabyName/2-yearh-img/"
 # im_dir = "/Volumes/song/gestureDatabyName/3-one-img/"
 # im_dir = "/Volumes/song/gestureDatabyName/7-zan-img/"
 # im_dir = "/Volumes/song/gestureDatabyName/8-fingerheart-img/"
 # im_dir = "/Volumes/song/gestureDatabyName/12-big_v-img/"
 
 # im_dir = "/Volumes/song/handgTight_56G/T_9_ok1ali2-img/"
-# im_dir = "/Volumes/song/handgTight_56G/T_10_ali1call-img/"
+im_dir = "/Volumes/song/handgTight_56G/T_10_ali1call-img/"
 # im_dir = "/Volumes/song/handgTight_56G/T_11_ali1rock1-img/"
 # im_dir = "/Volumes/song/gestureDatabyName/13-fist-img/"
 # im_dir = "/Volumes/song/handg_neg_test32G/20181018wsRegTest/wsRegTest-img/"
@@ -67,14 +67,20 @@ for annotation in annotations:
     for box_idx in xrange(f_boxes.shape[0]):
         box = f_boxes[box_idx]
         crop_box, reg_coord = crop4reg_small(box_idx, f_boxes,  ScaleB)
-        cropped_im = image[int(box[1]): int(box[3]), int(box[0]): int(box[2]), :]
 
         if not crop_box.size == 4:
             continue
-        if nbox > 1:
-            if overlapingOtherBox(crop_box, box_idx, f_boxes):
-               continue
+
         ncropped_im = crop_image(image, crop_box, paddingMode)
+        if nbox > 1:
+            overlapflag, overlaplists = overlapingOtherBox(crop_box, box_idx, f_boxes)
+            if overlapflag:
+                copyImg = image.copy()
+                for black_idx in overlaplists:
+                    bx1, by1, bx2, by2 = f_boxes[black_idx].astype(np.int32)
+                    copyImg[by1:by2, bx1:bx2] = np.zeros([by2-by1, bx2-bx1, 3])
+                ncropped_im = crop_image(copyImg, crop_box, paddingMode)
+
         nresized_im = cv2.resize(ncropped_im, (cropSize, cropSize))
         ratioW = float(cropSize)/(crop_box[2]-crop_box[0])
         ratioH = cropSize/float(crop_box[3]-crop_box[1])
