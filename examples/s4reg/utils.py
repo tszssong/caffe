@@ -109,13 +109,13 @@ def overlapSelf(Reframe,GTframe):
         ratio = Area * 1. / Area1
     return ratio
 
-def overlapingOtherBox(crop_box, box_idx, f_boxes):
+def overlapingOtherBox(crop_box, box_idx, f_boxes, th=0.01):
     overlap_flag = 0
     overlap_idxLists = []
     for otherbox_idx in xrange(f_boxes.shape[0]):
         if not box_idx == otherbox_idx:
             iou = IOU(crop_box, f_boxes[otherbox_idx])
-            if iou > 0.01:
+            if iou > th:
                 overlap_flag = 1
                 overlap_idxLists.append(otherbox_idx)
     if overlap_flag == 1:
