@@ -114,13 +114,17 @@ def crop4reg_small(idx, boxes, enlarge):
     cx = x1 + w/2
     cy = y1 + h/2
 
-    maxWH = np.max((w, h))
+    # maxWH = np.max((w, h))
+    # nx1 = cx - enlarge * maxWH * 0.5
+    # ny1 = cy - enlarge * maxWH * 0.5
+    # nx2 = cx + enlarge * maxWH * 0.5
+    # ny2 = cy + enlarge * maxWH * 0.5
     # minWH = np.min((w, h))
-    # meanWH = w + float(h-w)/2.
-    nx1 = cx - enlarge*maxWH * 0.5
-    ny1 = cy - enlarge*maxWH * 0.5
-    nx2 = cx + enlarge*maxWH * 0.5
-    ny2 = cy + enlarge*maxWH * 0.5
+    meanWH = w + float(h-w)/2.
+    nx1 = cx - enlarge*meanWH * 0.5
+    ny1 = cy - enlarge*meanWH * 0.5
+    nx2 = cx + enlarge*meanWH * 0.5
+    ny2 = cy + enlarge*meanWH * 0.5
 
     nnx1 = x1 - nx1
     nnx2 = nnx1 + w
