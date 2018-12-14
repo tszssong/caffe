@@ -8,7 +8,7 @@ from utils import IOU, overlapSelf, overlapingOtherBox
 from bbox_transform import validBox, crop4reg_small
 from image_process import  crop_image
 paddingMode = 'black'
-cropSize = 300
+cropSize = 320
 ScaleB = 3.2
 # im_dir = "/Volumes/song/handgesture5_48G/Tight_ali2_five_test-img/"
 # anno_file = "/Volumes/song/handgesture5_48G/Tight_ali2_five_test-xml.txt"
@@ -104,7 +104,7 @@ for annotation in annotations:
         ratioW = float(cropSize)/(crop_box[2]-crop_box[0])
         ratioH = cropSize/float(crop_box[3]-crop_box[1])
         box_ = box.reshape(1, -1)
-        filename = "/" + str(croped_pic_idx) + '_' +  im_path.split('.')[0]
+        filename = "/" + im_path.split('.')[0] + 'c'  + str(croped_pic_idx)
         save_file = os.path.join(save_dir + filename)
 
         cv2.imwrite(to_dir + save_file + '.jpg', nresized_im)
