@@ -5,7 +5,7 @@ import copy
 import os
 import re
 import numpy.random as npr
-
+wk_dir = "/Users/momo/wkspace/gesture/test_regGesture/"
 data_dir_path = wk_dir + "trainData/"
 model_dir_path = wk_dir + "ResNet50Anno/"
 if __name__=='__main__':

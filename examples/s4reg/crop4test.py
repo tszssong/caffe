@@ -22,7 +22,6 @@ maxNum = 5000
 #
 im_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018wsRegTest/2-4_1-img/"
 anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018wsRegTest/2-4_1.txt"
-#
 im_dir = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018wsRegTest/3-distrub-img"
 anno_file = "/Users/momo/wkspace/caffe_space/detection/caffe/data/20181018wsRegTest/3-distrub.txt"
 
