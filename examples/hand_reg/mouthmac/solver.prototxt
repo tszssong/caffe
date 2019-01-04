@@ -1,26 +1,16 @@
 net : "examples/hand_reg/mouthmac/traintest.prototxt"
 test_iter: 1
 test_interval: 100
-base_lr: 0.001
+base_lr: 0.00005
 momentum: 0.9
 weight_decay: 0.004
-lr_policy: "multistep"
+lr_policy: "fixed"
 #stepsize: 30000
 gamma: 0.7
-display: 10   #500
-stepvalue: 2000
-stepvalue: 5000
-stepvalue: 8000
-stepvalue: 12000
-stepvalue: 20000
-stepvalue: 30000
-stepvalue: 50000
-stepvalue: 80000
-stepvalue: 120000
-stepvalue: 180000
+display: 10  
 
-max_iter: 3000000
+max_iter: 5000000
 snapshot: 10000
-snapshot_prefix: "./models/mouth/addfist1028"
+snapshot_prefix: "./models/mouth/addpink1028f20w"
 type: "SGD"
 solver_mode: CPU

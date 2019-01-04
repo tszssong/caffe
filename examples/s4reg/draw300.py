@@ -6,8 +6,9 @@ import os
 import re
 import numpy.random as npr
 wk_dir = "../../data/trainData/T_5_five-pink_300S30/"
-wk_dir = "/Users/momo/wkspace/gesture/test_regGesture/data/"
+wk_dir = "/Users/momo/wkspace/gesture/handreg/data/gt_test_320S32/"
 data_dir_path = wk_dir + "testData/"
+data_dir_path = wk_dir
 model_dir_path = wk_dir + "testData_model/"
 TestModelAnno = False
 if __name__=='__main__':

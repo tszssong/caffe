@@ -1,7 +1,37 @@
 import numpy as np
 import numpy.random as npr
-from utils import IOU, overlapSelf, overlapingOtherBox
-ScaleFacetors = np.array([10,10,5,5])
+
+ScaleFacetors = np.array([10, 10, 5, 5])
+
+def IOU(box1, box2):
+    ax1, ay1, ax2, ay2 = box1
+    bx1, by1, bx2, by2 = box2
+    ox1 = max(ax1, bx1)
+    oy1 = max(ay1, by1)
+    ox2 = min(ax2, bx2)
+    oy2 = min(ay2, by2)
+    if((ox1<ox2) and (oy1<oy2)):
+        overlap_area = (ox2-ox1)*(oy2-oy1)
+    else:
+        overlap_area = 0
+    a_area = (ax2-ax1)*(ay2-ay1)
+    b_area = (bx2-bx1)*(by2-by1)
+    return  overlap_area/(a_area+b_area-overlap_area)
+
+def overlapingOtherBox(crop_box, box_idx, f_boxes, th=0.01):
+    overlap_flag = 0
+    overlap_idxLists = []
+    for otherbox_idx in xrange(f_boxes.shape[0]):
+        if not box_idx == otherbox_idx:
+            iou = IOU(crop_box, f_boxes[otherbox_idx])
+            if iou > th:
+                overlap_flag = 1
+                overlap_idxLists.append(otherbox_idx)
+    if overlap_flag == 1:
+        return True, overlap_idxLists
+    else:
+        return False, overlap_idxLists
+
 
 def validBox(box, width, height):
     rx1, ry1, rx2, ry2 = box
@@ -114,17 +144,17 @@ def crop4reg_small(idx, boxes, enlarge):
     cx = x1 + w/2
     cy = y1 + h/2
 
-    # maxWH = np.max((w, h))
-    # nx1 = cx - enlarge * maxWH * 0.5
-    # ny1 = cy - enlarge * maxWH * 0.5
-    # nx2 = cx + enlarge * maxWH * 0.5
-    # ny2 = cy + enlarge * maxWH * 0.5
+    maxWH = np.max((w, h))
+    nx1 = cx - enlarge * maxWH * 0.5
+    ny1 = cy - enlarge * maxWH * 0.5
+    nx2 = cx + enlarge * maxWH * 0.5
+    ny2 = cy + enlarge * maxWH * 0.5
     # minWH = np.min((w, h))
-    meanWH = w + float(h-w)/2.
-    nx1 = cx - enlarge*meanWH * 0.5
-    ny1 = cy - enlarge*meanWH * 0.5
-    nx2 = cx + enlarge*meanWH * 0.5
-    ny2 = cy + enlarge*meanWH * 0.5
+    # meanWH = w + float(h-w)/2.
+    # nx1 = cx - enlarge*meanWH * 0.5
+    # ny1 = cy - enlarge*meanWH * 0.5
+    # nx2 = cx + enlarge*meanWH * 0.5
+    # ny2 = cy + enlarge*meanWH * 0.5
 
     nnx1 = x1 - nx1
     nnx2 = nnx1 + w

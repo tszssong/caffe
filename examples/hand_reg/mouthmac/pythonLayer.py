@@ -14,8 +14,8 @@ class Data_Layer_test(caffe.Layer):
         self.batch_size = 128
         net_side = 64
         roi_list = []
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/train.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1106reg64/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1106reg64/test.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
@@ -39,8 +39,8 @@ class Data_Layer_train(caffe.Layer):
         self.batch_size = 128
         net_side = 64
         roi_list = ''
-        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/'
-        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1103reg64/train.txt'
+        roi_root = '/Users/momo/wkspace/caffe_space/detection/caffe/data/1106reg64/'
+        roi_txt='/Users/momo/wkspace/caffe_space/detection/caffe/data/1106reg64/train.txt'
         print roi_txt
         self.batch_loader = BatchLoader(roi_list,net_side,roi_root,roi_txt)
         top[0].reshape(self.batch_size, 3, net_side, net_side)
@@ -77,6 +77,7 @@ class BatchLoader(object):
         for line in lines:
             cur_+=1
             words = line.split()
+            
             image_file_name = self.roi_root + words[0]
             roi= [float(words[2]),float(words[3]),float(words[4]),float(words[5])]
             self.roi_list.append([image_file_name,roi])
@@ -92,6 +93,7 @@ class BatchLoader(object):
             cur_data = self.roi_list[self.roi_cur]  # Get the image index
             image_file_name = cur_data[0]
             im = cv2.imread(image_file_name)
+            
             h,w,ch = im.shape
             if h!=self.im_shape or w!=self.im_shape:
                 im = cv2.resize(im,(int(self.im_shape),int(self.im_shape)))

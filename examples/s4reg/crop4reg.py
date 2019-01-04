@@ -4,7 +4,7 @@ import cv2
 import copy
 import os
 import numpy.random as npr
-from utils import IOU, overlapSelf, overlapingOtherBox
+from utils import IOU, overlapingOtherBox
 from bbox_transform import validBox, crop4reg
 from image_process import fliterDim, crop_image
 from image_argument import flipAug

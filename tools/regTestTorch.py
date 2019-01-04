@@ -11,19 +11,15 @@ import os
 import cv2
 import argparse
 import time
-#model = "examples/hand_reg/lm87_64/test.prototxt"
-#model = "examples/hand_reg/mouthmac/test.prototxt"
-#weights = "models/fromAli/mouth/1023f_addfisthebing_iter_1570000.caffemodel"
-model = "/Users/momo/wkspace/caffe_space/detection/caffe/models/fromAli/mouth/test.prototxt";
-weights = "/Users/momo/wkspace/caffe_space/detection/caffe/models/fromAli/mouth/25262730f600w_iter_990000.caffemodel";
-#model = "/Users/momo/wkspace/caffe_space/detection/caffe/models/fromAli/mouth/test.prototxt";
-#weights = "/Users/momo/wkspace/caffe_space/detection/caffe/models/fromAli/mouth/25262730f600w_iter_990000.caffemodel";
+
+model = "/Users/momo/wkspace/gesture/caffemodel/BigResNet_nobn.prototxt";
+weights = "/Users/momo/wkspace/gesture/caffemodel/BigResNet_nobn.caffemodel";
 if __name__ == '__main__':
     bbox_reg_net = caffe.Net( model, weights, caffe.TEST)
     fid = open("data/regTest/Txts/3-distrub_64S2430_5_3black.txt","r")
 #    fid = open("data/regTest/test.txt","r")
     TP=0
-    inputSize = 64
+    inputSize = 128
 
     mean = 128
     lines = fid.readlines()
@@ -47,13 +43,14 @@ if __name__ == '__main__':
         h,w,ch = im.shape
         if h!=inputSize or w!=inputSize:
             im = cv2.resize(im,(int(inputSize),int(inputSize)))
-        
+        cv2.imshow("img", im)
+        cv2.waitKey()
         im = np.swapaxes(im, 0, 2)
         im = np.swapaxes(im, 1, 2)
         im  = im.astype(np.int)
 #        print "before:",im.dtype
 #        print im[0:4,0:4,0:4]
-        im -= mean
+#        im -= mean
 #        print "after:",im.dtype
 #        print im[0:4,0:4,0:4]
         label    = int(words[1])
@@ -69,7 +66,7 @@ if __name__ == '__main__':
 
         if label != 0:
             roi_n+=1
-        box_deltas = out_['fullyconnected1'][0]
+        box_deltas = out_['BigResNet/FC2'][0]
         print box_deltas
         regloss = np.append(regloss,np.sum((box_deltas-roi)**2)/2)
         
