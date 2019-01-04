@@ -7,10 +7,9 @@
     2. ali1: 宋洋标的非常不紧致的框  
         对应label: gtTotal/5-five_ali1sy.txt  
     3. ali2： 阿里众包第二批紧致框，用于控雨，有五指张开和grab，手势非常乱，整理过几次可见于：  
-        https://bitbucket.org/tszs_song/list4gesture/  
-        工程目录下的 ‘数据清理过程/ali2five-用于训分类'    
-        ali2five_gz_goodGrab.txt             -- 比较像five的控雨动作  
-        ali2five_jp-good.txt                       -- 五指张开     
+        https://bitbucket.org/tszs_song/list4gesture/工程目录下的 ‘数据清理过程/ali2five-用于训分类'    
+          ali2five_gz_goodGrab.txt             -- 比较像five的控雨动作  
+          ali2five_jp-good.txt                       -- 五指张开     
         另外这一批里还有广哲单独挑出来的grab数据，保存在  
         ssd/handgesture5_48G/Tight_ali2five_grab_train-img, 和上述清理过的不重复  
         对应label: gtTotal/T_5_ali2five_6474good  
