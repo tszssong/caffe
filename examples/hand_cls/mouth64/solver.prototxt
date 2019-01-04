@@ -10,10 +10,10 @@ test_iter: 1
 test_interval: 1000
 weight_decay: 0.004
 lr_policy: "step"
-stepsize: 5000
+stepsize: 20000
 gamma: 0.8
 display: 50
 max_iter: 1000000
 snapshot: 5000
-snapshot_prefix: "models/8clsmouth64/8cls_1w+2w"
+snapshot_prefix: "models/8clsmouth64/8cls_5w"
 solver_mode: CPU

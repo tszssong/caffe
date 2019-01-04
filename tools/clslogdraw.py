@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import re
 
-logfile = "examples/hand_cls/mouth64/log/2018-10-30_09-01-48.log"
+logfile = "examples/hand_cls/mouth64/log/2018-11-24_23-28-24.log"
 
 with open(logfile) as f:
     data = f.read()

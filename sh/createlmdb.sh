@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 set -e
-DATA=data/1026cls64/
+DATA=data/1027cls64/
 TOOLS=build/tools
 
 #TRAIN_DATA_ROOT=/Users/momo/wkspace/caffe_space/caffe/data/64data/
@@ -34,8 +34,8 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $TRAIN_DATA_ROOT \
-    $DATA/totals.txt \
-    $DATA/1026cls64_lmdb
+    $DATA/train.txt \
+    $DATA/1027_train64_lmdb
 
 echo "Creating val lmdb..."
 
@@ -44,7 +44,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_width=$RESIZE_WIDTH \
     --shuffle \
     $VAL_DATA_ROOT \
-    $DATA/1026cls64test.txt \
-    $DATA/1026cls64_lmdb
+    $DATA/test.txt \
+    $DATA/1027_test64_lmdb
 
 echo "Done."

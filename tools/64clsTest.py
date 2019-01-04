@@ -11,8 +11,10 @@ import time
 
 #prototxt   = "models/fromAli/test_mouth64.prototxt"
 #caffemodel = "models/fromAli/mouth64nobn100w.caffemodel"
-#prototxt   = "models/fromAli/mouth64bn/test.prototxt"
-#caffemodel = "models/fromAli/mouth64bn/1018addbg_1012f_iter_1000000.caffemodel"
+prototxt   = "models/fromAli/mouth64bn/test.prototxt"
+caffemodel = "models/fromAli/mouth64bn/1020_iter_1000000.caffemodel"
+caffemodel = "models/fromAli/mouth64bn/1018addbg_1012f_iter_1000000.caffemodel"
+#
 NumTest = 200000
 if __name__ == '__main__':
     caffe.set_mode_cpu()
@@ -20,6 +22,8 @@ if __name__ == '__main__':
     mean = np.array([104, 117, 123])
     classify_net = caffe.Net(prototxt, caffemodel, caffe.TEST)
     fid = open("data/48Test/Txts/64test1020.txt","r")
+    fid = open("data/48Test/Txts/64test1020_8cls.txt","r")
+    fid = open("data/48Test/Txts/64test1020_9cls.txt","r")
 #    fid = open("/Users/momo/Downloads/test0627.txt","r")
     subdirlists = ['bg', 'heart', 'yearh', 'one', 'baoquan', 'five', 'bainian', 'zan', 'fingerheart', 'ok', 'call', 'rock', 'big_v','fist']
     tp_dict = {}
@@ -76,7 +80,7 @@ if __name__ == '__main__':
         if not cls == label:
             err += 1
             savename =  words[0].split('/')[-1].split('.')[0] + '_' + str(cls) + '.jpg'
-            cv2.imwrite("/Users/momo/wkspace/caffe_space/caffe/data/48Test/error/" + savename, copy)
+#            cv2.imwrite("/Users/momo/wkspace/caffe_space/caffe/data/48Test/error/" + savename, copy)
         else:
             tp_dict[subdirlists[cls]]+=1
     print "\nerr, sum:",err, sum_
@@ -84,14 +88,19 @@ if __name__ == '__main__':
     gtTotal = 0
     tpTotal = 0
     for gname in tp_dict:
-        print "%12s"%(gname)," Recall:%.2f"%( float(tp_dict[gname])/float(gt_dict[gname]+1) ), \
-              " Precision:%.2f"%( float(tp_dict[gname])/float(re_dict[gname]+1) ), \
-              " re:%4d"%(re_dict[gname]), " tp:%4d"%(tp_dict[gname]), "gt:%4d"%(gt_dict[gname])
-        
-        reTotal += re_dict[gname]
-        gtTotal += gt_dict[gname]
-        tpTotal += tp_dict[gname]
-    print "total recall:%.2f"%(float(tpTotal)/float(gtTotal)), "total precision:%.2f"%(float(tpTotal)/float(reTotal))
+        if not (gname == 'big_v' or gname == 'ok' or gname == 'call' or gname == 'rock' or gname == 'fist' ):
+            print "%12s"%(gname)," Recall:%.2f"%( float(tp_dict[gname])/float(gt_dict[gname]+1) ), \
+                  " Precision:%.2f"%( float(tp_dict[gname])/float(re_dict[gname]+1) ), \
+                  " re:%4d"%(re_dict[gname]), " tp:%4d"%(tp_dict[gname]), "gt:%4d"%(gt_dict[gname])
+#        if not gname == 'bg' or gname == 'big_v' or gname == 'ok' or gname == 'call' or gname == 'rock' or gname == 'fist':
+            reTotal += re_dict[gname]
+            gtTotal += gt_dict[gname]
+            tpTotal += tp_dict[gname]
+#        reTotal += re_dict[gname]
+#        gtTotal += gt_dict[gname]
+#        tpTotal += tp_dict[gname]
+    print "8cls gesture recall:%.2f"%(float(tpTotal)/float(gtTotal))
+#    print "total recall:%.2f"%(float(tpTotal)/float(gtTotal)), "total precision:%.2f"%(float(tpTotal)/float(reTotal))
     print prototxt
     print caffemodel
 
